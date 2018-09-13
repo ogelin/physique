@@ -1,4 +1,4 @@
-clear;  %clear the memory
+clear all;  %clear the memory
 clc;    %clear console text
 
 % Inputs
@@ -19,6 +19,8 @@ posA=[posA_x;posA_y;posA_z];
 ar = 0;
 va=[va_x;va_y;va_z];
 Forces=[Force_md Force_mg Force_p];
+
+Devoir1(posA,ar,va,Forces)
 
 function [pcm MI aa]=Devoir1(posA,ar,va,Forces)
 
