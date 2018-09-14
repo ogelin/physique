@@ -1,33 +1,30 @@
-
-
-
-classdef cylindre
+classdef parallelipipede
  properties
     longueur = 0;
-    rayon = 0;
+    largeur = 0;
     masse = 0;
     positionXYZ = [0, 0, 0];  
  endproperties
 
   methods
-   function c = cylindre(longueurCylindre, rayonCylindre, masseCylindre, positionXYZCylindre)
+   function p = parallelipipede(longueurParallelipipede, largeurParallelipipede, masseParallelipipede, positionXYZParallelipipede)
       if (nargin != 4)
         error ("Le nombre d'arguments entré pour l'objet cylindre est invalide\n");
       endif
-      c.longueur = longueurCylindre;
-      c.rayon = rayonCylindre;
-      c.masse = masseCylindre;
-      c.positionXYZ(1) = positionXYZCylindre(1);
-      c.positionXYZ(2) = positionXYZCylindre(2);
-      c.positionXYZ(3) = positionXYZCylindre(3);
+      p.longueur = longueurParallelipipede;
+      p.largeur = largeurParallelipipede;
+      p.masse = masseParallelipipede;
+      p.positionXYZ(1) = positionXYZParallelipipede(1);
+      p.positionXYZ(2) = positionXYZParallelipipede(2);
+      p.positionXYZ(3) = positionXYZParallelipipede(3);
     endfunction
     
     function a = obtenirLongueur(obj)
       a = obj.longueur()
     endfunction
     
-    function a = obtenirRayon(obj)
-      a = obj.rayon()
+    function a = obtenirLargeur(obj)
+      a = obj.largeur()
     endfunction
     
     function a = obtenirMasse(obj)
@@ -41,9 +38,7 @@ classdef cylindre
       z = obj.positionXYZ(3);
       
       a = [x, y, z];
-      
     endfunction
 
   endmethods
 endclassdef
-

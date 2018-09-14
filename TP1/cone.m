@@ -1,7 +1,7 @@
 
 
 
-classdef cylindre
+classdef cone
  properties
     longueur = 0;
     rayon = 0;
@@ -10,16 +10,16 @@ classdef cylindre
  endproperties
 
   methods
-   function c = cylindre(longueurCylindre, rayonCylindre, masseCylindre, positionXYZCylindre)
+   function c = cone(longueurCone, rayonCone, masseCone, positionXYZCone)
       if (nargin != 4)
         error ("Le nombre d'arguments entré pour l'objet cylindre est invalide\n");
       endif
-      c.longueur = longueurCylindre;
-      c.rayon = rayonCylindre;
-      c.masse = masseCylindre;
-      c.positionXYZ(1) = positionXYZCylindre(1);
-      c.positionXYZ(2) = positionXYZCylindre(2);
-      c.positionXYZ(3) = positionXYZCylindre(3);
+      c.longueur = longueurCone;
+      c.rayon = rayonCone;
+      c.masse = masseCone;
+      c.positionXYZ(1) = positionXYZCone(1);
+      c.positionXYZ(2) = positionXYZCone(2);
+      c.positionXYZ(3) = positionXYZCone(3);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -46,4 +46,3 @@ classdef cylindre
 
   endmethods
 endclassdef
-
