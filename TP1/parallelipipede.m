@@ -9,7 +9,7 @@ classdef parallelipipede
   methods
    function p = parallelipipede(longueurParallelipipede, largeurParallelipipede, masseParallelipipede, positionXYZParallelipipede)
       if (nargin != 4)
-        error ("Le nombre d'arguments entré pour l'objet cylindre est invalide\n");
+        error ("Le nombre d'arguments entré pour l'objet parallelipipede est invalide\n");
       endif
       p.longueur = longueurParallelipipede;
       p.largeur = largeurParallelipipede;
@@ -19,16 +19,16 @@ classdef parallelipipede
       p.positionXYZ(3) = positionXYZParallelipipede(3);
     endfunction
     
-    function a = obtenirLongueur(obj)
-      a = obj.longueur()
+    function obtenirLongueur(obj)
+      obj.longueur()
     endfunction
     
-    function a = obtenirLargeur(obj)
-      a = obj.largeur()
+    function obtenirLargeur(obj)
+       obj.largeur()
     endfunction
     
-    function a = obtenirMasse(obj)
-      a = obj.masse()
+    function obtenirMasse(obj)
+       obj.masse()
     endfunction
     
     function a = obtenirPositionXYZ(obj)
