@@ -2,14 +2,14 @@ clear all;
 clc;
 
 cabine = cone(3,4,5, [6,7,8]);
-#f = fusee(12, [6,7,8], 3,4,5, [6,7,8]);
 f = fusee(12, [6,7,8], cabine);
 
 f.obtenirMasse();
 
 masseCone = 0;
-fprintf ("Masse cone\n", f.obtenirMasseCone(cabine));
-f.obtenirMasseCone(cabine);
+fprintf ("Masse cone\n");
+x = f.obtenirMasseCone(cabine);
+disp(x);
 
 fprintf ("Fin Masse cone\n");
 

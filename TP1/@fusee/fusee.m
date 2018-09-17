@@ -16,8 +16,8 @@ classdef fusee<handle
     endfunction
     
     
-    function obtenirMasse(obj)
-      obj.masse();
+    function y = obtenirMasse(obj)
+      y = obj.masse();
     endfunction
     
     function v = obtenirPositionNez(obj)
@@ -30,12 +30,11 @@ classdef fusee<handle
       
     endfunction
     
-    function obtenirMasseCone(obj)
+    function x = obtenirMasseCone(obj)
     
-    obj.obtenirMasse();
+    x = obj.obtenirMasse();
     
     endfunction
-    
     
     
     function v = trouverPositionCDMFCabine(obj)
