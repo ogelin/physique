@@ -17,16 +17,16 @@ classdef parallelipipede
       p.positionXYZ = [positionXYZParallelipipede(1), positionXYZParallelipipede(2), positionXYZParallelipipede(3)];
     endfunction
     
-    function obtenirLongueur(obj)
-      obj.longueur()
+    function longueur = obtenirLongueur(obj)
+      longueur = obj.longueur()
     endfunction
     
-    function obtenirLargeur(obj)
-       obj.largeur()
+    function largeur = obtenirLargeur(obj)
+       largeur = obj.largeur()
     endfunction
     
-    function obtenirMasse(obj)
-       obj.masse()
+    function masse = obtenirMasse(obj)
+       masse = obj.masse()
     endfunction
     
     function a = obtenirPositionXYZ(obj)

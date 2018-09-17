@@ -17,16 +17,16 @@ classdef cone
       c.positionXYZ = [positionXYZCone(1), positionXYZCone(2), positionXYZCone(3)];
     endfunction
     
-    function obtenirLongueur(obj)
-      obj.longueur()
+    function longueur = obtenirLongueur(obj)
+      longueur = obj.longueur()
     endfunction
     
-    function obtenirRayon(obj)
-      obj.rayon()
+    function rayon = obtenirRayon(obj)
+      rayon = obj.rayon()
     endfunction
     
-    function obtenirMasse(obj)
-      obj.masse()
+    function masse = obtenirMasse(obj)
+      masse = obj.masse()
     endfunction
     
     function v = obtenirPositionXYZ(obj)
@@ -38,7 +38,6 @@ classdef cone
       v = [x, y, z];
       
     endfunction
-    
 
   endmethods
 endclassdef
