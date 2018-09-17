@@ -17,21 +17,19 @@ classdef cylindre
       c.longueur = longueurCylindre;
       c.rayon = rayonCylindre;
       c.masse = masseCylindre;
-      c.positionXYZ(1) = positionXYZCylindre(1);
-      c.positionXYZ(2) = positionXYZCylindre(2);
-      c.positionXYZ(3) = positionXYZCylindre(3);
+      c.positionXYZ = [positionXYZCylindre(1), positionXYZCylindre(2), positionXYZCylindre(3)];
     endfunction
     
-    function a = obtenirLongueur(obj)
-      a = obj.longueur()
+    function longueur = obtenirLongueur(obj)
+      longueur = obj.longueur()
     endfunction
     
-    function a = obtenirRayon(obj)
-      a = obj.rayon()
+    function rayon = obtenirRayon(obj)
+      rayon = obj.rayon()
     endfunction
     
-    function a = obtenirMasse(obj)
-      a = obj.masse()
+    function masse = obtenirMasse(obj)
+      masse = obj.masse()
     endfunction
     
     function a = obtenirPositionXYZ(obj)

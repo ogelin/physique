@@ -1,6 +1,3 @@
-
-
-
 classdef cone
  properties
     longueur = 0;
@@ -11,36 +8,34 @@ classdef cone
 
   methods
    function c = cone(longueurCone, rayonCone, masseCone, positionXYZCone)
-      if (nargin != 4)
-        error ("Le nombre d'arguments entré pour l'objet cylindre est invalide\n");
+       if (nargin != 4)
+        error ("Le nombre d'arguments entré pour l'objet cone est invalide\n");
       endif
       c.longueur = longueurCone;
       c.rayon = rayonCone;
       c.masse = masseCone;
-      c.positionXYZ(1) = positionXYZCone(1);
-      c.positionXYZ(2) = positionXYZCone(2);
-      c.positionXYZ(3) = positionXYZCone(3);
+      c.positionXYZ = [positionXYZCone(1), positionXYZCone(2), positionXYZCone(3)];
     endfunction
     
-    function a = obtenirLongueur(obj)
-      a = obj.longueur()
+    function longueur = obtenirLongueur(obj)
+      longueur = obj.longueur()
     endfunction
     
-    function a = obtenirRayon(obj)
-      a = obj.rayon()
+    function rayon = obtenirRayon(obj)
+      rayon = obj.rayon()
     endfunction
     
-    function a = obtenirMasse(obj)
-      a = obj.masse()
+    function masse = obtenirMasse(obj)
+      masse = obj.masse()
     endfunction
     
-    function a = obtenirPositionXYZ(obj)
+    function v = obtenirPositionXYZ(obj)
       
       x = obj.positionXYZ(1);
       y = obj.positionXYZ(2);
       z = obj.positionXYZ(3);
       
-      a = [x, y, z];
+      v = [x, y, z];
       
     endfunction
 
