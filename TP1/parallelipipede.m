@@ -14,9 +14,7 @@ classdef parallelipipede
       p.longueur = longueurParallelipipede;
       p.largeur = largeurParallelipipede;
       p.masse = masseParallelipipede;
-      p.positionXYZ(1) = positionXYZParallelipipede(1);
-      p.positionXYZ(2) = positionXYZParallelipipede(2);
-      p.positionXYZ(3) = positionXYZParallelipipede(3);
+      p.positionXYZ = [positionXYZParallelipipede(1), positionXYZParallelipipede(2), positionXYZParallelipipede(3)];
     endfunction
     
     function obtenirLongueur(obj)

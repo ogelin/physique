@@ -17,9 +17,7 @@ classdef cylindre
       c.longueur = longueurCylindre;
       c.rayon = rayonCylindre;
       c.masse = masseCylindre;
-      c.positionXYZ(1) = positionXYZCylindre(1);
-      c.positionXYZ(2) = positionXYZCylindre(2);
-      c.positionXYZ(3) = positionXYZCylindre(3);
+      c.positionXYZ = [positionXYZCylindre(1), positionXYZCylindre(2), positionXYZCylindre(3)];
     endfunction
     
     function obtenirLongueur(obj)
