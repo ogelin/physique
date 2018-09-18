@@ -20,16 +20,20 @@ ar = 0;
 va=[va_x;va_y;va_z];
 Forces=[Force_md Force_mg Force_p];
 
-Devoir1(posA,ar,va,Forces)
+#Cas 1
 
-function [pcm MI aa]=Devoir1(posA,ar,va,Forces)
+#calcul de la position du nez pour le cas 1.[26.70, 0,2.4850]
 
-%1. Calculate CM of plane
+longueurFuselage = 22.95;
+hauteurCabine = 3.82;
+positionX = longueurFuselage+hauteurCabine;
 
-%2. Use CM to calculate torque (moment d'inertie) of plane
+largeurAile = 1.14;
+rayonFuselage = 1.345;
+positionZ = largeurAile + rayonFuselage
 
-%3. Calculate angular acceleration
+Devoir1([positionX, 0, positionZ],0,0,[11,11,260])
 
-end
+
 
 

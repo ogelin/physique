@@ -2,6 +2,7 @@ clear all;
 clc;
 
 fusee = fusee([0,0,0],0,0,0);
+fusee.initPartiesAvion();
 
 fprintf("\nFusee : \n");
 fprintf("Masse Totale : %d \n", fusee.masse());
