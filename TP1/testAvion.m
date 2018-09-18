@@ -12,16 +12,16 @@ fprintf("x = %d \n", positionavion(1));
 fprintf("y = %d \n", positionavion(2));
 fprintf("z = %d \n", positionavion(3));
 
-momentInertieavion = avion.momentInertieavion();
+momentInertieAvion = avion.momentInertieAvion();
 
-fprintf("momentInertieavion : \n");
-fprintf("x = %d \n", momentInertieavion(1));
-fprintf("y = %d \n", momentInertieavion(2));
-fprintf("z = %d \n", momentInertieavion(3));
+fprintf("TESTAVION::momentInertieavion : \n");
+fprintf("x = %d \n", momentInertieAvion(1));
+fprintf("y = %d \n", momentInertieAvion(2));
+fprintf("z = %d \n", momentInertieAvion(3));
 
-momentInertieavionOrigine = avion.momentInertieavionOrigine(positionavion);
+momentInertieAvionOrigine = avion.momentInertieAvionOrigine(positionavion);
 
-fprintf("momentInertieavionOrigine : \n");
-fprintf("x = %d \n", momentInertieavionOrigine(1));
-fprintf("y = %d \n", momentInertieavionOrigine(2));
-fprintf("z = %d \n", momentInertieavionOrigine(3));
+fprintf("TESTAVION::momentInertieavionOrigine : \n");
+fprintf("x = %d \n", momentInertieAvionOrigine(1));
+fprintf("y = %d \n", momentInertieAvionOrigine(2));
+fprintf("z = %d \n", momentInertieAvionOrigine(3));

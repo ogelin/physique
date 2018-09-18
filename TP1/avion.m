@@ -64,19 +64,21 @@ classdef avion<handle
     endfunction
     
     function momentInertieOrigine = momentInertieAvionOrigine(obj)
+    
     positionCMOrigineAvion = obj.calculCMOrigin();
-    fprintf("positionCMOriginAvion : \n");
+    fprintf("AVION :: positionCMOriginAvion : \n");
     fprintf("x = %d \n", positionCMOrigineAvion(1));
     fprintf("y = %d \n", positionCMOrigineAvion(2));
     fprintf("z = %d \n", positionCMOrigineAvion(3));
     
     aileron = obj.aileron.getPositionCMOrigin();
-    fprintf("aileron : \n");
+    fprintf("AVION :: aileron : \n");
     fprintf("x = %d \n", aileron(1));
     fprintf("y = %d \n", aileron(2));
     fprintf("z = %d \n", aileron(3));
     
-   momentInertieOrigine = 0;# obj.aileron.momentInertieOrigine(obj.aileron, [1,2,3], obj.aileron.calculCMOrigin());
+    momentInertieOrigine = obj.aileron.momentInertieOrigine(obj.aileron, positionCMOrigineAvion, obj.aileron.calculCMOrigin());
+    
     endfunction
 
   endmethods

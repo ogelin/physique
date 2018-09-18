@@ -58,26 +58,26 @@ classdef aileron
     
     endfunction
     
-    function mIOrigine = momentInertieOrigine(obj, positionCDMFusee, positionCDMObjet)
+    function mIOrigine = momentInertieOrigine(obj, positionCDMAvion, positionCDMObjet)
     #Selon les notes de cours (diapo 73 cours 2) on cherhce le moment d'inertie par rapport au point d qui est le cdm.
     
-   fprintf("positionCDMObjet : \n");
-   fprintf("x = %d \n", positionCDMObjet(1));
-   fprintf("y = %d \n", positionCDMObjet(2));
-   fprintf("z = %d \n", positionCDMObjet(3));
+      fprintf("AILERON::positionCDMObjet : \n");
+      fprintf("x = %d \n", positionCDMObjet(1));
+      fprintf("y = %d \n", positionCDMObjet(2));
+      fprintf("z = %d \n", positionCDMObjet(3));
     
-   fprintf("ICI??? positionCDMFusee : \n");
-   fprintf("x = %d \n", positionCDMFusee(1));
-   fprintf("y = %d \n", positionCDMFusee(2));
-   fprintf("z = %d \n", positionCDMFusee(3));
+      fprintf("AILLERON: positionCDMAvion : \n");
+      fprintf("x = %d \n", positionCDMAvion(1));
+      fprintf("y = %d \n", positionCDMAvion(2));
+      fprintf("z = %d \n", positionCDMAvion(3));
     
-    dc = positionCDMFusee - positionCDMObjet;
+    dc = positionCDMAvion - positionCDMObjet;
     
     
-    mIOrigine = obj.momentInertie + (obj.masse * dc');
-    #[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
-    #(-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
-    #(-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
+    mIOrigine = obj.momentInertie + (obj.masse *...
+    [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
+    (-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
+    (-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
     
     endfunction
     
