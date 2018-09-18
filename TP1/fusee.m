@@ -30,7 +30,7 @@ classdef fusee<handle
       
     endfunction
     
-    function x = obtenirMasseCone(obj)
+    function x = obtenirMasseCabine(obj)
     
     x = obj.obtenirMasse();
     
