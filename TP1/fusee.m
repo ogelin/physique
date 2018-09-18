@@ -60,30 +60,35 @@ classdef fusee<handle
       a = obj.positionCMOrigin;
     endfunction
     
-    
-    function v = obtenirPositionNez(obj)
-      
-      x = obj.positionNez(1);
-      y = obj.positionNez(2);
-      z = obj.positionNez(3);
-      
-      v = [x, y, z];
-      
-    endfunction
-    
     function x = obtenirMasseCone(obj)
     
     x = obj.obtenirMasse();
     
     endfunction
     
-    function momentInertieTotal = momentInertieFusee(obj)
-    momentInertieTotal = (2*obj.aile.momentInertie...
+    function momentInertie = momentInertieFusee(obj)
+    momentInertie = (2*obj.aile.momentInertie...
     + obj.aileron.momentInertie...
     + obj.cabine.momentInertie...
     + obj.fuselage.momentInertie...
     + obj.moteurGauche.momentInertie...
     + obj.moteurDroit.momentInertie);
+    endfunction
+    
+    function momentInertieOrigine = momentInertieFuseeOrigine(obj)
+    positionCMOrigineFusee = obj.calculCMOrigin();
+    fprintf("positionCMOriginFusee : \n");
+    fprintf("x = %d \n", positionCMOrigineFusee(1));
+    fprintf("y = %d \n", positionCMOrigineFusee(2));
+    fprintf("z = %d \n", positionCMOrigineFusee(3));
+    
+    aileron = obj.aileron.getPositionCMOrigin();
+    fprintf("aileron : \n");
+    fprintf("x = %d \n", aileron(1));
+    fprintf("y = %d \n", aileron(2));
+    fprintf("z = %d \n", aileron(3));
+    
+   momentInertieOrigine = 0;# obj.aileron.momentInertieOrigine(obj.aileron, [1,2,3], obj.aileron.calculCMOrigin());
     endfunction
 
   endmethods

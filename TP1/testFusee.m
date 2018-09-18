@@ -20,3 +20,10 @@ fprintf("momentInertieFusee : \n");
 fprintf("x = %d \n", momentInertieFusee(1));
 fprintf("y = %d \n", momentInertieFusee(2));
 fprintf("z = %d \n", momentInertieFusee(3));
+
+momentInertieFuseeOrigine = fusee.momentInertieFuseeOrigine(positionFusee);
+
+fprintf("momentInertieFuseeOrigine : \n");
+fprintf("x = %d \n", momentInertieFuseeOrigine(1));
+fprintf("y = %d \n", momentInertieFuseeOrigine(2));
+fprintf("z = %d \n", momentInertieFuseeOrigine(3));

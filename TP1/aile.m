@@ -59,6 +59,11 @@ classdef aile
     
     endfunction
     
+    function mIOrigine = momentInertieOrigine(obj)
+    
+    
+    endfunction
+    
   endmethods
 endclassdef
 
