@@ -15,7 +15,7 @@ classdef aile
       c.longueur = 2*longueurAile;
       c.largeur = largeurAile;
       c.epaisseur = epaisseurAile;
-      c.masse = masseAile;
+      c.masse = 2*masseAile;
       c.positionCMOrigin = calculCMOrigin(c);
     endfunction
     
