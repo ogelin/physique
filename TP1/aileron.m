@@ -7,21 +7,19 @@ classdef aileron
     largeur = 0;
     epaisseur = 0;
     masse = 0;
-    positionXYZ = [0, 0, 0];  
+    positionCMOrigin = [0, 0, 0];     
  endproperties
 
   methods
-   function c = aileron(longueurAileron, largeurAileron, epaisseurAileron, masseAileron, positionXYZAileron)
-      if (nargin != 5)
+   function c = aileron(longueurAileron, largeurAileron, epaisseurAileron, masseAileron)
+      if (nargin != 4)
         error ("Le nombre d'arguments entrÃ© pour l'objet aileron est invalide\n");
       endif
       c.longueur = longueurAileron;
       c.largeur = largeurAileron;
       c.epaisseur = epaisseurAileron;
       c.masse = masseAileron;
-      c.positionXYZ(1) = positionXYZAileron(1);
-      c.positionXYZ(2) = positionXYZAileron(2);
-      c.positionXYZ(3) = positionXYZAileron(3);
+      c.positionCMOrigin = calculCMOrigin(c);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -40,26 +38,18 @@ classdef aileron
       a = obj.masse();
     endfunction
     
-    function a = obtenirPositionAileron(obj)
-      
-      x = obtenirLargeur(obj) / 2;
+    %Calcul directement la position du CM par rapport à l'origine
+    function a = calculCMOrigin(obj)
+      x = obj.largeur/2;              %valeur donnée dans les consignes
       y = 0;
-      z = obtenirLongueur(obj) / 2;
+      z = obj.longueur/2 + (2*1.345); %1.345 = rayon du fuselage
       
       a = [x, y, z];
-      
     endfunction
     
-    function a = obtenirPositionOrigineAileron(obj)
-      
-      x = 0;
-      y = 0;
-      z = obj.positionXYZ(3);
-      
-      a = [x, y, z];
-      
+    function a = getPositionCMOrigin(obj)
+      a = obj.positionCMOrigin;
     endfunction
-
     
   endmethods
 endclassdef

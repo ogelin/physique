@@ -6,20 +6,20 @@ classdef moteur
     longueur = 0;
     rayon = 0;
     masse = 0;
-    positionXYZ = [0, 0, 0];  
+    direction = 0;
+    positionCMOrigin = [0, 0, 0];  
  endproperties
 
   methods
-   function c = moteur(longueurMoteur, rayonMoteur, masseMoteur, positionXYZMoteur)
+   function c = moteur(longueurMoteur, rayonMoteur, masseMoteur, directionMoteur)
       if (nargin != 4)
         error ("Le nombre d'arguments entr√© pour l'objet moteur est invalide\n");
       endif
       c.longueur = longueurMoteur;
       c.rayon = rayonMoteur;
       c.masse = masseMoteur;
-      c.positionXYZ(1) = positionXYZMoteur(1);
-      c.positionXYZ(2) = positionXYZMoteur(2);
-      c.positionXYZ(3) = positionXYZMoteur(3);
+      c.direction = directionMoteur;
+      c.positionCMOrigin = calculCMOrigin(c);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -34,46 +34,27 @@ classdef moteur
       a = obj.masse();
     endfunction
     
-    function a = obtenirPositionMoteurGauche(obj)
-      
-      x = obj.positionXYZ(1) / 2;
-      y = 0;
-      z = 0;
-      
-      a = [x, y, z];
-      
+    function a = obtenirDirection(obj)
+      a = obj.direction();
     endfunction
     
-    function a = obtenirPositionOrigineGauche(obj)
-      
+        
+    %Calcul directement la position du CM par rapport ‡ l'origine
+    function a = calculCMOrigin(obj)
       x = 5;
-      y = obj.positionXYZ(2);
-      z = obtenirRayon(obj) + 0.25;
+      if (obj.direction == -1)  %-1 pour gauche, 1 pour droit
+        y = -(obj.rayon + 1.345);
+      elseif (obj.direction == 1)
+        y = obj.rayon + 1.345;  %1.345 = rayon fuselage
+      endif
+      z = 1.345 + 0.25;       %0.25 = epaisseur ailes
       
-      a = [x, y, z];
-      
+      a = [x, y, z];  
     endfunction
     
-    function a = obtenirPositionMoteurDroite(obj)
-      
-      x = obj.positionXYZ(1) / 2;
-      y = 0;
-      z = 0;
-      
-      a = [x, y, z];
-      
+    function a = getPositionCMOrigin(obj)
+      a = obj.positionCMOrigin;
     endfunction
-    
-    function a = obtenirPositionOrigineDroite(obj)
-      
-      x = 5;
-      y = obj.positionXYZ(2);
-      z = obtenirRayon(obj) + 0.25;
-      
-      a = [x, y, z];
-      
-    endfunction
-
     
   endmethods
 endclassdef

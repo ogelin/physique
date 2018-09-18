@@ -1,19 +1,11 @@
 clear all;
 clc;
 
+cabine = cabine(3.82,1.345,0.7);
 
-c = cone(3,4,5, [6,7,8]);
+positionCabine = cabine.getPositionCMOrigin();
+fprintf("Fuselage : \n");
+fprintf("x = %d \n", positionCabine(1));
+fprintf("y = %d \n", positionCabine(2));
+fprintf("z = %d \n", positionCabine(3));
 
-
-
-c.obtenirLongueur();
-
-c.obtenirRayon();
-
-c.obtenirMasse();
-
-
-position = c.obtenirPositionXYZ();
-fprintf("x = %d \n", position(1));
-fprintf("y = %d \n", position(2));
-fprintf("z = %d \n", position(3));

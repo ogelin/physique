@@ -1,19 +1,19 @@
 clear all;
 clc;
 
+aile = aile(10.6,1.14,0.25, 3.25);
 
-p = parallelipipede(3,4,5, [6,7,8]);
-
-
-
-p.obtenirLongueur();
-
-p.obtenirLargeur();
-
-p.obtenirMasse();
+positionAile = aile.getPositionCMOrigin();
+fprintf("Fuselage : \n");
+fprintf("x = %d \n", positionAile(1));
+fprintf("y = %d \n", positionAile(2));
+fprintf("z = %d \n", positionAile(3));
 
 
-position = p.obtenirPositionXYZ();
-fprintf("x = %d \n", position(1));
-fprintf("y = %d \n", position(2));
-fprintf("z = %d \n", position(3));
+aileron = aileron(2.1,1.28,0.07, 0.5);
+
+positionAileron = aileron.getPositionCMOrigin();
+fprintf("Fuselage : \n");
+fprintf("x = %d \n", positionAileron(1));
+fprintf("y = %d \n", positionAileron(2));
+fprintf("z = %d \n", positionAileron(3));
