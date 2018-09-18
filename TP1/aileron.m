@@ -58,7 +58,7 @@ classdef aileron
     
     endfunction
     
-    function mIOrigine = momentInertieOrigine(obj, positionCDMAvion, positionCDMObjet)
+    function mIOrigine = momentInertieOrigine(obj, aileron, positionCDMAvion, positionCDMObjet)
     #Selon les notes de cours (diapo 73 cours 2) on cherhce le moment d'inertie par rapport au point d qui est le cdm.
     
       fprintf("AILERON::positionCDMObjet : \n");
@@ -74,7 +74,7 @@ classdef aileron
     dc = positionCDMAvion - positionCDMObjet;
     
     
-    mIOrigine = obj.momentInertie + (obj.masse *...
+    mIOrigine = aileron.momentInertie + (aileron.masse *...
     [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
     (-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
     (-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
