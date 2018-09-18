@@ -29,7 +29,7 @@ classdef cabine
       masse = obj.masse()
     endfunction
         
-    %Calcul directement la position du CM par rapport à l'origine
+    %Calcul directement la position du CM par rapport ï¿½ l'origine
     function a = calculCMOrigin(obj)
       x = 22.95 + obj.longueur/4;              %22.95 = longueurFuselage
       y = 0;
@@ -40,6 +40,16 @@ classdef cabine
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
+    endfunction
+    
+    function mI = momentInertie(obj)
+    
+       ix = 0.3*obj.masse*(((obj.rayon^2)/2)+((obj.longueur^2)/3));
+       iy = 0.3*obj.masse*(((obj.rayon^2)/2)+((obj.longueur^2)/3));
+       iz = 0.3*(obj.masse*obj.rayon^2);
+       
+       mI = [ix, iy, iz];
+    
     endfunction
     
   endmethods

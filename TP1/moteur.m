@@ -39,7 +39,7 @@ classdef moteur
     endfunction
     
         
-    %Calcul directement la position du CM par rapport à l'origine
+    %Calcul directement la position du CM par rapport ï¿½ l'origine
     function a = calculCMOrigin(obj)
       x = 5;
       if (obj.direction == -1)  %-1 pour gauche, 1 pour droit
@@ -54,6 +54,16 @@ classdef moteur
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
+    endfunction
+    
+    function mI = momentInertie(obj)
+    
+       ix = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
+       iy = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
+       iz = (obj.masse/2)*(obj.rayon^2);
+       
+       mI = [ix, iy, iz];
+    
     endfunction
     
   endmethods

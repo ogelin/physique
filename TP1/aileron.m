@@ -1,6 +1,3 @@
-
-
-
 classdef aileron
  properties
     longueur = 0;
@@ -38,9 +35,9 @@ classdef aileron
       a = obj.masse();
     endfunction
     
-    %Calcul directement la position du CM par rapport à l'origine
+    %Calcul directement la position du CM par rapport ï¿½ l'origine
     function a = calculCMOrigin(obj)
-      x = obj.largeur/2;              %valeur donnée dans les consignes
+      x = obj.largeur/2;              %valeur donnï¿½e dans les consignes
       y = 0;
       z = obj.longueur/2 + (2*1.345); %1.345 = rayon du fuselage
       
@@ -49,6 +46,39 @@ classdef aileron
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
+    endfunction
+    
+    function mI = momentInertie(obj)
+    
+       ix = (obj.masse/12)*((obj.largeur^2)+(obj.epaisseur^2));
+       iy = (obj.masse/12)*((obj.longueur^2)+(obj.epaisseur^2));
+       iz = (obj.masse/12)*((obj.longueur^2)+(obj.largeur^2));
+       
+       mI = [ix, iy, iz];
+    
+    endfunction
+    
+    function mIOrigine = momentInertieOrigine(obj, positionCDMFusee, positionCDMObjet)
+    #Selon les notes de cours (diapo 73 cours 2) on cherhce le moment d'inertie par rapport au point d qui est le cdm.
+    
+   fprintf("positionCDMObjet : \n");
+   fprintf("x = %d \n", positionCDMObjet(1));
+   fprintf("y = %d \n", positionCDMObjet(2));
+   fprintf("z = %d \n", positionCDMObjet(3));
+    
+   fprintf("ICI??? positionCDMFusee : \n");
+   fprintf("x = %d \n", positionCDMFusee(1));
+   fprintf("y = %d \n", positionCDMFusee(2));
+   fprintf("z = %d \n", positionCDMFusee(3));
+    
+    dc = positionCDMFusee - positionCDMObjet;
+    
+    
+    mIOrigine = obj.momentInertie + (obj.masse * dc');
+    #[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
+    #(-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
+    #(-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
+    
     endfunction
     
   endmethods

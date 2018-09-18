@@ -32,17 +32,27 @@ classdef fuselage
       a = obj.masse();
     endfunction
     
-    %Calcul directement la position du CM par rapport à l'origine
+    %Calcul directement la position du CM par rapport ï¿½ l'origine
     function a = calculCMOrigin(obj)
       x = obj.longueur / 2;
       y = 0;
-      z = obj.rayon + 0.25;  %0.25 est hardcodé et équivaux à l'épaisseur des ailes
+      z = obj.rayon + 0.25;  %0.25 est hardcodï¿½ et ï¿½quivaux ï¿½ l'ï¿½paisseur des ailes
       
       a = [x, y, z];
     endfunction
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
+    endfunction
+    
+    function mI = momentInertie(obj)
+    
+       ix = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
+       iy = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
+       iz = (obj.masse/2)*(obj.rayon^2);
+       
+       mI = [ix, iy, iz];
+    
     endfunction
     
   endmethods
