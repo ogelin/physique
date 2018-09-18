@@ -12,8 +12,6 @@ fprintf("x = %d \n", positionFusee(1));
 fprintf("y = %d \n", positionFusee(2));
 fprintf("z = %d \n", positionFusee(3));
 
-
-
 momentInertieFusee = fusee.momentInertieFusee();
 
 fprintf("momentInertieFusee : \n");
