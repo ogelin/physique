@@ -46,24 +46,12 @@ classdef avion<handle
       + obj.moteurDroit.getPositionCMOrigin * obj.moteurDroit.masse) / obj.masse;
     endfunction
     
-    function positionCMPieceRelatif = positionCMPieceRelatif(piece, masse)
-      positionCMPieceRelatif = masse;
-    endfunction
-    
-
-    
     function y = obtenirMasse(obj)
       y = obj.masse();
     endfunction
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
-    endfunction
-    
-    function x = obtenirMasseCone(obj)
-    
-    x = obj.obtenirMasse();
-    
     endfunction
     
     function momentInertie = momentInertieAvion(obj)

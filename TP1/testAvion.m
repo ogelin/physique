@@ -12,8 +12,6 @@ fprintf("x = %d \n", positionavion(1));
 fprintf("y = %d \n", positionavion(2));
 fprintf("z = %d \n", positionavion(3));
 
-
-
 momentInertieavion = avion.momentInertieavion();
 
 fprintf("momentInertieavion : \n");
