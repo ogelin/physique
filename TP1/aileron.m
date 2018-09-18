@@ -38,9 +38,9 @@ classdef aileron
       a = obj.masse();
     endfunction
     
-    %Calcul directement la position du CM par rapport à l'origine
+    %Calcul directement la position du CM par rapport ï¿½ l'origine
     function a = calculCMOrigin(obj)
-      x = obj.largeur/2;              %valeur donnée dans les consignes
+      x = obj.largeur/2;              %valeur donnï¿½e dans les consignes
       y = 0;
       z = obj.longueur/2 + (2*1.345); %1.345 = rayon du fuselage
       
@@ -49,6 +49,15 @@ classdef aileron
     
     function a = getPositionCMOrigin(obj)
       a = obj.positionCMOrigin;
+    endfunction
+    
+    function mI = momentInertie(obj)
+       ix = (obj.masse/12)*((obj.largeur^2)+(obj.epaisseur^2));
+       iy = (obj.masse/12)*((obj.longueur^2)+(obj.epaisseur^2));
+       iz = (obj.masse/12)*((obj.longueur^2)+(obj.largeur^2));
+       
+       mI = [ix, iy, iz];
+    
     endfunction
     
   endmethods

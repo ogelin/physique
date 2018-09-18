@@ -11,3 +11,12 @@ fprintf("Fuselage : \n");
 fprintf("x = %d \n", positionFusee(1));
 fprintf("y = %d \n", positionFusee(2));
 fprintf("z = %d \n", positionFusee(3));
+
+
+
+momentInertieFusee = fusee.momentInertieFusee();
+
+fprintf("momentInertieFusee : \n");
+fprintf("x = %d \n", momentInertieFusee(1));
+fprintf("y = %d \n", momentInertieFusee(2));
+fprintf("z = %d \n", momentInertieFusee(3));
