@@ -2,6 +2,9 @@ classdef avion<handle
  properties
     masse = 0;
     positionNez = [0, 0, 0]; 
+    angleNez = 0;
+    realCM = [0,0,0];
+    distanceNezCM = 0;
     positionCMOrigin = [0, 0, 0];
     aileron = 0;
     aile = 0;
@@ -18,11 +21,27 @@ classdef avion<handle
        # error ("Le nombre d'arguments entré pour l'objet avion est invalide\n");
       #endif
       f.positionNez = [positionNezAvion(1), positionNezAvion(2), positionNezAvion(3)];
+      f.angleNez = angle;
       initPartiesAvion(f);
       f.masse = calculMasse(f);
       f.positionCMOrigin = calculCMOrigin(f);
+      f.distanceNezCM = calculDistanceNezCM(f);
+      f.realCM = findRealCM(f);
     endfunction
 
+    function distanceNezCM = calculDistanceNezCM(obj)
+      distanceNezCM = sqrt((obj.positionNez(1)-obj.positionCMOrigin(1))^2 + ...
+      (obj.positionNez(2)-obj.positionCMOrigin(2))^2 + ...
+      (obj.positionNez(3)-obj.positionCMOrigin(3))^2);
+    endfunction
+    
+    function realCM = findRealCM(obj)
+      x = obj.positionNez(1)-(obj.distanceNezCM*cos(obj.angleNez));
+      y = 0;
+      z = obj.positionNez(3)-(obj.distanceNezCM*sin(obj.angleNez));
+      realCM = [x, y, z];
+    endfunction
+    
     function initPartiesAvion(obj)
       obj.aileron = aileron(2.1, 1.28, 0.07, 0.5);
       obj.aile = aile(10.6, 1.14, 0.25, 3.25);

@@ -1,11 +1,15 @@
 clear all;
 clc;
 
-avion = avion([0,0,0],0,0,0);
+avion = avion([3.82+22.95, 0, 1.345], 0,0,0);
 avion.initPartiesAvion();
 
 fprintf("\navion : \n");
 fprintf("Masse Totale : %d \n", avion.masse());
+fprintf("PositionNez : %d \n", avion.positionNez);
+fprintf("Distance Nez CM : %d \n", avion.distanceNezCM);
+fprintf("Position Réelle CM : %d \n", avion.realCM);
+
 positionavion = avion.getPositionCMOrigin();
 fprintf("Fuselage : \n");
 fprintf("x = %d \n", positionavion(1));
