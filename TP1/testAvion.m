@@ -1,12 +1,17 @@
 clear all;
 clc;
 
-avion = avion([0,0,0],0,0,0);
+
+fprintf("CAS 1 : \n")
+avion = avion([26.77,0,1.345],0,0,0);
 avion.initPartiesAvion();
 
 fprintf("\navion : \n");
 fprintf("Masse Totale : %d \n", avion.masse());
-positionavion = avion.getPositionCMOrigin();
+
+%Je ne pense pas que ceci fasse vraiment ce que l'on veut
+%Le fprintf "fuselage" n'est pas vrai.
+positionavion = avion.getPositionCMATerre();
 fprintf("Fuselage : \n");
 fprintf("x = %d \n", positionavion(1));
 fprintf("y = %d \n", positionavion(2));
