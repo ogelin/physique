@@ -79,6 +79,8 @@ classdef avion<handle
     
     momentInertieOrigine = obj.aileron.momentInertieOrigine(obj.aileron, positionCMOrigineAvion, obj.aileron.calculCMOrigin());
     
+    momentInertieAile = obj.aile.momentInertieOrigine(positionCMOrigineAvion);
+    
     endfunction
 
   endmethods

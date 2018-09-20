@@ -25,3 +25,4 @@ fprintf("TESTAVION::momentInertieavionOrigine : \n");
 fprintf("x = %d \n", momentInertieAvionOrigine(1));
 fprintf("y = %d \n", momentInertieAvionOrigine(2));
 fprintf("z = %d \n", momentInertieAvionOrigine(3));
+

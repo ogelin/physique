@@ -37,9 +37,9 @@ classdef aile
     endfunction
     
         
-    %Calcul directement la position du CM par rapport ï¿½ l'origine
+    %Calcul directement la position du CM par rapport à l'origine
     function a = calculCMOrigin(obj)
-      x = 10.54;            %valeur donnï¿½e dans les consignes
+      x = 10.54;            %valeur donnée dans les consignes
       y = 0;
       z = obj.epaisseur/2;
       
@@ -59,8 +59,14 @@ classdef aile
     
     endfunction
     
-    function mIOrigine = momentInertieOrigine(obj)
-    
+    function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
+      
+      dc = positionCDMAvion - obj.getPositionCMOrigin();
+      
+      mIOrigine = obj.momentInertie + (obj.masse *...
+      [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
+      (-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
+      (-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
     
     endfunction
     
