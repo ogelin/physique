@@ -51,6 +51,17 @@ classdef cabine
        mI = [ix, iy, iz];
     
     endfunction
+  
+    function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
+      
+      dc = positionCDMAvion - obj.getPositionCMOrigin();
+      
+      mIOrigine = obj.momentInertie + (obj.masse *...
+      [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
+      (-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
+      (-dc(3)*dc(1)), (-dc(3)*dc(2)), ((dc(1)^2)+(dc(2)^2))]);
+    
+    endfunction
     
   endmethods
 endclassdef
