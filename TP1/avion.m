@@ -112,7 +112,15 @@ classdef avion<handle
     momentInertieFuselage = obj.fuselage.momentInertieOrigine(obj.positionCMEnVol);
     fprintf("AVION :: moment inertie fuselage : \n");
     disp(momentInertieFuselage);
-     
+    
+    momentInertieMoteurGauche = obj.moteurGauche.momentInertieOrigine(obj.positionCMEnVol);
+    fprintf("AVION :: moment inertie moteur gauche : \n");
+    disp(momentInertieMoteurGauche);
+    
+    momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCMEnVol);
+    fprintf("AVION :: moment inertie moteur droit : \n");
+    disp(momentInertieMoteurDroit);
+    
     endfunction
 
   endmethods
