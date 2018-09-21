@@ -84,9 +84,6 @@ classdef avion<handle
     + obj.moteurDroit.momentInertie);
     endfunction
     
-    function rotationAvion()
-    endfunction
-    
     function momentInertieOrigineTotal = momentInertieAvionOrigine(obj)
     
     fprintf("AVION :: positionCMAvionEnVol : \n");
@@ -128,6 +125,50 @@ classdef avion<handle
     + momentInertieFuselage + momentInertieMoteurGauche + momentInertieMoteurDroit;
     fprintf("AVION :: moment inertie total de l'avion : \n");
     disp(momentInertieOrigineTotal);
+    
+    endfunction
+    
+    function matriceRotation = calculMatriceRotationAvion(obj, angleRoationY)
+    
+    matriceRotation = [cos(angleRoationY), 0 sin(angleRoationY); 0, 1, 0 ; -sin(angleRoationY), 0, cos(angleRoationY);]
+    
+    endfunction
+    
+    function positionForce1 = calculPositionForce1(obj, angleRoationY)
+    #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
+    
+    x = obj.moteurDroit.getPositionCMOrigin()(1) - 3.68*cos(angleRoationY);
+    y = obj.moteurDroit.getPositionCMOrigin()(2) - 3.68*sin(angleRoationY);
+    z = obj.moteurDroit.getPositionCMOrigin()(3);
+    
+    positionForce1 = [x, y, z];
+    
+    endfunction
+    
+     function positionForce2 = calculPositionForce2(obj, angleRoationY)
+    #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
+    
+    x = obj.moteurGauche.getPositionCMOrigin()(1) - 3.68*cos(angleRoationY);
+    y = obj.moteurGauche.getPositionCMOrigin()(2) - 3.68*sin(angleRoationY);
+    z = obj.moteurGauche.getPositionCMOrigin()(3);
+    
+    positionForce2 = [x, y, z];
+    
+    endfunction
+    
+    function positionForce3 = calculPositionForce3(obj)
+    #Cette force est dans la direction verticale, quelle que soit l'orientation de l'appareil.
+    #Est appliquée sous les ailes au centre la surface de contact entre les ailes.
+    
+    x = obj.aile.getPositionCMOrigin()(1);
+    y = obj.aile.getPositionCMOrigin()(2);
+    z = obj.aile.getPositionCMOrigin()(3);
+    
+    positionForce3 = [x, y, z];
+    
+    endfunction
+    
+    function tau = calculTau(positionCMOriginAvion, positionForce1, force1, positionForce2, force2)
     
     endfunction
 
