@@ -13,7 +13,7 @@ largeurAile = 1.14;
 rayonFuselage = 1.345;
 positionZ = largeurAile + rayonFuselage;
 
-reponseDevoir1_cas1 = Devoir1([positionX, 0, positionZ],0,0,[11,11,260])
+reponseDevoir1_cas1 = Devoir1([positionX, 0, positionZ],0,[0,0,0],[11,11,260])
 
 
 
