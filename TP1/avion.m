@@ -180,26 +180,28 @@ classdef avion<handle
     
     function AA = caculAccelerationAngulaire(obj, vitesseAngulaire, matriceMI, tau)
     
-    vitesseAngulaire
-    vitesseAngulaireTransposee = [vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3);]
-    matriceMI
+    vitesseAngulaire;
+    vitesseAngulaireTransposee = [vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3);];
+    matriceMI;
     
-    #vecteurW = matriceMI* vitesseAngulaire
-    #vecteurWTranspose = [vecteurW(1), vecteurW(2), vecteurW(3)]
+    vecteurW = matriceMI .* vitesseAngulaire;
+    vecteurWTranspose = [vecteurW(1), vecteurW(2), vecteurW(3)];
     
-    #matriceIdentite = [0, -vitesseAngulaire(3), vitesseAngulaire(2);...
-   # vitesseAngulaire(3), 0, -vitesseAngulaire(1);...
-    #-vitesseAngulaire(2), vitesseAngulaire(1), 0; ]
+    matriceIdentite = [0, -vitesseAngulaire(3), vitesseAngulaire(2);...
+    vitesseAngulaire(3), 0, -vitesseAngulaire(1);...
+    -vitesseAngulaire(2), vitesseAngulaire(1), 0; ];
     
-    #vagueW = matriceIdentite * vecteurW
+    vagueW = matriceIdentite * vecteurW;
     
-    #matriceMIInverse = matriceMI.^-1
+    matriceMIInverse = matriceMI.^-1;
     
-    #x= matriceIdentite*vecteurW
+    x= matriceIdentite*vecteurW;
     
-    #y = vagueW*x
+    y = vagueW*x;
     
-    AA = 0;#matriceMIInverse*[tau - (vagueW*matriceIdentite*vecteurW)]
+    z = tau - y;
+    
+    AA = matriceMIInverse*[tau - (vagueW*matriceIdentite*vecteurW)];
     endfunction
 
   endmethods
