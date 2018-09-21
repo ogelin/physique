@@ -84,7 +84,10 @@ classdef avion<handle
     + obj.moteurDroit.momentInertie);
     endfunction
     
-    function momentInertieOrigine = momentInertieAvionOrigine(obj)
+    function rotationAvion()
+    endfunction
+    
+    function momentInertieOrigineTotal = momentInertieAvionOrigine(obj)
     
     fprintf("AVION :: positionCMAvionEnVol : \n");
     fprintf("x = %d \n", obj.positionCMEnVol(1));
@@ -97,9 +100,9 @@ classdef avion<handle
     fprintf("y = %d \n", aileron(2));
     fprintf("z = %d \n", aileron(3));
     
-    momentInertieOrigine = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCMEnVol, obj.aileron.calculCMOrigin());
+    momentInertieAileron = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCMEnVol, obj.aileron.calculCMOrigin());
     fprintf("AVION :: moment inertie aileron : \n");
-    disp(momentInertieOrigine);
+    disp(momentInertieAileron);
     
     momentInertieAile = obj.aile.momentInertieOrigine(obj.positionCMEnVol);
     fprintf("AVION :: moment inertie aile : \n");
@@ -120,6 +123,11 @@ classdef avion<handle
     momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCMEnVol);
     fprintf("AVION :: moment inertie moteur droit : \n");
     disp(momentInertieMoteurDroit);
+    
+    momentInertieOrigineTotal = momentInertieAileron + momentInertieAile + momentInertieCabine...
+    + momentInertieFuselage + momentInertieMoteurGauche + momentInertieMoteurDroit;
+    fprintf("AVION :: moment inertie total de l'avion : \n");
+    disp(momentInertieOrigineTotal);
     
     endfunction
 

@@ -54,7 +54,7 @@ classdef aileron
        iy = (obj.masse/12)*((obj.longueur^2)+(obj.epaisseur^2));
        iz = (obj.masse/12)*((obj.longueur^2)+(obj.largeur^2));
        
-       mI = [ix, iy, iz];
+       mI = [ix, 0, 0; 0, iy, 0; 0, 0 iz];
     
     endfunction
     
