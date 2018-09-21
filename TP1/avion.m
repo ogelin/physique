@@ -130,7 +130,7 @@ classdef avion<handle
     
     function matriceRotation = calculMatriceRotationAvion(obj, angleRoationY)
     
-    matriceRotation = [cos(angleRoationY), 0 sin(angleRoationY); 0, 1, 0 ; -sin(angleRoationY), 0, cos(angleRoationY);]
+    matriceRotation = [cos(angleRoationY), 0 sin(angleRoationY); 0, 1, 0 ; -sin(angleRoationY), 0, cos(angleRoationY);];
     
     endfunction
     
@@ -145,7 +145,7 @@ classdef avion<handle
     
     endfunction
     
-     function positionForce2 = calculPositionForce2(obj, angleRoationY)
+    function positionForce2 = calculPositionForce2(obj, angleRoationY)
     #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
     
     x = obj.moteurGauche.getPositionCMOrigin()(1) - 3.68*cos(angleRoationY);
@@ -168,8 +168,14 @@ classdef avion<handle
     
     endfunction
     
-    function tau = calculTau(positionCMOriginAvion, positionForce1, force1, positionForce2, force2)
-    
+    function tau = calculTau(obj, positionForce1, positionForce2, positionForce3, force)
+        rc = obj.calculPositionCMEnVol();
+        
+        tau1 = [(positionForce1 - rc) * force(1)];
+        tau2 = [(positionForce2 - rc) * force(2)];
+        tau3 = [(positionForce3 - rc) * force(3)];
+        tau = tau1 + tau2 + tau3
+        
     endfunction
 
   endmethods

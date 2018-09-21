@@ -11,6 +11,10 @@ function [ pcm, MI, aa ] = Devoir1(posA,ar,va,Forces )
     positionForce1 = avion.calculPositionForce1(ar)
     positionForce2 = avion.calculPositionForce2(ar)
     positionForce3 = avion.calculPositionForce3()
+    
+    tau = avion.calculTau(positionForce1, positionForce2, positionForce3, Forces);
+    disp(tau);
+    
     aa = 0;
     
     
@@ -22,10 +26,3 @@ end
 
 
 
-   # fprintf("Moment inertie totale :");
-    #disp(MI);
-    
-    #fprintf("momentInertieAvionOrigine : \n");
-    #fprintf("x = %d \n", MI(1));
-   # fprintf("y = %d \n", MI(2));
-    #fprintf("z = %d \n", MI(3));
