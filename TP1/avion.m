@@ -56,6 +56,8 @@ classdef avion<handle
       + obj.fuselage.getPositionCMOrigin * obj.fuselage.masse...
       + obj.moteurGauche.getPositionCMOrigin * obj.moteurGauche.masse...
       + obj.moteurDroit.getPositionCMOrigin * obj.moteurDroit.masse) / obj.masse;
+      
+      fprintf("Cendre de masse aile : %d \n", obj.aile.getPositionCMOrigin);
     endfunction
     
     %Cette formule est la formule de rotation des notes de cours.

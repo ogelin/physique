@@ -1,6 +1,3 @@
-
-
-
 classdef moteur
  properties
     longueur = 0;

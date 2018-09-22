@@ -39,7 +39,7 @@ classdef aileron
     function a = calculCMOrigin(obj)
       x = obj.largeur/2;              %valeur donnï¿½e dans les consignes
       y = 0;
-      z = obj.longueur/2 + (2*1.345); %1.345 = rayon du fuselage
+      z = obj.longueur/2 + (2*1.345) + 0.25; %1.345 = rayon du fuselage  0.25 = épaisseur de l'aile
       
       a = [x, y, z];
     endfunction

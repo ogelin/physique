@@ -1,6 +1,3 @@
-
-
-
 classdef fuselage
  properties
     longueur = 0;

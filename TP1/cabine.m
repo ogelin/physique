@@ -33,7 +33,7 @@ classdef cabine
     function a = calculCMOrigin(obj)
       x = 22.95 + obj.longueur/4;              %22.95 = longueurFuselage
       y = 0;
-      z = obj.rayon;
+      z = obj.rayon + 0.25; %0.25 = épaisseur de l'aile
       
       a = [x, y, z];
     endfunction
