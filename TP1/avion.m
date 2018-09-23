@@ -65,6 +65,10 @@ classdef avion<handle
                         [cos(obj.angleNez), 0, sin(obj.angleNez);...
                         0, 1, 0;...
                         -sin(obj.angleNez), 0, cos(obj.angleNez)];  %Matrice de rotation
+                        
+      #fprinf("Avion :: positionCMEnVol : %d", positionCMEnVol);                 
+                        
+      #obj.setPositionCMOrigin(positionCMEnVol);
     endfunction
     
     function y = obtenirMasse(obj)

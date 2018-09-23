@@ -42,6 +42,10 @@ classdef fuselage
       a = obj.positionCMOrigin;
     endfunction
     
+    function setPositionCMOrigin(obj, positionCMOriginXYZ)
+      obj.positionCMOrigin = positionCMOriginXYZ;
+    endfunction
+    
     function mI = momentInertie(obj)
     
        ix = ((obj.masse/4)*(obj.rayon^2))+((obj.masse/12)*(obj.longueur^2));

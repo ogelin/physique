@@ -35,6 +35,10 @@ classdef aileron
       a = obj.masse();
     endfunction
     
+    function setPositionCMOrigin(obj, positionCMOriginXYZ)
+      obj.positionCMOrigin = positionCMOriginXYZ;
+    endfunction
+    
     %Calcul directement la position du CM par rapport � l'origine
     function a = calculCMOrigin(obj)
       x = obj.largeur/2;              %valeur donn�e dans les consignes

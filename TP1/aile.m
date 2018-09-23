@@ -23,6 +23,9 @@ classdef aile
     function a = obtenirLongueur(obj)
       a = obj.longueur();
     endfunction
+    function setPositionCMOrigin(obj, positionCMOriginXYZ)
+      obj.positionCMOrigin = positionCMOriginXYZ;
+    endfunction
     
     function a = obtenirLargeur(obj)
       a = obj.largeur();

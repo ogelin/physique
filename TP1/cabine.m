@@ -42,6 +42,10 @@ classdef cabine
       a = obj.positionCMOrigin;
     endfunction
     
+    function setPositionCMOrigin(obj, positionCMOriginXYZ)
+      obj.positionCMOrigin = positionCMOriginXYZ;
+    endfunction
+    
     function mI = momentInertie(obj)
     
        ix = 0.0125*obj.masse*(((obj.rayon^2)*12)+((obj.longueur^2)*3));
@@ -51,25 +55,30 @@ classdef cabine
        mI = [ix,0,0;0,iy,0;0,0,iz];
        
       
-      #fprintf("cabine obj.masse %d : \n", obj.masse);
-      #fprintf("cabine obj.rayon %d : \n", obj.rayon);
-     # fprintf("cabine obj.longueur %d : \n", obj.longueur);
-      #fprintf("cabine :: momentInertie : \n");
-      #disp(mI);
+      fprintf("cabine obj.masse %d : \n", obj.masse);
+      fprintf("cabine obj.rayon %d : \n", obj.rayon);
+      fprintf("cabine obj.longueur %d : \n", obj.longueur);
+      fprintf("cabine :: momentInertie : \n");
+      disp(mI);
 
     endfunction
   
     function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
       
+     fprintf("aileron :: positionCDMAvion : %d\n");
+     disp(positionCDMAvion);
+     fprintf("aileron :: obj.getPositionCMOrigin() : %d\n");
+     disp(obj.getPositionCMOrigin());
+      
       dc = positionCDMAvion - obj.getPositionCMOrigin();
       
-      #fprintf("cabine :: dc : \n");
-     # disp(dc);
+      fprintf("cabine :: dc : \n");
+      disp(dc);
       
       megaDC =[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)),(-dc(1)*dc(3));(-dc(2)*dc(1)),((dc(1)^2)+(dc(3)^2)),(-dc(2)*dc(3));(-dc(3)*dc(1)),(-dc(3)*dc(2)),((dc(1)^2)+(dc(2)^2))];
       
-      #fprintf("cabine :: megaDC : \n");
-     # disp(megaDC);
+      fprintf("cabine :: megaDC : \n");
+      disp(megaDC);
       
       mIOrigine = obj.momentInertie + (obj.masse *...
       [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
