@@ -44,17 +44,35 @@ classdef fuselage
     
     function mI = momentInertie(obj)
     
-       ix = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
-       iy = ((obj.masse/4)*(obj.rayon^2))*((obj.masse/12)*(obj.longueur^2));
+       ix = ((obj.masse/4)*(obj.rayon^2))+((obj.masse/12)*(obj.longueur^2));
+       iy = ((obj.masse/4)*(obj.rayon^2))+((obj.masse/12)*(obj.longueur^2));
        iz = (obj.masse/2)*(obj.rayon^2);
        
-       mI = [ix, iy, iz];
+       mI = [ix,0,0;0,iy,0;0,0,iz];
+       
+      fprintf("fuselage obj.masse %d : \n", obj.masse);
+      fprintf("fuselage obj.rayon %d : \n", obj.rayon);
+      fprintf("fuselage obj.longueur %d : \n", obj.longueur);
+      fprintf("fuselage :: momentInertie : \n");
+      disp(mI);
     
   endfunction
   
       function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
       
+      fprintf("fuselage :: positionCDMAvion : %d\n");
+      disp(positionCDMAvion);
+      fprintf("fuselage :: obj.getPositionCMOrigin() : %d\n");
+      disp(obj.getPositionCMOrigin());
       dc = positionCDMAvion - obj.getPositionCMOrigin();
+      
+      fprintf("fuselage :: dc : \n");
+      disp(dc);
+      
+      megaDC =[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)),(-dc(1)*dc(3));(-dc(2)*dc(1)),((dc(1)^2)+(dc(3)^2)),(-dc(2)*dc(3));(-dc(3)*dc(1)),(-dc(3)*dc(2)),((dc(1)^2)+(dc(2)^2))];
+      
+      fprintf("fuselage :: megaDC : \n");
+      disp(megaDC);
       
       mIOrigine = obj.momentInertie + (obj.masse *...
       [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
