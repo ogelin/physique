@@ -55,13 +55,33 @@ classdef aile
        iy = (obj.masse/12)*((obj.longueur^2)+(obj.epaisseur^2));
        iz = (obj.masse/12)*((obj.longueur^2)+(obj.largeur^2));
        
-       mI = [ix, iy, iz];
+      mI = [ix,0,0;0,iy,0;0,0,iz];
+       
+      #fprintf("aile obj.masse %d : \n", obj.masse);
+      #fprintf("aile obj.largeur %d : \n", obj.largeur);
+      #fprintf("aile obj.epaisseur %d : \n", obj.epaisseur);
+     # fprintf("aile obj.longueur %d : \n", obj.longueur);
+      #fprintf("aile :: momentInertie : \n");
+     # disp(mI);
     
     endfunction
     
     function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
       
+      #fprintf("aile :: positionCDMAvion : %d\n");
+      #disp(positionCDMAvion);
+      #fprintf("aile :: obj.getPositionCMOrigin() : %d\n");
+      #disp(obj.getPositionCMOrigin());
+      
       dc = positionCDMAvion - obj.getPositionCMOrigin();
+      
+      #fprintf("aile :: dc : \n");
+     # disp(dc);
+      
+      #megaDC =[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)),(-dc(1)*dc(3));(-dc(2)*dc(1)),((dc(1)^2)+(dc(3)^2)),(-dc(2)*dc(3));(-dc(3)*dc(1)),(-dc(3)*dc(2)),((dc(1)^2)+(dc(2)^2))];
+      
+      #fprintf("aile :: megaDC : \n");
+      #disp(megaDC);
       
       mIOrigine = obj.momentInertie + (obj.masse *...
       [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
