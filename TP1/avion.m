@@ -36,8 +36,8 @@ classdef avion<handle
       obj.aile = aile(10.6, 1.14, 0.25, 3.25);
       obj.cabine = cabine(3.82, 1.345, 0.7);
       obj.fuselage = fuselage(22.95, 1.345, 15.1);
-      obj.moteurGauche = moteur(3.68, 0.724, 1.7, -1);
-      obj.moteurDroit = moteur(3.68, 0.724, 1.7, 1);
+      obj.moteurGauche = moteur(3.68, 0.724, 1.7, 1);
+      obj.moteurDroit = moteur(3.68, 0.724, 1.7, -1);
     endfunction
     
     function positionNezATerre = caculPositionNezATerre(obj)
