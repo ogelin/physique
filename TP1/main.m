@@ -9,7 +9,7 @@ longueurFuselage = 22.95;
 hauteurCabine = 3.82;
 positionX = longueurFuselage+hauteurCabine;
 
-largeurAile = 1.14;
+largeurAile = 0.25;
 rayonFuselage = 1.345;
 positionZ = largeurAile + rayonFuselage;
 
