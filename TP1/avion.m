@@ -119,11 +119,26 @@ classdef avion<handle
     fprintf("AVION :: moment inertie moteur droit : \n");
     disp(momentInertieMoteurDroit);
     
-    momentInertieOrigineTotal = momentInertieAileron + momentInertieAile + momentInertieCabine...
+    momentInertieOrigineTotalSansRotation = momentInertieAileron + momentInertieAile + momentInertieCabine...
     + momentInertieFuselage + momentInertieMoteurGauche + momentInertieMoteurDroit;
     fprintf("AVION :: moment inertie total de l'avion : \n");
-    disp(momentInertieOrigineTotal);
+    disp(momentInertieOrigineTotalSansRotation);
     
+    R = inv(obj.calculMatriceRotationAvion(obj.angleNez));
+    fprintf("AVION::R : \n");
+    disp(R);
+    
+    inverseR = obj.calculMatriceRotationAvion(obj.angleNez)
+    
+    fprintf("AVION::angleNez : \n");
+    disp(obj.angleNez);
+    
+    momentInertieOrigineTotalAvecRotation = R*momentInertieOrigineTotalSansRotation*inverseR;
+    
+    fprintf("AVION::momentInertieOrigineTotalAvecRotation : \n");
+    disp(momentInertieOrigineTotalAvecRotation);
+    
+    momentInertieOrigineTotal = momentInertieOrigineTotalAvecRotation;
     endfunction
     
     function matriceRotation = calculMatriceRotationAvion(obj, angleRoationY)
