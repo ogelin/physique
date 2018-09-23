@@ -2,7 +2,7 @@ function [ pcm, MI, aa ] = Devoir1(posA,ar,va,Forces )
 
 
     avion = avion(posA,ar,va,Forces);
-    pcm = avion.getPositionCMATerre();
+    pcm = avion.getPositionCMEnVol();
     MI = avion.momentInertieAvionOrigine()
     
     

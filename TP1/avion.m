@@ -41,7 +41,7 @@ classdef avion<handle
     endfunction
     
     function positionNezATerre = caculPositionNezATerre(obj)
-      positionNezATerre = [obj.fuselage.longueur + obj.cabine.longueur, 0, obj.cabine.rayon];
+      positionNezATerre = [obj.fuselage.longueur + obj.cabine.longueur, 0, obj.cabine.rayon + 0.25];
     endfunction
     
     function masseTot = calculMasse(obj)
@@ -56,8 +56,6 @@ classdef avion<handle
       + obj.fuselage.getPositionCMOrigin * obj.fuselage.masse...
       + obj.moteurGauche.getPositionCMOrigin * obj.moteurGauche.masse...
       + obj.moteurDroit.getPositionCMOrigin * obj.moteurDroit.masse) / obj.masse;
-      
-      fprintf("Cendre de masse aile : %d \n", obj.aile.getPositionCMOrigin);
     endfunction
     
     %Cette formule est la formule de rotation des notes de cours.
@@ -77,6 +75,10 @@ classdef avion<handle
       a = obj.positionCMATerre;
     endfunction
     
+    function a = getPositionCMEnVol(obj)
+      a = obj.positionCMEnVol;
+    endfunction
+    
     function momentInertie = momentInertieAvion(obj)
     momentInertie = (2*obj.aile.momentInertie...
     + obj.aileron.momentInertie...
@@ -92,12 +94,6 @@ classdef avion<handle
     fprintf("x = %d \n", obj.positionCMEnVol(1));
     fprintf("y = %d \n", obj.positionCMEnVol(2));
     fprintf("z = %d \n", obj.positionCMEnVol(3));
-    
-    aileron = obj.aileron.getPositionCMOrigin();
-    fprintf("AVION :: aileron : \n");
-    fprintf("x = %d \n", aileron(1));
-    fprintf("y = %d \n", aileron(2));
-    fprintf("z = %d \n", aileron(3));
     
     momentInertieAileron = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCMEnVol, obj.aileron.calculCMOrigin());
     fprintf("AVION :: moment inertie aileron : \n");
