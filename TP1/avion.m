@@ -159,22 +159,26 @@ classdef avion<handle
     function positionForce1 = calculPositionForce1(obj, angleRoationY)
     #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
     
-    x = obj.moteurDroit.getPositionCMOrigin()(1) - 3.68*cos(angleRoationY);
-    y = obj.moteurDroit.getPositionCMOrigin()(2) - 3.68*sin(angleRoationY);
+    x = obj.moteurDroit.getPositionCMOrigin()(1) - (3.68/2);
+    y = obj.moteurDroit.getPositionCMOrigin()(2);
     z = obj.moteurDroit.getPositionCMOrigin()(3);
     
     positionForce1 = [x, y, z];
+    
+    fprintf("Avion :: positionForce1 : %d \n", positionForce1);
     
     endfunction
     
     function positionForce2 = calculPositionForce2(obj, angleRoationY)
     #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
     
-    x = obj.moteurGauche.getPositionCMOrigin()(1) - 3.68*cos(angleRoationY);
-    y = obj.moteurGauche.getPositionCMOrigin()(2) - 3.68*sin(angleRoationY);
+    x = obj.moteurGauche.getPositionCMOrigin()(1) - (3.68/2);
+    y = obj.moteurGauche.getPositionCMOrigin()(2);
     z = obj.moteurGauche.getPositionCMOrigin()(3);
     
     positionForce2 = [x, y, z];
+    
+    fprintf("Avion :: positionForce2 : %d \n", positionForce2);
     
     endfunction
     
@@ -184,9 +188,11 @@ classdef avion<handle
     
     x = obj.aile.getPositionCMOrigin()(1);
     y = obj.aile.getPositionCMOrigin()(2);
-    z = obj.aile.getPositionCMOrigin()(3);
+    z = 0;
     
     positionForce3 = [x, y, z];
+    
+    fprintf("Avion :: positionForce3 : %d \n", positionForce3);
     
     endfunction
     
