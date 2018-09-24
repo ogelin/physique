@@ -98,7 +98,7 @@ classdef avion<handle
     fprintf("y = %d \n", obj.positionCM(2));
     fprintf("z = %d \n", obj.positionCM(3));
     
-    momentInertieAileron = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCM, obj.aileron.positionCM());
+    momentInertieAileron = obj.aileron.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie aileron : \n");
     disp(momentInertieAileron);
     

@@ -89,7 +89,7 @@ classdef aile
       #fprintf("aile :: obj.getPositionCMOrigin() : %d\n");
       #disp(obj.getPositionCMOrigin());
       
-      dc = positionCDMAvion - obj.getPositionCM();
+      dc = positionCDMAvion - obj.positionCM();
       
       #fprintf("aile :: dc : \n");
      # disp(dc);
