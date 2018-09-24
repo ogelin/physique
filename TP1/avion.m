@@ -182,7 +182,7 @@ classdef avion<handle
     
     x = obj.aile.getPositionCM()(1);
     y = obj.aile.getPositionCM()(2);
-    z = 0;
+    z = obj.aile.getPositionCM()(3);
     
     positionForce3 = [x, y, z];
     
@@ -192,10 +192,17 @@ classdef avion<handle
     
     function tau = calculTau(obj, positionForce1, positionForce2, positionForce3, force)
           rc = obj.positionCM();
+        fprintf("RC : %d \n",rc);
         
         tau1 = [(positionForce1 - rc) * force(1)];
+        fprintf("Tau 1 : %d \n",tau1);
         tau2 = [(positionForce2 - rc) * force(2)];
+        fprintf("Tau 2 : %d \n",tau2);
         tau3 = [(positionForce3 - rc) * force(3)];
+        fprintf("Tau 3 : %d \n",tau3);
+        fprintf("Force 3 : %d \n", force(3));
+        
+        
         tau = tau1 + tau2 + tau3
         
     endfunction
