@@ -210,27 +210,55 @@ classdef avion<handle
     function AA = caculAccelerationAngulaire(obj, vitesseAngulaire, matriceMI, tau)
     
     vitesseAngulaire;
-    vitesseAngulaireTransposee = [vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3);];
-    matriceMI;
+   # vitesseAngulaireTransposee = [vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3);];
+   # fprintf("Avion :: vitesseAngulaireTransposee : %d \n", vitesseAngulaireTransposee);
     
-    vecteurW = matriceMI .* vitesseAngulaire;
-    vecteurWTranspose = [vecteurW(1), vecteurW(2), vecteurW(3)];
+    
+    vitesseAngulaire; 
+    fprintf("Avion :: vitesseAngulaire : \n");
+    disp(vitesseAngulaire);
+    
+    matriceMI; 
+    fprintf("Avion :: matriceMI : \n");
+    disp(matriceMI);
+    
+    vecteurW = matriceMI * vitesseAngulaire;
+    fprintf("Avion :: vecteurW :\n");
+    disp(vecteurW);
+    
+    #vecteurWTranspose = [vecteurW(1), vecteurW(2), vecteurW(3)];
     
     matriceIdentite = [0, -vitesseAngulaire(3), vitesseAngulaire(2);...
     vitesseAngulaire(3), 0, -vitesseAngulaire(1);...
     -vitesseAngulaire(2), vitesseAngulaire(1), 0; ];
     
     vagueW = matriceIdentite * vecteurW;
+    fprintf("Avion :: vagueW :\n");
+    disp(vagueW);
     
-    matriceMIInverse = matriceMI.^-1;
+    
+    matriceMIInverse = inv(matriceMI);
+    fprintf("Avion :: matriceMIInverse :\n");
+    disp(matriceMIInverse);
+    
     
     x= matriceIdentite*vecteurW;
+    fprintf("Avion :: x :\n");
+    disp(x);
     
-    y = vagueW*x;
+    transposeX = [x(1),x(2),x(3)]
+    
+    y = vagueW*transposeX;
+    fprintf("Avion :: y :\n");
+    disp(y);
     
     z = tau - y;
+    fprintf("Avion :: z :\n");
+    disp(z);
     
-    AA = matriceMIInverse*[tau - (vagueW*matriceIdentite*vecteurW)];
+    nouveauZ = [z(1);z(4);z(7)]
+    
+    AA = matriceMIInverse*[nouveauZ];
     endfunction
 
   endmethods
