@@ -3,18 +3,22 @@ classdef cabine
     longueur = 0;
     rayon = 0;
     masse = 0;
-    positionCMOrigin = [0, 0, 0];  
+    positionCMDansAvion = [0, 0, 0]; 
+    vecteurNezCM = [0, 0, 0];    
+    positionCM = [0, 0, 0];
  endproperties
 
   methods
-   function c = cabine(longueurCabine, rayonCabine, masseCabine)
-       if (nargin != 3)
+   function c = cabine(longueurCabine, rayonCabine, masseCabine, positionNezAvion, angleNez)
+       if (nargin != 5)
         error ("Le nombre d'arguments entrÃ© pour l'objet cabine est invalide\n");
       endif
       c.longueur = longueurCabine;
       c.rayon = rayonCabine;
       c.masse = masseCabine;
-      c.positionCMOrigin = calculCMOrigin(c);
+      c.positionCMDansAvion = calculCMDansAvion(c);
+      c.vecteurNezCM = c.positionCMDansAvion - [22.95+3.82, 0, 1.345+0.25];
+      c.positionCM = calculCM(c, positionNezAvion, angleNez);
     endfunction
     
     function longueur = obtenirLongueur(obj)
@@ -29,22 +33,31 @@ classdef cabine
       masse = obj.masse()
     endfunction
         
-    %Calcul directement la position du CM par rapport ï¿½ l'origine
-    function a = calculCMOrigin(obj)
+    %Calcul directement la position du CM par rapport ï¿½ l'origine de l'avion
+    function positionCMDansAvion = calculCMDansAvion(obj)
       x = 22.95 + obj.longueur/4;              %22.95 = longueurFuselage
       y = 0;
       z = obj.rayon + 0.25; %0.25 = épaisseur de l'aile
       
-      a = [x, y, z];
+      positionCMDansAvion = [x, y, z];
     endfunction
     
-    function a = getPositionCMOrigin(obj)
-      a = obj.positionCMOrigin;
+    %Calcul directement la position du CM par rapport a l'axe du laboratoire
+    function positionCM = calculCM(obj, positionNezAvion, angleNez)
+      positionCM = positionNezAvion + ...
+                        obj.vecteurNezCM * ...
+                        [cos(angleNez), 0, sin(angleNez);...
+                        0, 1, 0;...
+                        -sin(angleNez), 0, cos(angleNez)];  %Matrice de rotation    
     endfunction
     
-    function setPositionCMOrigin(obj, positionCMOriginXYZ)
-      obj.positionCMOrigin = positionCMOriginXYZ;
+    function positionCMDansAvion = getPositionCMDansAvion(obj)
+      positionCMDansAvion = obj.positionCMDansAvion;
     endfunction
+    
+    function positionCM = getPositionCM(obj)
+      positionCM = obj.positionCM;
+    endfunction       
     
     function mI = momentInertie(obj)
     
@@ -68,9 +81,9 @@ classdef cabine
      fprintf("aileron :: positionCDMAvion : %d\n");
      disp(positionCDMAvion);
      fprintf("aileron :: obj.getPositionCMOrigin() : %d\n");
-     disp(obj.getPositionCMOrigin());
+     disp(obj.positionCM());
       
-      dc = positionCDMAvion - obj.getPositionCMOrigin();
+      dc = positionCDMAvion - obj.positionCM();
       
       fprintf("cabine :: dc : \n");
       disp(dc);

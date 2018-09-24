@@ -4,19 +4,23 @@ classdef moteur
     rayon = 0;
     masse = 0;
     direction = 0;
-    positionCMOrigin = [0, 0, 0];  
+    positionCMDansAvion = [0, 0, 0]; 
+    vecteurNezCM = [0, 0, 0];    
+    positionCM = [0, 0, 0];
  endproperties
 
   methods
-   function c = moteur(longueurMoteur, rayonMoteur, masseMoteur, directionMoteur)
-      if (nargin != 4)
+   function c = moteur(longueurMoteur, rayonMoteur, masseMoteur, directionMoteur, positionNezAvion, angleNez)
+      if (nargin != 6)
         error ("Le nombre d'arguments entré pour l'objet moteur est invalide\n");
       endif
       c.longueur = longueurMoteur;
       c.rayon = rayonMoteur;
       c.masse = masseMoteur;
       c.direction = directionMoteur;
-      c.positionCMOrigin = calculCMOrigin(c);
+      c.positionCMDansAvion = calculCMDansAvion(c);
+      c.vecteurNezCM = c.positionCMDansAvion - [22.95+3.82, 0, 1.345+0.25];
+      c.positionCM = calculCM(c, positionNezAvion, angleNez);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -34,10 +38,9 @@ classdef moteur
     function a = obtenirDirection(obj)
       a = obj.direction();
     endfunction
-    
-        
-    %Calcul directement la position du CM par rapport � l'origine
-    function a = calculCMOrigin(obj)
+                
+    %Calcul directement la position du CM par rapport � l'origine de l'avion
+    function positionCMDansAvion = calculCMDansAvion(obj)
       x = 5;
       if (obj.direction == -1)  %-1 pour gauche, 1 pour droit
         y = -(obj.rayon + 1.345);
@@ -46,16 +49,26 @@ classdef moteur
       endif
       z = 1.345 + 0.25;       %0.25 = epaisseur ailes
       
-      a = [x, y, z];  
+      
+      positionCMDansAvion = [x, y, z];
     endfunction
     
-    function a = getPositionCMOrigin(obj)
-      a = obj.positionCMOrigin;
+    %Calcul directement la position du CM par rapport a l'axe du laboratoire
+    function positionCM = calculCM(obj, positionNezAvion, angleNez)
+      positionCM = positionNezAvion + ...
+                        obj.vecteurNezCM * ...
+                        [cos(angleNez), 0, sin(angleNez);...
+                        0, 1, 0;...
+                        -sin(angleNez), 0, cos(angleNez)];  %Matrice de rotation    
     endfunction
     
-    function setPositionCMOrigin(obj, positionCMOriginXYZ)
-      obj.positionCMOrigin = positionCMOriginXYZ;
+    function positionCMDansAvion = getPositionCMDansAvion(obj)
+      positionCMDansAvion = obj.positionCMDansAvion;
     endfunction
+    
+    function positionCM = getPositionCM(obj)
+      positionCM = obj.positionCM;
+    endfunction  
     
     function mI = momentInertie(obj)
     
@@ -77,9 +90,9 @@ classdef moteur
       fprintf("moteur :: positionCDMAvion : %d\n");
       disp(positionCDMAvion);
       fprintf("moteur :: obj.getPositionCMOrigin() : %d\n");
-      disp(obj.getPositionCMOrigin());
+      disp(obj.positionCM());
       
-      dc = positionCDMAvion - obj.getPositionCMOrigin();
+      dc = positionCDMAvion - obj.positionCM();
       
       fprintf("moteur :: dc : \n"); 
       disp(dc);

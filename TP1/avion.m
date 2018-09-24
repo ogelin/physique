@@ -4,8 +4,8 @@ classdef avion<handle
     angleNez = 0;
     positionNezATerre = [0, 0, 0];
     positionNezEnVol = [0, 0, 0]; 
-    positionCMATerre = [0, 0, 0]; 
-    positionCMEnVol = [0, 0, 0];
+    positionCMDansAvion = [0, 0, 0]; 
+    positionCM = [0, 0, 0];
     vecteurNezCMATerre = [0, 0, 0];
     aileron = 0;
     aile = 0;
@@ -26,18 +26,18 @@ classdef avion<handle
       initPartiesAvion(f);
       f.positionNezATerre = caculPositionNezATerre(f);
       f.masse = calculMasse(f);
-      f.positionCMATerre = calculCMATerre(f);
-      f.vecteurNezCMATerre = f.positionCMATerre - f.positionNezATerre;
-      f.positionCMEnVol = calculPositionCMEnVol(f);
+      f.positionCMDansAvion = calculCMDansAvion(f);
+      f.vecteurNezCMATerre = f.positionCMDansAvion - f.positionNezATerre;
+      f.positionCM = calculPositionCM(f);
     endfunction
 
     function initPartiesAvion(obj)
-      obj.aileron = aileron(2.1, 1.28, 0.07, 0.5);
-      obj.aile = aile(10.6, 1.14, 0.25, 3.25);
-      obj.cabine = cabine(3.82, 1.345, 0.7);
-      obj.fuselage = fuselage(22.95, 1.345, 15.1);
-      obj.moteurGauche = moteur(3.68, 0.724, 1.7, 1);
-      obj.moteurDroit = moteur(3.68, 0.724, 1.7, -1);
+      obj.aileron = aileron(2.1, 1.28, 0.07, 0.5, obj.positionNezEnVol, obj.angleNez);
+      obj.aile = aile(10.6, 1.14, 0.25, 3.25, obj.positionNezEnVol, obj.angleNez);
+      obj.cabine = cabine(3.82, 1.345, 0.7, obj.positionNezEnVol, obj.angleNez);
+      obj.fuselage = fuselage(22.95, 1.345, 15.1, obj.positionNezEnVol, obj.angleNez);
+      obj.moteurGauche = moteur(3.68, 0.724, 1.7, 1, obj.positionNezEnVol, obj.angleNez);
+      obj.moteurDroit = moteur(3.68, 0.724, 1.7, -1, obj.positionNezEnVol, obj.angleNez);
     endfunction
     
     function positionNezATerre = caculPositionNezATerre(obj)
@@ -49,38 +49,37 @@ classdef avion<handle
       + obj.cabine.masse + obj.fuselage.masse + obj.moteurGauche.masse*2;
     endfunction
     
-    function positionCMATerre = calculCMATerre(obj)
-      positionCMATerre = (obj.aile.getPositionCMOrigin * obj.aile.masse...
-      + obj.aileron.getPositionCMOrigin * obj.aileron.masse...
-      + obj.cabine.getPositionCMOrigin * obj.cabine.masse...
-      + obj.fuselage.getPositionCMOrigin * obj.fuselage.masse...
-      + obj.moteurGauche.getPositionCMOrigin * obj.moteurGauche.masse...
-      + obj.moteurDroit.getPositionCMOrigin * obj.moteurDroit.masse) / obj.masse;
+    function positionCMDansAvion = calculCMDansAvion(obj)
+      positionCMDansAvion = (obj.aile.getPositionCMDansAvion * obj.aile.masse...
+      + obj.aileron.getPositionCMDansAvion * obj.aileron.masse...
+      + obj.cabine.getPositionCMDansAvion * obj.cabine.masse...
+      + obj.fuselage.getPositionCMDansAvion * obj.fuselage.masse...
+      + obj.moteurGauche.getPositionCMDansAvion * obj.moteurGauche.masse...
+      + obj.moteurDroit.getPositionCMDansAvion * obj.moteurDroit.masse) / obj.masse;
     endfunction
     
     %Cette formule est la formule de rotation des notes de cours.
-    function positionCMEnVol = calculPositionCMEnVol(obj)
-      positionCMEnVol = obj.positionNezEnVol + ...
+    function positionCM = calculPositionCM(obj)
+      positionCM = obj.positionNezEnVol + ...
                         obj.vecteurNezCMATerre * ...
                         [cos(obj.angleNez), 0, sin(obj.angleNez);...
                         0, 1, 0;...
                         -sin(obj.angleNez), 0, cos(obj.angleNez)];  %Matrice de rotation
                         
-      #fprinf("Avion :: positionCMEnVol : %d", positionCMEnVol);                 
+      fprintf("Vecteur CM - Nez : %d \n", obj.vecteurNezCMATerre);                 
                         
-      #obj.setPositionCMOrigin(positionCMEnVol);
     endfunction
     
     function y = obtenirMasse(obj)
       y = obj.masse();
     endfunction
     
-    function a = getPositionCMATerre(obj)
-      a = obj.positionCMATerre;
+    function a = getPositionCMDansAvion(obj)
+      a = obj.positionCMDansAvion;
     endfunction
     
-    function a = getPositionCMEnVol(obj)
-      a = obj.positionCMEnVol;
+    function a = getPositionCM(obj)
+      a = obj.positionCM;
     endfunction
     
     function momentInertie = momentInertieAvion(obj)
@@ -95,36 +94,31 @@ classdef avion<handle
     function momentInertieOrigineTotal = momentInertieAvionOrigine(obj)
     
     fprintf("AVION :: positionCMAvionEnVol : \n");
-    fprintf("x = %d \n", obj.positionCMEnVol(1));
-    fprintf("y = %d \n", obj.positionCMEnVol(2));
-    fprintf("z = %d \n", obj.positionCMEnVol(3));
+    fprintf("x = %d \n", obj.positionCM(1));
+    fprintf("y = %d \n", obj.positionCM(2));
+    fprintf("z = %d \n", obj.positionCM(3));
     
-    momentInertieAileron = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCMATerre, obj.aileron.calculCMOrigin());
+    momentInertieAileron = obj.aileron.momentInertieOrigine(obj.aileron, obj.positionCM, obj.aileron.positionCM());
     fprintf("AVION :: moment inertie aileron : \n");
     disp(momentInertieAileron);
     
-    momentInertieAile = obj.aile.momentInertieOrigine(obj.positionCMATerre);
-    #momentInertieAile = obj.aile.momentInertieOrigine(obj.positionCMEnVol);
+    momentInertieAile = obj.aile.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie aile : \n");
     disp(momentInertieAile);
     
-    momentInertieCabine = obj.cabine.momentInertieOrigine(obj.positionCMATerre);
-    %momentInertieCabine = obj.cabine.momentInertieOrigine(obj.positionCMEnVol);
+    momentInertieCabine = obj.cabine.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie cabine : \n");
     disp(momentInertieCabine);
     
-    momentInertieFuselage = obj.fuselage.momentInertieOrigine(obj.positionCMATerre);
-    %momentInertieFuselage = obj.fuselage.momentInertieOrigine(obj.positionCMEnVol);
+    momentInertieFuselage = obj.fuselage.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie fuselage : \n");
     disp(momentInertieFuselage);
     
-    momentInertieMoteurGauche = obj.moteurGauche.momentInertieOrigine(obj.positionCMATerre);
-    %momentInertieMoteurGauche = obj.moteurGauche.momentInertieOrigine(obj.positionCMEnVol);
+    momentInertieMoteurGauche = obj.moteurGauche.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie moteur gauche : \n");
     disp(momentInertieMoteurGauche);
     
-    momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCMATerre);
-    %momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCMEnVol);
+    momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCM);
     fprintf("AVION :: moment inertie moteur droit : \n");
     disp(momentInertieMoteurDroit);
     
@@ -159,9 +153,9 @@ classdef avion<handle
     function positionForce1 = calculPositionForce1(obj, angleRoationY)
     #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
     
-    x = obj.moteurDroit.getPositionCMOrigin()(1) - (3.68/2);
-    y = obj.moteurDroit.getPositionCMOrigin()(2);
-    z = obj.moteurDroit.getPositionCMOrigin()(3);
+    x = obj.moteurDroit.getPositionCM()(1) - (3.68/2);
+    y = obj.moteurDroit.getPositionCM()(2);
+    z = obj.moteurDroit.getPositionCM()(3);
     
     positionForce1 = [x, y, z];
     
@@ -172,9 +166,9 @@ classdef avion<handle
     function positionForce2 = calculPositionForce2(obj, angleRoationY)
     #Est dans la direction de l'axe du moteur et est exercée à l'arrière du moteur en son centre.
     
-    x = obj.moteurGauche.getPositionCMOrigin()(1) - (3.68/2);
-    y = obj.moteurGauche.getPositionCMOrigin()(2);
-    z = obj.moteurGauche.getPositionCMOrigin()(3);
+    x = obj.moteurGauche.getPositionCM()(1) - (3.68/2);
+    y = obj.moteurGauche.getPositionCM()(2);
+    z = obj.moteurGauche.getPositionCM()(3);
     
     positionForce2 = [x, y, z];
     
@@ -186,8 +180,8 @@ classdef avion<handle
     #Cette force est dans la direction verticale, quelle que soit l'orientation de l'appareil.
     #Est appliquée sous les ailes au centre la surface de contact entre les ailes.
     
-    x = obj.aile.getPositionCMOrigin()(1);
-    y = obj.aile.getPositionCMOrigin()(2);
+    x = obj.aile.getPositionCM()(1);
+    y = obj.aile.getPositionCM()(2);
     z = 0;
     
     positionForce3 = [x, y, z];
@@ -197,8 +191,7 @@ classdef avion<handle
     endfunction
     
     function tau = calculTau(obj, positionForce1, positionForce2, positionForce3, force)
-        %rc = obj.calculPositionCMEnVol();
-        rc = obj.positionCMATerre();
+          rc = obj.positionCM();
         
         tau1 = [(positionForce1 - rc) * force(1)];
         tau2 = [(positionForce2 - rc) * force(2)];

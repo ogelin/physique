@@ -4,19 +4,23 @@ classdef aileron
     largeur = 0;
     epaisseur = 0;
     masse = 0;
-    positionCMOrigin = [0, 0, 0];     
+    positionCMDansAvion = [0, 0, 0]; 
+    vecteurNezCM = [0, 0, 0];    
+    positionCM = [0, 0, 0];
  endproperties
 
   methods
-   function c = aileron(longueurAileron, largeurAileron, epaisseurAileron, masseAileron)
-      if (nargin != 4)
+   function c = aileron(longueurAileron, largeurAileron, epaisseurAileron, masseAileron, positionNezAvion, angleNez)
+      if (nargin != 6)
         error ("Le nombre d'arguments entrÃ© pour l'objet aileron est invalide\n");
       endif
       c.longueur = longueurAileron;
       c.largeur = largeurAileron;
       c.epaisseur = epaisseurAileron;
       c.masse = masseAileron;
-      c.positionCMOrigin = calculCMOrigin(c);
+      c.positionCMDansAvion = calculCMDansAvion(c);
+      c.vecteurNezCM = c.positionCMDansAvion - [22.95+3.82, 0, 1.345+0.25];
+      c.positionCM = calculCM(c, positionNezAvion, angleNez);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -35,21 +39,30 @@ classdef aileron
       a = obj.masse();
     endfunction
     
-    function setPositionCMOrigin(obj, positionCMOriginXYZ)
-      obj.positionCMOrigin = positionCMOriginXYZ;
-    endfunction
-    
-    %Calcul directement la position du CM par rapport ï¿½ l'origine
-    function a = calculCMOrigin(obj)
+    %Calcul directement la position du CM par rapport ï¿½ l'origine de l'avion
+    function positionCMDansAvion = calculCMDansAvion(obj)
       x = obj.largeur/2;              %valeur donnï¿½e dans les consignes
       y = 0;
       z = obj.longueur/2 + (2*1.345) + 0.25; %1.345 = rayon du fuselage  0.25 = épaisseur de l'aile
       
-      a = [x, y, z];
+      positionCMDansAvion = [x, y, z];
     endfunction
     
-    function a = getPositionCMOrigin(obj)
-      a = obj.positionCMOrigin;
+    %Calcul directement la position du CM par rapport a l'axe du laboratoire
+    function positionCM = calculCM(obj, positionNezAvion, angleNez)
+      positionCM = positionNezAvion + ...
+                        obj.vecteurNezCM * ...
+                        [cos(angleNez), 0, sin(angleNez);...
+                        0, 1, 0;...
+                        -sin(angleNez), 0, cos(angleNez)];  %Matrice de rotation    
+    endfunction
+    
+    function positionCMDansAvion = getPositionCMDansAvion(obj)
+      positionCMDansAvion = obj.positionCMDansAvion;
+    endfunction
+    
+    function positionCM = getPositionCM(obj)
+      positionCM = obj.positionCM;
     endfunction
     
     function mI = momentInertie(obj)

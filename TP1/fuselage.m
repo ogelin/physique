@@ -3,18 +3,22 @@ classdef fuselage
     longueur = 0;
     rayon = 0;
     masse = 0;
-    positionCMOrigin = [0, 0, 0];  
+    positionCMDansAvion = [0, 0, 0]; 
+    vecteurNezCM = [0, 0, 0];    
+    positionCM = [0, 0, 0];
  endproperties
 
   methods
-   function c = fuselage(longueurFuselage, rayonFuselage, masseFuselage)
-      if (nargin != 3)
+   function c = fuselage(longueurFuselage, rayonFuselage, masseFuselage, positionNezAvion, angleNez)
+      if (nargin != 5)
         error ("Le nombre d'arguments entré pour l'objet fuselage est invalide\n");
       endif
       c.longueur = longueurFuselage;
       c.rayon = rayonFuselage;
       c.masse = masseFuselage;
-      c.positionCMOrigin = calculCMOrigin(c);
+      c.positionCMDansAvion = calculCMDansAvion(c);
+      c.vecteurNezCM = c.positionCMDansAvion - [22.95+3.82, 0, 1.345+0.25];
+      c.positionCM = calculCM(c, positionNezAvion, angleNez);
     endfunction
     
     function a = obtenirLongueur(obj)
@@ -28,23 +32,32 @@ classdef fuselage
     function a = obtenirMasse(obj)
       a = obj.masse();
     endfunction
-    
-    %Calcul directement la position du CM par rapport � l'origine
-    function a = calculCMOrigin(obj)
+            
+    %Calcul directement la position du CM par rapport � l'origine de l'avion
+    function positionCMDansAvion = calculCMDansAvion(obj)
       x = obj.longueur / 2;
       y = 0;
       z = obj.rayon + 0.25;  %0.25 est hardcod� et �quivaux � l'�paisseur des ailes
       
-      a = [x, y, z];
+      positionCMDansAvion = [x, y, z];
     endfunction
     
-    function a = getPositionCMOrigin(obj)
-      a = obj.positionCMOrigin;
+    %Calcul directement la position du CM par rapport a l'axe du laboratoire
+    function positionCM = calculCM(obj, positionNezAvion, angleNez)
+      positionCM = positionNezAvion + ...
+                        obj.vecteurNezCM * ...
+                        [cos(angleNez), 0, sin(angleNez);...
+                        0, 1, 0;...
+                        -sin(angleNez), 0, cos(angleNez)];  %Matrice de rotation    
     endfunction
     
-    function setPositionCMOrigin(obj, positionCMOriginXYZ)
-      obj.positionCMOrigin = positionCMOriginXYZ;
+    function positionCMDansAvion = getPositionCMDansAvion(obj)
+      positionCMDansAvion = obj.positionCMDansAvion;
     endfunction
+    
+    function positionCM = getPositionCM(obj)
+      positionCM = obj.positionCM;
+    endfunction  
     
     function mI = momentInertie(obj)
     
@@ -68,7 +81,7 @@ classdef fuselage
       #disp(positionCDMAvion);
       #fprintf("fuselage :: obj.getPositionCMOrigin() : %d\n");
       #disp(obj.getPositionCMOrigin());
-      dc = positionCDMAvion - obj.getPositionCMOrigin();
+      dc = positionCDMAvion - obj.positionCM();
       
       #fprintf("fuselage :: dc : \n");
       #disp(dc);
