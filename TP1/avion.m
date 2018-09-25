@@ -65,9 +65,7 @@ classdef avion<handle
                         [cos(obj.angleNez), 0, sin(obj.angleNez);...
                         0, 1, 0;...
                         -sin(obj.angleNez), 0, cos(obj.angleNez)];  %Matrice de rotation
-                        
-      fprintf("Vecteur CM - Nez : %d \n", obj.vecteurNezCMATerre);                 
-                        
+                                          
     endfunction
     
     function y = obtenirMasse(obj)
@@ -93,55 +91,29 @@ classdef avion<handle
     
     function momentInertieOrigineTotal = momentInertieAvionOrigine(obj)
     
-    fprintf("AVION :: positionCMAvionEnVol : \n");
-    fprintf("x = %d \n", obj.positionCM(1));
-    fprintf("y = %d \n", obj.positionCM(2));
-    fprintf("z = %d \n", obj.positionCM(3));
-    
     momentInertieAileron = obj.aileron.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie aileron : \n");
-    disp(momentInertieAileron);
     
     momentInertieAile = obj.aile.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie aile : \n");
-    disp(momentInertieAile);
     
     momentInertieCabine = obj.cabine.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie cabine : \n");
-    disp(momentInertieCabine);
     
     momentInertieFuselage = obj.fuselage.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie fuselage : \n");
-    disp(momentInertieFuselage);
     
     momentInertieMoteurGauche = obj.moteurGauche.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie moteur gauche : \n");
-    disp(momentInertieMoteurGauche);
     
     momentInertieMoteurDroit = obj.moteurDroit.momentInertieOrigine(obj.positionCM);
-    fprintf("AVION :: moment inertie moteur droit : \n");
-    disp(momentInertieMoteurDroit);
     
     momentInertieOrigineTotalSansRotation = momentInertieAileron + momentInertieAile + momentInertieCabine...
     + momentInertieFuselage + momentInertieMoteurGauche + momentInertieMoteurDroit;
-    fprintf("AVION :: moment inertie total de l'avion : \n");
-    disp(momentInertieOrigineTotalSansRotation);
     
     R = inv(obj.calculMatriceRotationAvion(obj.angleNez));
-    fprintf("AVION::R : \n");
-    disp(R);
     
     inverseR = obj.calculMatriceRotationAvion(obj.angleNez)
     
-    fprintf("AVION::angleNez : \n");
-    disp(obj.angleNez);
-    
     momentInertieOrigineTotalAvecRotation = R*momentInertieOrigineTotalSansRotation*inverseR;
     
-    fprintf("AVION::momentInertieOrigineTotalAvecRotation : \n");
-    disp(momentInertieOrigineTotalAvecRotation);
-    
     momentInertieOrigineTotal = momentInertieOrigineTotalAvecRotation;
+    
     endfunction
     
     function matriceRotation = calculMatriceRotationAvion(obj, angleRoationY)
@@ -159,8 +131,6 @@ classdef avion<handle
     
     positionForce1 = [x, y, z];
     
-    fprintf("Avion :: positionForce1 : %d \n", positionForce1);
-    
     endfunction
     
     function positionForce2 = calculPositionForce2(obj, angleRoationY)
@@ -171,8 +141,6 @@ classdef avion<handle
     z = obj.moteurGauche.getPositionCM()(3);
     
     positionForce2 = [x, y, z];
-    
-    fprintf("Avion :: positionForce2 : %d \n", positionForce2);
     
     endfunction
     
@@ -186,23 +154,15 @@ classdef avion<handle
     
     positionForce3 = [x, y, z];
     
-    fprintf("Avion :: positionForce3 : %d \n", positionForce3);
-    
     endfunction
     
     function tau = calculTau(obj, positionForce1, positionForce2, positionForce3, force)
           rc = obj.positionCM();
-        fprintf("RC : %d \n",rc);
         
         tau1 = [(positionForce1 - rc) * force(1)];
-        fprintf("Tau 1 : %d \n",tau1);
         tau2 = [(positionForce2 - rc) * force(2)];
-        fprintf("Tau 2 : %d \n",tau2);
         tau3 = [(positionForce3 - rc) * force(3)];
-        fprintf("Tau 3 : %d \n",tau3);
-        fprintf("Force 3 : %d \n", force(3));
-        
-        
+
         tau = tau1 + tau2 + tau3
         
     endfunction
@@ -214,48 +174,21 @@ classdef avion<handle
    # fprintf("Avion :: vitesseAngulaireTransposee : %d \n", vitesseAngulaireTransposee);
     
     
-    vitesseAngulaire; 
-    fprintf("Avion :: vitesseAngulaire : \n");
-    disp(vitesseAngulaire);
-    
+    vitesseAngulaire;   
     matriceMI; 
-    fprintf("Avion :: matriceMI : \n");
-    disp(matriceMI);
-    
     matriceMIInverse = inv(matriceMI);
-    fprintf("Avion :: matriceMIInverse :\n");
-    disp(matriceMIInverse);
-
-    
     vecteurW = matriceMIInverse * vitesseAngulaire;
-    fprintf("Avion :: vecteurW :\n");
-    disp(vecteurW);
-    
-    #vecteurWTranspose = [vecteurW(1), vecteurW(2), vecteurW(3)];
     
     matriceIdentite = [0, -vitesseAngulaire(3), vitesseAngulaire(2);...
     vitesseAngulaire(3), 0, -vitesseAngulaire(1);...
     -vitesseAngulaire(2), vitesseAngulaire(1), 0; ];
     
     vagueW = matriceIdentite * vecteurW;
-    fprintf("Avion :: vagueW :\n");
-    disp(vagueW);
-    
-    
     x= matriceIdentite*vecteurW;
-    fprintf("Avion :: x :\n");
-    disp(x);
-    
     transposeX = [x(1),x(2),x(3)]
-    
     y = vagueW*transposeX;
-    fprintf("Avion :: y :\n");
-    disp(y);
-
     
     z = tau - y;
-    fprintf("Avion :: z :\n");
-    disp(z);
     
     nouveauZ = [z(1);z(4);z(7)]
     
