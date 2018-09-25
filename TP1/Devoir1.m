@@ -1,8 +1,8 @@
-function [ pcm, MI, aa ] = Devoir1(posA,ar,va,Forces )
+function x = Devoir1(posA,ar,va,Forces )
 
 
     avion = avion(posA,ar,va,Forces);
-    pcm = avion.getPositionCM()
+    pcm = [avion.getPositionCM()(1); avion.getPositionCM()(2); avion.getPositionCM()(3)]
     MI = avion.momentInertieAvionOrigine()
     
     
@@ -16,6 +16,8 @@ function [ pcm, MI, aa ] = Devoir1(posA,ar,va,Forces )
     
     
     aa = avion.caculAccelerationAngulaire(va, MI, tau)
+    
+    x = [ pcm, MI, aa ] ;
     
     
     

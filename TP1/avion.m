@@ -106,9 +106,9 @@ classdef avion<handle
     momentInertieOrigineTotalSansRotation = momentInertieAileron + momentInertieAile + momentInertieCabine...
     + momentInertieFuselage + momentInertieMoteurGauche + momentInertieMoteurDroit;
     
-    R = inv(obj.calculMatriceRotationAvion(obj.angleNez));
+    inverseR = inv(obj.calculMatriceRotationAvion(obj.angleNez));
     
-    inverseR = obj.calculMatriceRotationAvion(obj.angleNez);
+    R = obj.calculMatriceRotationAvion(obj.angleNez);
     
     momentInertieOrigineTotalAvecRotation = R*momentInertieOrigineTotalSansRotation*inverseR;
     
