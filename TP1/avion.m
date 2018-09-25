@@ -108,7 +108,7 @@ classdef avion<handle
     
     R = inv(obj.calculMatriceRotationAvion(obj.angleNez));
     
-    inverseR = obj.calculMatriceRotationAvion(obj.angleNez)
+    inverseR = obj.calculMatriceRotationAvion(obj.angleNez);
     
     momentInertieOrigineTotalAvecRotation = R*momentInertieOrigineTotalSansRotation*inverseR;
     
@@ -163,7 +163,7 @@ classdef avion<handle
         tau2 = [(positionForce2 - rc) * force(2)];
         tau3 = [(positionForce3 - rc) * force(3)];
 
-        tau = tau1 + tau2 + tau3
+        tau = tau1 + tau2 + tau3;
         
     endfunction
     
@@ -185,12 +185,12 @@ classdef avion<handle
     
     vagueW = matriceIdentite * vecteurW;
     x= matriceIdentite*vecteurW;
-    transposeX = [x(1),x(2),x(3)]
+    transposeX = [x(1),x(2),x(3)];
     y = vagueW*transposeX;
     
     z = tau - y;
     
-    nouveauZ = [z(1);z(4);z(7)]
+    nouveauZ = [z(1);z(4);z(7)];
     
     AA = matriceMIInverse*[nouveauZ];
     endfunction
