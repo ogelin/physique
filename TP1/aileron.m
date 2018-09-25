@@ -73,12 +73,12 @@ classdef aileron
        
       mI = [ix,0,0;0,iy,0;0,0,iz];
        
-      #fprintf("aileron obj.masse %d : \n", obj.masse);
-      #fprintf("aileron obj.largeur %d : \n", obj.largeur);
-      #fprintf("aileron obj.epaisseur %d : \n", obj.epaisseur);
-     # fprintf("aileron obj.longueur %d : \n", obj.longueur);
-      #fprintf("aileron :: momentInertie : \n");
-      #disp(mI);
+      fprintf("aileron obj.masse %d : \n", obj.masse);
+      fprintf("aileron obj.largeur %d : \n", obj.largeur);
+      fprintf("aileron obj.epaisseur %d : \n", obj.epaisseur);
+      fprintf("aileron obj.longueur %d : \n", obj.longueur);
+      fprintf("aileron :: momentInertie : \n");
+      disp(mI);
     
     endfunction
     
@@ -87,12 +87,12 @@ classdef aileron
     
     #fprintf("aileron :: positionCDMAvion : %d\n");
     #disp(positionCDMAvion);
-    #fprintf("aileron :: obj.getPositionCMOrigin() : %d\n");
-    #disp(obj.getPositionCMOrigin());
+    fprintf("aileron :: obj.getPositionCM : \n");
+    disp(obj.getPositionCM());
     
     dc = positionCDMAvion - obj.positionCM;
     
-    #fprintf("aileron :: dc : \n"); 
+    fprintf("aileron :: dc : \n"); 
     #disp(dc);
     
     #megaDC =[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)),(-dc(1)*dc(3));(-dc(2)*dc(1)),((dc(1)^2)+(dc(3)^2)),(-dc(2)*dc(3));(-dc(3)*dc(1)),(-dc(3)*dc(2)),((dc(1)^2)+(dc(2)^2))];

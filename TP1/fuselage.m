@@ -67,20 +67,20 @@ classdef fuselage
        
        mI = [ix,0,0;0,iy,0;0,0,iz];
        
-      #fprintf("fuselage obj.masse %d : \n", obj.masse);
-      #fprintf("fuselage obj.rayon %d : \n", obj.rayon);
-      #fprintf("fuselage obj.longueur %d : \n", obj.longueur);
-      #fprintf("fuselage :: momentInertie : \n");
-      #disp(mI);
+      fprintf("fuselage obj.masse %d : \n", obj.masse);
+      fprintf("fuselage obj.rayon %d : \n", obj.rayon);
+      fprintf("fuselage obj.longueur %d : \n", obj.longueur);
+      fprintf("fuselage :: momentInertie : \n");
+      disp(mI);
     
   endfunction
   
       function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
       
-      #fprintf("fuselage :: positionCDMAvion : %d\n");
-      #disp(positionCDMAvion);
-      #fprintf("fuselage :: obj.getPositionCMOrigin() : %d\n");
-      #disp(obj.getPositionCMOrigin());
+      fprintf("fuselage :: positionCDMAvion : %d\n");
+      disp(positionCDMAvion);
+      fprintf("fuselage :: obj.getPositionCM() : %d\n");
+      disp(obj.getPositionCM());
       dc = positionCDMAvion - obj.positionCM();
       
       #fprintf("fuselage :: dc : \n");

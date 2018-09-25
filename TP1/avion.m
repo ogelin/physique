@@ -222,7 +222,12 @@ classdef avion<handle
     fprintf("Avion :: matriceMI : \n");
     disp(matriceMI);
     
-    vecteurW = matriceMI * vitesseAngulaire;
+    matriceMIInverse = inv(matriceMI);
+    fprintf("Avion :: matriceMIInverse :\n");
+    disp(matriceMIInverse);
+
+    
+    vecteurW = matriceMIInverse * vitesseAngulaire;
     fprintf("Avion :: vecteurW :\n");
     disp(vecteurW);
     
@@ -237,11 +242,6 @@ classdef avion<handle
     disp(vagueW);
     
     
-    matriceMIInverse = inv(matriceMI);
-    fprintf("Avion :: matriceMIInverse :\n");
-    disp(matriceMIInverse);
-    
-    
     x= matriceIdentite*vecteurW;
     fprintf("Avion :: x :\n");
     disp(x);
@@ -251,6 +251,7 @@ classdef avion<handle
     y = vagueW*transposeX;
     fprintf("Avion :: y :\n");
     disp(y);
+
     
     z = tau - y;
     fprintf("Avion :: z :\n");

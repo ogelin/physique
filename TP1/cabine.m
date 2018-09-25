@@ -78,9 +78,9 @@ classdef cabine
   
     function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
       
-     fprintf("aileron :: positionCDMAvion : %d\n");
+     fprintf("cabine :: positionCDMAvion : %d\n");
      disp(positionCDMAvion);
-     fprintf("aileron :: obj.getPositionCMOrigin() : %d\n");
+     fprintf("cabine :: obj.getPositionCMOrigin() : %d\n");
      disp(obj.positionCM());
       
       dc = positionCDMAvion - obj.positionCM();

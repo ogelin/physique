@@ -14,7 +14,7 @@ rayonFuselage = 1.345;
 positionZ = largeurAile + rayonFuselage;
 
 reponseDevoir1_cas1 = Devoir1([positionX, 0, positionZ],0,[0;0;0],[11,11,260])
-reponseDevoir1_cas2 = Devoir1([4198;0;618],0.15,[0.0; -0.003; -0.01],[8,11,260]);
+#reponseDevoir1_cas2 = Devoir1([4198;0;618],0.15,[0.0; -0.003; -0.01],[8,11,260]);
 
 
 
