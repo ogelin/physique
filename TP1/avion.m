@@ -182,7 +182,7 @@ classdef avion<handle
     
     x = obj.aile.getPositionCM()(1);
     y = obj.aile.getPositionCM()(2);
-    z = obj.aile.getPositionCM()(3);
+    z = obj.aile.getPositionCM()(3) - obj.aile.epaisseur/2;
     
     positionForce3 = [x, y, z];
     
