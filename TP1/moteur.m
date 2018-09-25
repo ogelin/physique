@@ -77,31 +77,13 @@ classdef moteur
        iz = (obj.masse/2)*(obj.rayon^2);
        
        mI = [ix,0,0;0,iy,0;0,0,iz];
-       
-      fprintf("moteur obj.masse %d : \n", obj.masse);
-      fprintf("moteur obj.rayon %d : \n", obj.rayon);
-      fprintf("moteur obj.longueur %d : \n", obj.longueur);
-      fprintf("moteur :: momentInertie : \n");
-      disp(mI);
     
   endfunction
   
    function mIOrigine = momentInertieOrigine(obj, positionCDMAvion)
-      fprintf("moteur :: positionCDMAvion : %d\n");
-      disp(positionCDMAvion);
-      fprintf("moteur :: obj.getPositionCMOrigin() : %d\n");
-      disp(obj.positionCM());
-      
+
       dc = positionCDMAvion - obj.positionCM();
-      
-      fprintf("moteur :: dc : \n"); 
-      disp(dc);
-      
-      megaDC =[((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)),(-dc(1)*dc(3));(-dc(2)*dc(1)),((dc(1)^2)+(dc(3)^2)),(-dc(2)*dc(3));(-dc(3)*dc(1)),(-dc(3)*dc(2)),((dc(1)^2)+(dc(2)^2))];
-      
-      fprintf("moteur :: megaDC : \n");
-      disp(megaDC);
-      
+
       mIOrigine = obj.momentInertie + (obj.masse *...
       [((dc(2)^2)+(dc(3)^2)),(-dc(1)*dc(2)), (-dc(1)*dc(3));...
       (-dc(2)*dc(1)), ((dc(1)^2)+(dc(3)^2)), (-dc(2)*dc(3));...
