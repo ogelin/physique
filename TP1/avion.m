@@ -171,26 +171,23 @@ classdef avion<handle
     
     vitesseAngulaire;
    # vitesseAngulaireTransposee = [vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3);];
-   # fprintf("Avion :: vitesseAngulaireTransposee : %d \n", vitesseAngulaireTransposee);
-    
-    
-    vitesseAngulaire;   
+   # fprintf("Avion :: vitesseAngulaireTransposee : %d \n", vitesseAngulaireTransposee);  
     matriceMI; 
     matriceMIInverse = inv(matriceMI);
-    vecteurW = matriceMIInverse * vitesseAngulaire;
+    vecteurW = matriceMIInverse * vitesseAngulaire
     
     matriceIdentite = [0, -vitesseAngulaire(3), vitesseAngulaire(2);...
     vitesseAngulaire(3), 0, -vitesseAngulaire(1);...
     -vitesseAngulaire(2), vitesseAngulaire(1), 0; ];
     
-    vagueW = matriceIdentite * vecteurW;
-    x= matriceIdentite*vecteurW;
-    transposeX = [x(1),x(2),x(3)];
-    y = vagueW*transposeX;
+    vagueW = matriceIdentite * vecteurW
+    x= matriceMI*vecteurW
+    transposeX = [x(1),x(2),x(3)]
+    y = vagueW*transposeX
     
-    z = tau - y;
+    z = tau - y
     
-    nouveauZ = [z(1);z(4);z(7)];
+    nouveauZ = [z(1);z(4);z(7)]
     
     AA = matriceMIInverse*[nouveauZ];
     endfunction
