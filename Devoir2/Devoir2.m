@@ -5,6 +5,9 @@ function [But tf rf vf] = Devoir2 (ri, vi, wi)
 precision = 0.001;
 nCol = 0;
 
+
+
+
 while(nCol < 4)
 
 qn = SEDK4T0(q0, t0, deltaT, g);
