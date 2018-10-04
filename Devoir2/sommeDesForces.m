@@ -3,6 +3,6 @@ function [forces] = sommeDesForces(vitesse, vitesseAngulaire)
   forceMagnus = forceMagnus(vitesse, vitesseAngulaire);
   printf('vitesse:');
   disp(vitesse);
-  forceFrottementVisqueux(vitesse);
+  forceFrottementVisqueux = forceFrottementVisqueux(vitesse);
   forces = forceGravite + forceMagnus + forceFrottementVisqueux;
 endfunction
