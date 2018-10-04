@@ -4,14 +4,18 @@ function [effetMagnus] = forceMagnus (vitesse, vitesseAngulaire)
 
 p = 1.2754 # masse volumique de l'air en kg/m3
 
-coefficientMagnus = coefficientMagnus(vitesse, vitesseAngulaire);
+coefficientMagnus = calculCoefficientMagnus(vitesse, vitesseAngulaire);
 
-A = pi*(rayonBallon^2); # Aire effective du ballon
+ballonRayon = 0.11; # en mètre
 
-resultat = vitesse*vitesseAngulaire;
+A = pi*(ballonRayon^2); # Aire effective du ballon
+
+resultat = cross(vitesse,vitesseAngulaire);
 
 resultatDenominateur = calculNorme(resultat);
 
-effetMagnus = p * coefficientMagnus * A * (vitesseNormee^2) * (vitesse * vitesseAngulaire)/resultatDenominateur);
+vitesseNorme = calculNorme(vitesse);
+
+effetMagnus = p * coefficientMagnus * A * (vitesseNorme^2) * ((cross(vitesse,vitesseAngulaire))/resultatDenominateur);
 
 endfunction

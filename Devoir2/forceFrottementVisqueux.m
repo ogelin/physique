@@ -1,6 +1,8 @@
 
-
-function [forceVisqueux] = forceFrottementVisqueux (vitesse)
+function [forceVisqueuse] = forceFrottementVisqueux(vitesse)
+ 
+printf('vitesse');
+disp(vitesse);
 
 rayonBallon = 0.11;
 
@@ -8,12 +10,12 @@ A = pi*(rayonBallon^2); # Aire effective du ballon
 
 p = 1.2754 # masse volumique de l'air en kg/m3
 
-vitesseNorme = calculNorme(vitesse);
+vitesseNormee = calculNorme(vitesse);
 
-nombreReynolds = calculNombreReynolds(vitesseNorme);
+nombreReynolds = calculNombreReynolds(vitesseNormee);
 
 cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
 
-forceVisqueux = -A * p * cVisqueux * vitesseNorme * vitesse;
+forceVisqueuse = -A * p * cVis * vitesseNormee * vitesse;
 
 endfunction
