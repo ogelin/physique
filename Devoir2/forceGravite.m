@@ -1,7 +1,9 @@
 
 
-function [positionBallon] = forceGravite (masseBallon)
+function [positionBallon] = forceGravite ()
 
-positionBallon = [0; 0; masseBallon * 9.8];
+ballonMasse = 0.45; # en kg
+  
+positionBallon = [0; 0; ballonMasse * 9.8];
 
 endfunction
