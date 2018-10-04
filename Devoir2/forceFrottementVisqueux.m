@@ -2,9 +2,6 @@
 
 function [forceVisqueuse] = forceFrottementVisqueux(vitesse)
 
-printf('vitesse visqueux');
-disp(vitesse);
-
 rayonBallon = 0.11;
 
 A = pi*(rayonBallon^2); # Aire effective du ballon
