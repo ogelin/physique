@@ -2,28 +2,6 @@
 
 function [but] = verifierCollision (qn)
 
-#Le ballon entre complètement dans le but (position de son centre de masse en x = 0 m 
-#pour le but de gauche et position de son centre de masse en x = 120 m pour le but de droite).
-# Dans ce cas, un but est compte ́.
-
-#Vérifier collision dans le but de gauche
-
-
-#Limite du but gauche
-
-coinButGauchePoteauProcheOrigineEnZ0 = [0, 17.5, 0];  # y = 1 + 11 + 5.5 
-coinButGauchePoteauLoinOrigineEnZ0 = [0, 24.820, 0];;  # y = 1 + 11 + 5.5 +7.32
-coinButGauchePoteauProcheOrigineEnZ244 = [0, 17.5, 2.44];  
-coinButGauchePoteauLoinOrigineEnZ244 = [0, 24.820, 2.44];  
-
-
-#Limite du but droit
-
-coinButDroitPoteauProcheOrigineEnZ0 = [120, 17.5, 0];  # y = 1 + 11 + 5.5 
-coinButDroitPoteauLoinOrigineEnZ0 = [120, 24.820, 0];;  # y = 1 + 11 + 5.5 +7.32
-coinButDroitPoteauProcheOrigineEnZ244 = [120, 17.5, 2.44];  
-coinButDroitPoteauLoinOrigineEnZ244 = [120, 24.820, 2.44];  
-
 
 # Il y a un but du côté gauche
 if (qn(0) < 0 && 17.5 < qn(1) < 24.820 && 0 < qn(2) < 2.44)
@@ -98,5 +76,7 @@ but = -2;
 #Corner côté droit
 elseif ( 120 < qn(0) && ( 0 < qn(1) < 17.5 ) || ( 24.820 < qn(1) < 90 )  && 0 <= qn(2) )
 but = -2;
+
+endif
 
 endfunction
