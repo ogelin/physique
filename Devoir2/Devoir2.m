@@ -10,6 +10,8 @@ deltaT = 0.01; % ?????Je ne sais pas �a devrait �tre quelle valeur??????
 
 while(nCol < 4)
 
+R = calculMatriceRotation(wi);
+
 
 q0 = q(vi, ri, vitesseAngulaire, R);
 
