@@ -4,18 +4,21 @@ function [But tf rf vf] = Devoir2 (ri, vi, wi)
 
 precision = 0.001;
 nCol = 0;
-q0 = ri;
+
 t0 = 0; 
-deltaT = 0.01; % ?????Je ne sais pas ça devrait être quelle valeur??????
+deltaT = 0.01; % ?????Je ne sais pas ï¿½a devrait ï¿½tre quelle valeur??????
 
 while(nCol < 4)
 
-g = sommeDesForces(vi, wi);
+
+q0 = q(vi, ri, vitesseAngulaire, R);
 
 printf("q0");
 disp(q0);
 
-qn = SEDRK4t0(q0, t0, deltaT, g);
+
+
+qn = SEDRK4t0(q0, t0, deltaT, 'g');
 
 col = verifierCollision(qn);
 
