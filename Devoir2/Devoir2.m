@@ -10,10 +10,16 @@ deltaT = 0.01; % ?????Je ne sais pas �a devrait �tre quelle valeur??????
 
 while(nCol < 4)
 
-R = calculMatriceRotation(wi);
+printf("wi");
+disp(wi);
 
+printf("vi");
+disp(vi);
 
-q0 = q(vi, ri, vitesseAngulaire, R);
+printf("ri");
+disp(ri);
+
+q0 = [vi, wi, ri];
 
 printf("q0");
 disp(q0);
