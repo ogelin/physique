@@ -15,6 +15,6 @@ nombreReynolds = calculNombreReynolds(vitesseNormee);
 cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
 
 forceVisqueuse = -A * p * cVis * vitesseNormee * vitesse;
-forceVisqueuse = A+p;
+forceVisqueuse = A + p;
  
 endfunction

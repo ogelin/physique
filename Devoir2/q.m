@@ -2,16 +2,12 @@
 
 function [qent] = q(vitesse, vitesseAngulaire, position)
 
-printf("vi");
-disp(vi);
 
-printf("ri");
-disp(ri);
+printf("vitesse");
+disp(vitesse);
 
-q0 = q(vi, wi, ri);
-
-printf("q0");
-disp(q0);
+printf("vitesseAngulaire");
+disp(vitesseAngulaire);
 
 qent = [vitesse(1); vitesse(2); vitesse(3); ...
         vitesseAngulaire(1); vitesseAngulaire(2); vitesseAngulaire(3); ...

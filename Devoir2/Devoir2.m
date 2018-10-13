@@ -19,14 +19,14 @@ disp(vi);
 printf("ri");
 disp(ri);
 
-q0 = [vi, wi, ri];
+q0 = q(vi, wi, ri);
 
 printf("q0");
 disp(q0);
 
 
 
-qn = SEDRK4t0(q0, t0, deltaT, 'g');
+qn = SEDRK4t0(q0,t0,deltaT,g);
 
 col = verifierCollision(qn);
 
