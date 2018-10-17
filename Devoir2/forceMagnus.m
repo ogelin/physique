@@ -10,6 +10,9 @@ ballonRayon = 0.11; # en mètre
 
 A = pi*(ballonRayon^2); # Aire effective du ballon
 
+
+vitesse = [vitesse(1); vitesse(2); vitesse(3)];
+
 resultat = cross(vitesse,vitesseAngulaire);
 
 resultatDenominateur = calculNorme(resultat);

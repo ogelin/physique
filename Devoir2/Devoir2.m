@@ -27,10 +27,9 @@ disp(vi);
 printf("ri");
 disp(ri);
 
-q0 = q(vi, wi, ri);
+q0 = q(vi, ri);
 vi = [q0(1), q0(2), q0(3)]
 
-wi = [q0(4), q0(5), q0(6)]
 
 printf("q0");
 disp(q0);
@@ -40,7 +39,7 @@ printf("Devoir2**************************************************\n");
 
 
 %qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
-q0 = SEDRK4t0(q0,t0,deltaT,g);
+q0 = SEDRK4t0(q0,t0,deltaT, 'g');
 
 
 col = verifierCollision(qn);

@@ -4,6 +4,10 @@ function [coefficientMagnus] = calculCoefficientMagnus (vitesse, vitesseAngulair
 
 rayonBallon = 0.11;
 
-coefficientMagnus = 0.1925 * ((vitesseAngulaire * rayonBallon)/vitesse)^0.25
+vitesseNorme = calculNorme(vitesse);
+
+vitesseAngulaireNorme = calculNorme(vitesseAngulaire);
+
+coefficientMagnus = 0.1925 * ((vitesseAngulaireNorme * rayonBallon)/vitesseNorme)^0.25
 
 endfunction
