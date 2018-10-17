@@ -1,6 +1,6 @@
 
 
-function [gResult] = g (q0, t0)
+function [gResult] = g (q0,t0)
 
 %La fonction devrait pouvoir renvoyer la nouvelle vitesse, la nouvelle accélération et SEDRK4T0 se charge de la position;
 
@@ -8,21 +8,23 @@ function [gResult] = g (q0, t0)
 
 printf("g **************************************************\n");
 
-printf('t');
+printf('t0\n');
 disp(t0);
 
 vitesse = [q0(1), q0(2), q0(3)];
 
 
 accelerationModifiee = -((vitesse .^2) ./2);
-constante = [2/(2 + vitesse(1) *t0))];
-vitesseModifieeX = vitesse(1)  * constante;
-vitesseModifieeY = vitesse(2)  * [2/(2 + vitesse(2) *t0)];
-vitesseModifieeZ = vitesse(3)  * [2/(2 + vitesse(3) *t0)];
+vitesseModifieeX = vitesse(1)  * [2/(2 + vitesse(1)*t0)];
+vitesseModifieeY = vitesse(2)  * [2/(2 + vitesse(2)*t0)];
+vitesseModifieeZ = vitesse(3)  * [2/(2 + vitesse(3)*t0)];
 
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
+qResult = [vitesseModifieeX; vitesseModifieeY; vitesseModifieeZ; ...
+           accelerationModifiee(1); accelerationModifiee(2); accelerationModifiee(3)
+           q(7); q(8); q(9)];
 
-gResult = [q(7); q(8); q(9); vitesseModifieeX; vitesseModifieeY; vitesseModifieeZ; accelerationModifiee(1); accelerationModifiee(2); accelerationModifiee(3)];
+gResult = [qResult, t0];
 
 
 endfunction
