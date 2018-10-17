@@ -12,7 +12,7 @@ function qs=SEDRK4t0(q0,t0,Deltat,g)
 %               qui retourne la valeur de g au temps choisi
 
 printf("SEDRK4t0 **************************************************\n");
-k1=feval('g',q0,t0);
+k1=feval(g,q0,t0);
 printf("SEDRK4t0 after k1**************************************************\n");
 printf('k1');
 disp(k1);

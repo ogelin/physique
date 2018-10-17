@@ -15,7 +15,7 @@ vitesse = [q0(1), q0(2), q0(3)];
 
 
 accelerationModifiee = -((vitesse .^2) ./2);
-constante = [2/(2 + vitesse(1) *t0))];
+constante = [2/(2 + vitesse(1) *t0)];
 vitesseModifieeX = vitesse(1)  * constante;
 vitesseModifieeY = vitesse(2)  * [2/(2 + vitesse(2) *t0)];
 vitesseModifieeZ = vitesse(3)  * [2/(2 + vitesse(3) *t0)];
