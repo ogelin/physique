@@ -40,7 +40,7 @@ printf("Devoir2**************************************************\n");
 
 
 %qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
-q0 = SEDRK4t0(q0,t0,deltaT,'g');
+q0 = SEDRK4t0(q0,t0,deltaT,g);
 
 
 col = verifierCollision(qn);
