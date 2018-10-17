@@ -8,6 +8,14 @@ nCol = 0;
 t0 = 0; 
 deltaT = 0.01; 
 
+F = sommeDesForces(vi, wi);
+printf("sommeDesForces\n");
+disp(F);
+
+a = acceleration(F);
+printf("acceleration\n");
+disp(a);
+
 while(nCol < 4)
 
 printf("wi");
@@ -19,34 +27,20 @@ disp(vi);
 printf("ri");
 disp(ri);
 
-
-
-printf("Devoir2**************************************************\n");
-
 q0 = q(vi, wi, ri);
 vi = [q0(1), q0(2), q0(3)]
 
 wi = [q0(4), q0(5), q0(6)]
-printf("Devoir2**************************************************\n");
 
 printf("q0");
 disp(q0);
 
-F = sommeDesForces(vi, wi);
-
-printf("sommeDesForces\n");
-disp(F);
-printf("Devoir2**************************************************\n");
-a = acceleration(F);
-printf("Devoir2**************************************************\n");
-
-printf("acceleration\n");
-disp(a);
-printf("Devoir2**************************************************\n");
-
-qx = SEDRK4t0(q0,t0,deltaT,g);
 
 printf("Devoir2**************************************************\n");
+
+%qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
+q0 = SEDRK4t0(q0,t0,deltaT,'g');
+
 
 col = verifierCollision(qn);
 
