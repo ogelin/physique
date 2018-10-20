@@ -27,7 +27,7 @@ disp(vi);
 printf("ri");
 disp(ri);
 
-q0 = q(vi, ri);
+q0 = q(vi, ri, a);
 vi = [q0(1), q0(2), q0(3)]
 
 

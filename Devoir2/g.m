@@ -23,21 +23,37 @@ acceleration = [q0(7), q0(8), q0(9)];
 
 F = sommeDesForces(vitesse, wi);
 printf('F\n');
-disp(F);
+disp(F(1));
+disp(F(2));
+disp(F(3));
 
 
-accelerationModifiee = acceleration(F);
+%accelerationModifiee = acceleration(F);
 
-vitesseModifieeX = vitesse(1)  + acceleration(1)*t0;
-vitesseModifieeY = vitesse(2)  + acceleration(2)*t0;
-vitesseModifieeZ = vitesse(3)  + acceleration(3)*t0;
+ballonMasse = 0.45; # en kg
+
+aX = F(1)/ ballonMasse;
+aY = F(2)/ ballonMasse;
+aZ = F(3)/ ballonMasse;
+
+accelerationModifiee = [aX, aY, aZ];
+
+vitesseModifieeX = vitesse(1) + acceleration(1)*t0;
+vitesseModifieeY = vitesse(2) + acceleration(2)*t0;
+vitesseModifieeZ = vitesse(3) + acceleration(3)*t0;
 
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
 
+printf("g ICI positionModifiee**************************************************\n");
+printf('position\n');
+disp(position(1));
+disp(position(2));
+disp(position(3));
 
-positionModifiee = position + (vitesse .t0 + ((accelerationModifiee .*0.5).* (t0^2)));
 
-           
+positionModifiee = position + (vitesse .*t0 + ((accelerationModifiee .*0.5).* (t0^2)));
+
+printf("g Après modifiée position**************************************************\n");        
 gResult = [positionModifiee; vitesseModifiee; accelerationModifiee];
 
 
