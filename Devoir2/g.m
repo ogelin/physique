@@ -6,7 +6,7 @@ function [gResult] = g (q0,t0)
 
 %q(vitesse, vitesseAngulaire, position)
 
-wi = [0;0;6.3];
+wi = [0;-3;6.3];
 
 printf("g **************************************************\n");
 
@@ -19,6 +19,9 @@ vitesse = [q0(4), q0(5), q0(6)];
 position = [q0(1), q0(2), q0(3)];
 
 acceleration = [q0(7), q0(8), q0(9)];
+
+printf("Q0");
+disp(q0(8));
 
 
 F = sommeDesForces(vitesse, wi);
@@ -42,6 +45,7 @@ vitesseModifieeX = vitesse(1) + acceleration(1)*t0;
 vitesseModifieeY = vitesse(2) + acceleration(2)*t0;
 vitesseModifieeZ = vitesse(3) + acceleration(3)*t0;
 
+
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
 
 printf("g ICI positionModifiee**************************************************\n");
@@ -51,10 +55,10 @@ disp(position(2));
 disp(position(3));
 
 
-positionModifiee = position + (vitesse .*t0 + ((accelerationModifiee .*0.5).* (t0^2)));
+positionModifiee = position + (vitesse .*t0 + ((accelerationModifiee .*0.5).* (t0^2)))
 
 printf("g Après modifiée position**************************************************\n");        
-gResult = [positionModifiee; vitesseModifiee; accelerationModifiee];
+gResult = [positionModifiee, vitesseModifiee, accelerationModifiee];
 
 
 endfunction

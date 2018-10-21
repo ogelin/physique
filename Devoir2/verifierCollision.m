@@ -35,43 +35,50 @@ but = 0;
 
 # Le ballon touche les montants du buts gauche
 # Poteau proche de l'origine
-elseif ( (qn(1) = 0) && ( (17.5 - 0.11) <= qn(2) <= (17.5 + 0.11) )&& 0 < qn(3) < (2.44 - 0.11) )
+elseif ( (qn(1) == 0) && ( (17.5 - 0.11) <= qn(2) <= (17.5 + 0.11) )&& 0 < qn(3) < (2.44 - 0.11) )
 printf('but = -1\n');
+printf('but gauche 1');
+
 but = -1;
 
 
 # Le ballon touche les montants du buts gauche
 # Poteau loin de l'origine
-elseif ( (qn(1) = 0) && ((24.820 - 0.11) <= qn(2) <= (24.820 - 0.11)) && 0 < qn(3) < (2.44 - 0.11) )
+elseif ( (qn(1) == 0) && ((24.820 - 0.11) <= qn(2) <= (24.820 - 0.11)) && 0 < qn(3) < (2.44 - 0.11) )
 printf('but = -1\n');
+printf('but gauche 2');
 but = -1;
 
 
 # Le ballon touche les montants du buts gauche
 # Poteau transversale
-elseif ( (qn(1) = 0) && ((17.5 + 0.11) < qn(2) < (24.820 - 0.11))  && (2.44 - 0.11) <= qn(3) <= (2.44 + 0.11) )
+elseif ( (qn(1) == 0) && ((17.5 + 0.11) < qn(2) < (24.820 - 0.11))  && (2.44 - 0.11) <= qn(3) <= (2.44 + 0.11) )
 printf('but = -1\n');
+printf('but gauche 3');
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau proche de l'origine
-elseif ( (qn(1) = 120) && ((17.5 - 0.11) <= qn(2) <= (17.5 + 0.11)) && 0 < qn(3) < (2.44 - 0.11))
+elseif ( (qn(1) == 120) && ((17.5 - 0.11) <= qn(2) <= (17.5 + 0.11)) && 0 < qn(3) < (2.44 - 0.11))
 printf('but = -1\n');
+printf('but droit 1');
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau loin de l'origine
-elseif ( (qn(1) = 120) && ((24.820 - 0.11) <= qn(2) <= (24.820 - 0.11)) && 0 < qn(3) < (2.44 - 0.11) )
+elseif ( (qn(1) == 120) && ((24.820 - 0.11) <= qn(2) <= (24.820 - 0.11)) && 0 < qn(3) < (2.44 - 0.11) )
 printf('but = -1\n');
+printf('but droit 2');
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau transversale
-elseif ( (qn(1) = 120) && ((17.5 + 0.11) < qn(2) < (24.820 - 0.11))  && (2.44 - 0.11) <= qn(3) <= (2.44 + 0.11) )
+elseif ( (qn(1) == 120) && ((17.5 + 0.11) < qn(2) < (24.820 - 0.11))  && (2.44 - 0.11) <= qn(3) <= (2.44 + 0.11) )
 printf('but = -1\n');
+printf('but droit 3');
 but = -1;
 
 
@@ -79,6 +86,8 @@ but = -1;
 #Sortie vers le haut
 elseif ( 0 <= qn(1) <= 120 && 90 < qn(2) && 0.11 <= qn(3) )
 printf('but = -2\n');
+
+printf('Le ballon sort du terrain Sortie vers le haut');
 but = -2;
 
 
@@ -86,24 +95,28 @@ but = -2;
 #Sortie vers le bas
 elseif ( 0 <= qn(1) <= 120 && qn(2) < 0  && 0.11 <= qn(3) )
 printf('but = -2\n');
+printf('Le ballon sort du terrain Sortie vers le bas');
 but = -2;
 
 
 #Le ballon sort du terrain
 #Sortie vers la gauche
-elseif ( qn(1) < 0 && ( 0 < qn(2) < (17.5-0.11) ) || ( (24.820+0.11) < qn(2) < 90 )  && 0.11 <= qn(2) )
+elseif ( qn(1) < 0 && (( 0 < qn(2) < (17.5-0.11) ) || ( (24.820+0.11) < qn(2) < 90 ))  && 0.11 <= qn(2) )
 printf('but = -2\n');
+printf('Le ballon sort du terrain Sortie vers le gauche');
 but = -2;
 
 
 #Le ballon sort du terrain
 #Sortie vers la droite
-elseif ( 120 < qn(1) && ( 0 < qn(2) < (17.5-0.11) ) || ( (24.820+0.11) < qn(2) < 90 )  && 0.11 <= qn(3) )
+elseif ( 120 < qn(1) && (( 0 < qn(2) < (17.5-0.11) ) || ( (24.820+0.11) < qn(2) < 90 ))  && 0.11 <= qn(3) )
 printf('but = -2\n');
+printf('Le ballon sort du terrain Sortie vers le droite');
 but = -2;
 
 elseif
 printf('Pas de collision');
+but = -4;
 
 endif
 

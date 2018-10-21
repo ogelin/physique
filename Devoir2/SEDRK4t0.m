@@ -10,26 +10,19 @@ function qs=SEDRK4t0(q0,t0,Deltat,g)
 %               qui retourne la valeur de g au temps choisi
 printf("SEDRK4t0**************************************************\n");
 
-printf("q0 \n");
-disp(q0);
-
-printf("t0 \n");
-disp(q0);
-
-printf("\n");
-
-%k1=feval(g,q0,t0);
+k1=feval(g,q0,t0)
 printf("SEDRK4t0 k1**************************************************\n");
 
-%k2=feval(g,q0+k1*Deltat/2,t0+Deltat/2);
+k2=feval(g,q0+k1*Deltat/2,t0+Deltat/2)
 printf("SEDRK4t0 k2**************************************************\n");
 
-%k3=feval(g,q0+k2*Deltat/2,t0+Deltat/2);
+k3=feval(g,q0+k2*Deltat/2,t0+Deltat/2)
 printf("SEDRK4t0 k3**************************************************\n");
 
-%k4=feval(g,q0+k3*Deltat,t0+Deltat);
+k4=feval(g,q0+k3*Deltat,t0+Deltat)
 printf("SEDRK4t0 k4**************************************************\n");
 
-%qs=q0+Deltat*(k1+2*k2+2*k3+k4)/6;
-qs = [1;2;3;4;5;6;7;8;9];
+qs=q0+Deltat*(k1+2*k2+2*k3+k4)/6
+%qs = [1;2;3;4;5;6;7;8;9];
 
+endfunction
