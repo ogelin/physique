@@ -34,7 +34,7 @@ disp(vi);
 printf("ri");
 disp(ri);
 
-q0 = q(ri, vi, a);
+q0 = q(ri, vi, a, wi);
 vi = [q0(4), q0(5), q0(6)];
 
 

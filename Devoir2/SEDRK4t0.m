@@ -26,6 +26,5 @@ k4=feval(g,q0+k3*Deltat,t0+Deltat)
 printf("SEDRK4t0 k4**************************************************\n");
 
 qs=q0+Deltat*(k1+2*k2+2*k3+k4)/6
-%qs = [1;2;3;4;5;6;7;8;9];
 
 endfunction
