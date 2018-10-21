@@ -19,6 +19,6 @@ resultatDenominateur = calculNorme(resultat);
 
 vitesseNorme = calculNorme(vitesse);
 
-effetMagnus = p * coefficientMagnus * A * (vitesseNorme^2) * ((cross(vitesse,vitesseAngulaire))/resultatDenominateur);
+effetMagnus = p * coefficientMagnus * A * (vitesseNorme^2) * (resultat/resultatDenominateur);
 
 endfunction

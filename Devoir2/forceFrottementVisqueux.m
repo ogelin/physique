@@ -10,8 +10,6 @@ p = 1.2754 # masse volumique de l'air en kg/m3
 
 vitesseNormee = calculNorme(vitesse);
 
-nombreReynolds = calculNombreReynolds(vitesseNormee);
-
 cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
 
 forceVisqueuse = -A * p * cVis * vitesse;
