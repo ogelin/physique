@@ -8,6 +8,6 @@ vitesseNorme = calculNorme(vitesse);
 
 vitesseAngulaireNorme = calculNorme(vitesseAngulaire);
 
-coefficientMagnus = 0.1925 * ((vitesseAngulaireNorme * rayonBallon)/vitesseNorme)^0.25
+coefficientMagnus = 0.1925 * ((vitesseAngulaireNorme * rayonBallon)/vitesseNorme)^0.25;
 
 endfunction

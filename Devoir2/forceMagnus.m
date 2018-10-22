@@ -2,7 +2,7 @@
 
 function [effetMagnus] = forceMagnus (vitesse, vitesseAngulaire)
 
-p = 1.2754 # masse volumique de l'air en kg/m3
+p = 1.2754; # masse volumique de l'air en kg/m3
 
 coefficientMagnus = calculCoefficientMagnus(vitesse, vitesseAngulaire);
 

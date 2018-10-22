@@ -23,11 +23,8 @@ trajectoire = [];
 
 while(compteur < 4)
 
-printf("Devoir2**************************************************\n");
-
-
 qResultat = SEDRK4t0(q0,t0,deltaT, 'g');
-rf = [qResultat(4), qResultat(5), qResultat(6)]
+rf = [qResultat(4), qResultat(5), qResultat(6)];
 
 col = verifierCollision(rf);
 nCol = col;
@@ -48,13 +45,11 @@ tf = t0;
 vf = [q0(1), q0(2), q0(3)];
 But = nCol;
 
-
 trajectoire = [trajectoire; q0(4) q0(5) q0(6)];
 sizeTrajectoire = size(trajectoire);
 
 endwhile
 
-disp(tf);
 genererGraphe(trajectoire, sizeTrajectoire(1));
 
 endfunction

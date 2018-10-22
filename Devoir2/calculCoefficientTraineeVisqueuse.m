@@ -2,7 +2,7 @@
 
 function [cVis] = calculCoefficientTraineeVisqueuse (vitesseNormee)
 
-nombreReynolds = calculNombreReynolds(vitesseNormee)
+nombreReynolds = calculNombreReynolds(vitesseNormee);
 
 if(nombreReynolds < 100000)
 

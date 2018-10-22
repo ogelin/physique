@@ -8,9 +8,9 @@ A = pi*(rayonBallon^2); # Aire effective du ballon
 
 p = 1.2754; # masse volumique de l'air en kg/m3
 
-vitesseNormee = norm(vitesse)
+vitesseNormee = norm(vitesse);
 
-cVis = calculCoefficientTraineeVisqueuse(vitesseNormee)
+cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
 
 forceVisqueuse = -A * p * cVis * vitesse;
 
