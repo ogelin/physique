@@ -20,4 +20,6 @@ vitesseNorme = calculNorme(vitesse);
 
 effetMagnus = p * coefficientMagnus * A * (vitesseNorme^2) * (resultat/resultatDenominateur);
 
+effetMagnus = transpose(effetMagnus);
+
 endfunction

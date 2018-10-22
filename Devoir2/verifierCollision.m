@@ -23,7 +23,7 @@ but = 1;
 
 
 # Le ballon touche le sol en premier
-elseif (qn(3) <= 0.11)
+elseif (qn(3) < 0.11)
 printf('but = 0\n');
 but = 0;
 

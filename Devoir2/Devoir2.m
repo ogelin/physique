@@ -10,55 +10,35 @@ nCol = -4;
 t0 = 0; 
 deltaT = 0.01; 
 
-F = sommeDesForces(vi, wi);
-printf("sommeDesForces\n");
-disp(F);
 
-a = acceleration(F);
-printf("acceleration\n");
-disp(a);
 But = -6;
 tf = 0;
 rf = 0;
 vf = 0;
 
-printf("wi");
-disp(wi);
-
-printf("vi");
-disp(vi);
-
-printf("ri");
-disp(ri);
-
-q0 = q(ri, vi, a, wi);
-vi = [q0(4), q0(5), q0(6)];
-
-
-printf("q0");
-disp(q0);
+q0 = q(vi, ri, wi);
 
 trajectoire = [];
 
 while(nCol == -4)
 
 printf("Devoir2**************************************************\n");
-%printf('q0 dans le while devoir2');
-%disp(q0);
-%qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
-qResultat = SEDRK4t0(q0,t0,deltaT, 'g');
 
-col = verifierCollision(qResultat);
+
+qResultat = SEDRK4t0(q0,t0,deltaT, 'g');
+rf = [qResultat(4), qResultat(5), qResultat(6)]
+
+col = verifierCollision(rf);
 nCol = col;
 
 q0 = qResultat; 
+
 t0 = t0 + deltaT;
 tf = t0;
-rf = [q0(1), q0(2), q0(3)];
-vf = [q0(4), q0(5), q0(6)];
+vf = [q0(1), q0(2), q0(3)];
 But = nCol;
 
-trajectoire = [trajectoire; q0(1) q0(2) q0(3)];
+trajectoire = [trajectoire; q0(4) q0(5) q0(6)];
 sizeTrajectoire = size(trajectoire);
 
 endwhile

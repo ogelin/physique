@@ -6,14 +6,14 @@ rayonBallon = 0.11;
 
 A = pi*(rayonBallon^2); # Aire effective du ballon
 
-p = 1.2754 # masse volumique de l'air en kg/m3
+p = 1.2754; # masse volumique de l'air en kg/m3
 
-vitesseNormee = calculNorme(vitesse);
+vitesseNormee = norm(vitesse)
 
-cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
+cVis = calculCoefficientTraineeVisqueuse(vitesseNormee)
 
-forceVisqueuseSansTranspose = -A * p * cVis * vitesse;
+forceVisqueuse = -A * p * cVis * vitesse;
 
-forceVisqueuse = forceVisqueuseSansTranspose'
+forceVisqueuse = transpose(forceVisqueuse);
  
 endfunction

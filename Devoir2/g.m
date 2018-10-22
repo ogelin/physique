@@ -6,19 +6,11 @@ function [gResult] = g (q0,t0)
 
 %q(vitesse, vitesseAngulaire, position)
 
-printf("g **************************************************\n");
+position = [q0(4), q0(5), q0(6)];
 
+vitesse = [q0(1), q0(2), q0(3)];
 
-printf('t0\n');
-disp(t0);
-
-position = [q0(1), q0(2), q0(3)];
-
-vitesse = [q0(4), q0(5), q0(6)];
-
-acceleration = [q0(7), q0(8), q0(9)];
-
-wi = [q0(10), q0(11), q0(12)];
+wi = [q0(7), q0(8), q0(9)];
 
 F = sommeDesForces(vitesse, wi);
 printf('F\n');
@@ -31,15 +23,15 @@ disp(F(3));
 
 ballonMasse = 0.45; # en kg
 
-aX = F(1)/ ballonMasse;
-aY = F(2)/ ballonMasse;
-aZ = F(3)/ ballonMasse;
+aX = F(1)/ ballonMasse
+aY = F(2)/ ballonMasse
+aZ = F(3)/ ballonMasse
 
 accelerationModifiee = [aX, aY, aZ];
 
-vitesseModifieeX = vitesse(1) + acceleration(1)*t0;
-vitesseModifieeY = vitesse(2) + acceleration(2)*t0;
-vitesseModifieeZ = vitesse(3) + acceleration(3)*t0;
+vitesseModifieeX = vitesse(1) + aX*t0;
+vitesseModifieeY = vitesse(2) + aY*t0;
+vitesseModifieeZ = vitesse(3) + aZ*t0;
 
 
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
@@ -51,15 +43,14 @@ disp(accelerationModifiee(2));
 disp(accelerationModifiee(3));
 
 
-deltaPositionX = vitesse(1) .*t0 + ((accelerationModifiee(1) .*0.5).* (t0^2));
-deltaPositionY = vitesse(2) .*t0 + ((accelerationModifiee(2) .*0.5).* (t0^2));
-deltaPositionZ = vitesse(3) .*t0 + ((accelerationModifiee(3) .*0.5).* (t0^2));
-deltaPosition = [deltaPositionX, deltaPositionY, deltaPositionZ];
+positionModifieeX = vitesse(1) .*t0 + ((accelerationModifiee(1) .*0.5).* (t0^2));
+positionModifieeY = vitesse(2) .*t0 + ((accelerationModifiee(2) .*0.5).* (t0^2));
+positionModifieeZ = vitesse(3) .*t0 + ((accelerationModifiee(3) .*0.5).* (t0^2));
+positionModifiee = [positionModifieeX, positionModifieeY, positionModifieeZ];
 
-disp(position(2));
 wi = [0,0,0];
 printf("g Après modifiée position**************************************************\n");        
-gResult = [deltaPosition, vitesseModifiee, accelerationModifiee, wi];
+gResult = [accelerationModifiee, vitesseModifiee, wi];
 
 
 endfunction
