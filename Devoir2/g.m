@@ -33,7 +33,6 @@ vitesseModifieeX = vitesse(1) + aX*t0;
 vitesseModifieeY = vitesse(2) + aY*t0;
 vitesseModifieeZ = vitesse(3) + aZ*t0;
 
-
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
 
 printf("g ICI accelerationModifiee**************************************************\n");
@@ -43,14 +42,15 @@ disp(accelerationModifiee(2));
 disp(accelerationModifiee(3));
 
 
-positionModifieeX = vitesse(1) .*t0 + ((accelerationModifiee(1) .*0.5).* (t0^2));
-positionModifieeY = vitesse(2) .*t0 + ((accelerationModifiee(2) .*0.5).* (t0^2));
-positionModifieeZ = vitesse(3) .*t0 + ((accelerationModifiee(3) .*0.5).* (t0^2));
-positionModifiee = [positionModifieeX, positionModifieeY, positionModifieeZ];
+printf("g ICI vitesseModifiee**************************************************\n");
+printf('vitesseModifiee\n');
+disp(vitesseModifiee(1));
+disp(vitesseModifiee(2));
+disp(vitesseModifiee(3));
 
 wi = [0,0,0];
 printf("g Après modifiée position**************************************************\n");        
-gResult = [accelerationModifiee, vitesseModifiee, wi];
+gResult = [accelerationModifiee, vitesse, wi];
 
 
 endfunction
