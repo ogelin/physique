@@ -1,6 +1,6 @@
 #fonction qui appel d'autres fonctions permettant de trouvers les réponses pour les 5 simulations.
 
-function [Reponse] = Devoir2 (ri, vi, wi)
+function [But tf rf vf] = Devoir2 (ri, vi, wi)
 
 ballonRayon = 0.11; # en mètre
 
@@ -44,8 +44,6 @@ sizeTrajectoire = size(trajectoire);
 endwhile
 
 genererGraphe(trajectoire, sizeTrajectoire(1));
-
-Reponse = [But, tf, rf, vf];
 
 endfunction
 

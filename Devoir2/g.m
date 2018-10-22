@@ -41,13 +41,6 @@ disp(accelerationModifiee(1));
 disp(accelerationModifiee(2));
 disp(accelerationModifiee(3));
 
-
-printf("g ICI vitesseModifiee**************************************************\n");
-printf('vitesseModifiee\n');
-disp(vitesseModifiee(1));
-disp(vitesseModifiee(2));
-disp(vitesseModifiee(3));
-
 wi = [0,0,0];
 printf("g Après modifiée position**************************************************\n");        
 gResult = [accelerationModifiee, vitesse, wi];
