@@ -55,10 +55,15 @@ disp(position(2));
 disp(position(3));
 
 
-positionModifiee = position + (vitesse .*t0 + ((accelerationModifiee .*0.5).* (t0^2)))
+deltaPositionX = vitesse(1) .*t0 + ((accelerationModifiee(1) .*0.5).* (t0^2));
+deltaPositionY = vitesse(2) .*t0 + ((accelerationModifiee(2) .*0.5).* (t0^2));
+deltaPositionZ = vitesse(3) .*t0 + ((accelerationModifiee(3) .*0.5).* (t0^2));
+deltaPosition = [deltaPositionX, deltaPositionY, deltaPositionZ];
+
+disp(position(2));
 
 printf("g Après modifiée position**************************************************\n");        
-gResult = [positionModifiee, vitesseModifiee, accelerationModifiee, wi];
+gResult = [deltaPosition, vitesseModifiee, accelerationModifiee, wi];
 
 
 endfunction
