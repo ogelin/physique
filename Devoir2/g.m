@@ -20,10 +20,6 @@ acceleration = [q0(7), q0(8), q0(9)];
 
 wi = [q0(10), q0(11), q0(12)];
 
-printf("Q0");
-disp(q0(8));
-
-
 F = sommeDesForces(vitesse, wi);
 printf('F\n');
 disp(F(1));

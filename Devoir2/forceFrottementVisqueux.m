@@ -12,6 +12,8 @@ vitesseNormee = calculNorme(vitesse);
 
 cVis = calculCoefficientTraineeVisqueuse(vitesseNormee);
 
-forceVisqueuse = -A * p * cVis * vitesse;
+forceVisqueuseSansTranspose = -A * p * cVis * vitesse;
+
+forceVisqueuse = forceVisqueuseSansTranspose'
  
 endfunction
