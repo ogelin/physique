@@ -46,8 +46,8 @@ trajectoire = [];
 while(nCol == -4)
 
 printf("Devoir2**************************************************\n");
-printf('q0 dans le while devoir2');
-disp(q0);
+%printf('q0 dans le while devoir2');
+%disp(q0);
 %qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
 qResultat = SEDRK4t0(q0,t0,deltaT, 'g');
 
@@ -63,15 +63,22 @@ But = nCol;
 
 trajectoire = [trajectoire; q0(1) q0(2) q0(3)];
 sizeTrajectoire = size(trajectoire);
-genererGraphe(trajectoire, sizeTrajectoire(1));
 
 endwhile
+
+genererGraphe(trajectoire, sizeTrajectoire(1));
 
 Reponse = [But, tf, rf, vf];
 
 endfunction
 
 function genererGraphe(trajectoire, size) 
+  
+%dessiner la table
+terrain = [[0 0 0]; [0 90 0]; [120 90 0]; [120 0 0]; [0 0 0]];
+ligneTerrain = plot3(terrain(:,1), terrain(:,2), terrain(:,3));
+            
+hold on
                        
 X = zeros(size, 1);
 Y = zeros(size, 1);
@@ -83,9 +90,9 @@ Y(i) = trajectoire(i, 2);
 Z(i) = trajectoire(i, 3);
 end
 plot3(X, Y, Z); hold on
-text(X(size), Y(size), Z(size), 'Essai');
+text(X(size), Y(size), Z(size), '');
 xlabel('x');
 ylabel('y');
 zlabel('z');
-title('Essai');
+title('Trajectoire du ballon');
 end
