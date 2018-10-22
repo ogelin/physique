@@ -48,11 +48,11 @@ vitesseModifieeZ = vitesse(3) + acceleration(3)*t0;
 
 vitesseModifiee = [vitesseModifieeX, vitesseModifieeY, vitesseModifieeZ];
 
-printf("g ICI positionModifiee**************************************************\n");
-printf('position\n');
-disp(position(1));
-disp(position(2));
-disp(position(3));
+printf("g ICI accelerationModifiee**************************************************\n");
+printf('accelerationModifiee\n');
+disp(accelerationModifiee(1));
+disp(accelerationModifiee(2));
+disp(accelerationModifiee(3));
 
 
 deltaPositionX = vitesse(1) .*t0 + ((accelerationModifiee(1) .*0.5).* (t0^2));
@@ -61,7 +61,7 @@ deltaPositionZ = vitesse(3) .*t0 + ((accelerationModifiee(3) .*0.5).* (t0^2));
 deltaPosition = [deltaPositionX, deltaPositionY, deltaPositionZ];
 
 disp(position(2));
-
+wi = [0,0,0];
 printf("g Après modifiée position**************************************************\n");        
 gResult = [deltaPosition, vitesseModifiee, accelerationModifiee, wi];
 
