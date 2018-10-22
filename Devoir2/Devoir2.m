@@ -10,9 +10,6 @@ nCol = -4;
 t0 = 0; 
 deltaT = 0.01; 
 
-printf("vi\n");
-disp(vi);
-
 F = sommeDesForces(vi, wi);
 printf("sommeDesForces\n");
 disp(F);
