@@ -41,17 +41,15 @@ vi = [q0(4), q0(5), q0(6)];
 printf("q0");
 disp(q0);
 
+trajectoire = [];
+
 while(nCol == -4)
-
-
 
 printf("Devoir2**************************************************\n");
 printf('q0 dans le while devoir2');
 disp(q0);
 %qResultatPositionX = SEDRK4t0(positionX,t0,deltaT,gx);
 qResultat = SEDRK4t0(q0,t0,deltaT, 'g');
-
-
 
 col = verifierCollision(qResultat);
 nCol = col;
@@ -63,9 +61,31 @@ rf = [q0(1), q0(2), q0(3)];
 vf = [q0(4), q0(5), q0(6)];
 But = nCol;
 
+trajectoire = [trajectoire; q0(1) q0(2) q0(3)];
+sizeTrajectoire = size(trajectoire);
+genererGraphe(trajectoire, sizeTrajectoire(1));
 
 endwhile
 
 Reponse = [But, tf, rf, vf];
 
 endfunction
+
+function genererGraphe(trajectoire, size) 
+                       
+X = zeros(size, 1);
+Y = zeros(size, 1);
+Z = zeros(size, 1);
+
+for i = 1:size
+X(i) = trajectoire(i, 1);
+Y(i) = trajectoire(i, 2);
+Z(i) = trajectoire(i, 3);
+end
+plot3(X, Y, Z); hold on
+text(X(size), Y(size), Z(size), 'Essai');
+xlabel('x');
+ylabel('y');
+zlabel('z');
+title('Essai');
+end
