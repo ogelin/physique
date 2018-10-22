@@ -6,6 +6,7 @@ ballonRayon = 0.11; # en mètre
 
 precision = 0.001;
 nCol = -4;
+compteur = 0;
 
 t0 = 0; 
 deltaT = 0.01; 
@@ -20,7 +21,7 @@ q0 = q(vi, ri, wi);
 
 trajectoire = [];
 
-while(nCol == -4)
+while(compteur < 4)
 
 printf("Devoir2**************************************************\n");
 
@@ -33,16 +34,27 @@ nCol = col;
 
 q0 = qResultat; 
 
+if(nCol!= -4)
+  compteur +=1;
+  t0 = t0 - 2*deltaT;
+  deltaT = deltaT/10;
+  if((q0(5) - ballonRayon) < precision)
+  compteur = 4;
+  endif
+endif
+
 t0 = t0 + deltaT;
 tf = t0;
 vf = [q0(1), q0(2), q0(3)];
 But = nCol;
+
 
 trajectoire = [trajectoire; q0(4) q0(5) q0(6)];
 sizeTrajectoire = size(trajectoire);
 
 endwhile
 
+disp(tf);
 genererGraphe(trajectoire, sizeTrajectoire(1));
 
 endfunction
