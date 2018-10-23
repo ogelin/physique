@@ -50,10 +50,6 @@ sizeTrajectoire = size(trajectoire);
 endwhile
 
 genererGraphe(trajectoire, sizeTrajectoire(1));
-disp(But);
-disp(tf);
-disp(rf);
-disp(vf);
 
 endfunction
 
