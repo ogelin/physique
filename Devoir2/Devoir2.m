@@ -57,6 +57,10 @@ function genererGraphe(trajectoire, size)
   
 %dessiner la table
 terrain = [[0 0 0]; [0 90 0]; [120 90 0]; [120 0 0]; [0 0 0]];
+patch([0, 120, 120, 0], [0, 0, 90, 90], [0, 0, 0, 0], "g");
+patch([0, 0, 0, 0], [41.35, 41.35, 48.65, 48.65], [0, 2.44, 2.44, 0], "b"); #dessine la filet gauche
+patch([120, 120, 120, 120], [41.35, 41.35, 48.65, 48.65], [0, 2.44, 2.44, 0], "b");  #dessine le filet droit
+   
 ligneTerrain = plot3(terrain(:,1), terrain(:,2), terrain(:,3));
             
 hold on
