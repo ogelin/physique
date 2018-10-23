@@ -20,37 +20,38 @@ but = 0;
 
 # Le ballon touche les montants du buts gauche
 # Poteau proche de l'origine
-elseif ( (qn(1) == 0) && ( (41.35 - 0.11) <= qn(2) ) && (qn(2) <= (48.65 + 0.11) )&& (0 < qn(3)) && (qn(3) < (2.44 - 0.11)))
+elseif ( ((0 - 0.11) <= qn(1)) && (qn(1) <= (0 + 0.11)) && ( (41.35 - 0.11) <= qn(2) ) && (qn(2) <= (41.35 + 0.11) )&& (0 < qn(3)) && (qn(3) < (2.44 - 0.11)))
+printf("poteau gauche proche");
 but = -1;
 
 
 # Le ballon touche les montants du buts gauche
 # Poteau loin de l'origine
-elseif ( (qn(1) == 0) && ((41.35 - 0.11) <= qn(2) ) && ( qn(2) <= (48.65 - 0.11)) && (0 < qn(3)) (qn(3) < (2.44 - 0.11) ))
+elseif ( ((0 - 0.11) <= qn(1)) && (qn(1) <= (0 + 0.11)) && ((48.65 - 0.11) <= qn(2) ) && ( qn(2) <= (48.65 - 0.11)) && (0 < qn(3)) (qn(3) < (2.44 - 0.11) ))
 but = -1;
 
 
 # Le ballon touche les montants du buts gauche
 # Poteau transversale
-elseif ( (qn(1) == 0) && ((41.35 + 0.11) < qn(2) ) && ( qn(2) < (48.65 - 0.11))  && ((2.44 - 0.11) <= qn(3)) && ( qn(3) <= (2.44 + 0.11) ))
+elseif ( ((0 - 0.11) <= qn(1)) && (qn(1) <= (0 + 0.11)) && ((41.35 + 0.11) <= qn(2) ) && ( qn(2) <= (48.65 - 0.11))  && ((2.44 - 0.11) <= qn(3)) && ( qn(3) <= (2.44 + 0.11) ))
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau proche de l'origine
-elseif ( (qn(1) == 120) && ((41.35 - 0.11) <= qn(2) ) && ( qn(2) <= (48.65 + 0.11)) && (0 < qn(3) ) && (qn(3) < (2.44 - 0.11)))
+elseif ( ((120 - 0.11) <= qn(1)) && (qn(1) <= (120 + 0.11)) && ((41.35 - 0.11) <= qn(2) ) && ( qn(2) <= (41.35 + 0.11)) && (0 < qn(3) ) && (qn(3) < (2.44 - 0.11)))
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau loin de l'origine
-elseif ( (qn(1) == 120) && ((41.35 - 0.11) <= qn(2)) && ( qn(2) <= (48.65 - 0.11)) && (0 < qn(3)) && (qn(3) < (2.44 - 0.11) ))
+elseif ( ((120 - 0.11) <= qn(1)) && (qn(1) <= (120 + 0.11)) && ((48.65 - 0.11) <= qn(2)) && ( qn(2) <= (48.65 - 0.11)) && (0 < qn(3)) && (qn(3) < (2.44 - 0.11) ))
 but = -1;
 
 
 # Le ballon touche les montants du buts droit
 # Poteau transversale
-elseif ( (qn(1) == 120) && ((41.35 + 0.11) < qn(2)) && (qn(2) < (48.65 - 0.11))  && ((2.44 - 0.11) <= qn(3)) && (qn(3) <= (2.44 + 0.11)))
+elseif ( ((120 - 0.11) <= qn(1)) && (qn(1) <= (120 + 0.11)) && ((41.35 + 0.11) <= qn(2)) && (qn(2) <= (48.65 - 0.11))  && ((2.44 - 0.11) <= qn(3)) && (qn(3) <= (2.44 + 0.11)))
 but = -1;
 
 

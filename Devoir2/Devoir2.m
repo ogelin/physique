@@ -30,7 +30,7 @@ nCol = col;
 
 if(nCol!= -4)
   compteur +=1;
-  t0 = t0 - 2*deltaT;
+  t0 = t0 - deltaT;
   deltaT = deltaT/10;
   qResultat = q0;
   if((q0(5) - ballonRayon) < precision)
@@ -38,7 +38,7 @@ if(nCol!= -4)
   endif
 endif
 
-q0 = qResultat; 
+q0 = qResultat;
 t0 = t0 + deltaT;
 tf = t0;
 vf = [q0(1), q0(2), q0(3)];
