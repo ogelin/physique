@@ -69,13 +69,22 @@ but = -2;
 
 #Le ballon sort du terrain
 #Sortie vers la gauche
-elseif ( qn(1) < 0 && ((( 0 < qn(2) ) && (qn(2) < (41.35-0.11) )) || (( (48.65+0.11) < qn(2)) && ( qn(2) < 90 )))  && 0.11 <= qn(2) )
+elseif ( qn(1) < 0 && ((( 0 < qn(2) ) && (qn(2) < (41.35-0.11) )) || (( (48.65+0.11) < qn(2)) && ( qn(2) < 90 )))  && 0.11 <= qn(3) )
 but = -2;
 
+#Le ballon sort du terrain
+#Sortie vers la gauche au dessus du but
+elseif ( qn(1) < 0 && (((41.35-0.11) < qn(2) ) && qn(2) < (48.65 + 0.11)) && ((2.44 + 0.11) <= qn(3)))
+but = -2;
 
 #Le ballon sort du terrain
 #Sortie vers la droite
 elseif ( 120 < qn(1) && ((( 0 < qn(2)) && (qn(2) < (41.35-0.11) )) || (( (48.65+0.11) < qn(2) ) && ( qn(2) < 90 )))  && 0.11 <= qn(3) )
+but = -2;
+
+#Le ballon sort du terrain
+#Sortie vers la droite au dessus du but
+elseif ( 120 < qn(1) && (((41.35-0.11) < qn(2) ) && qn(2) < (48.65 + 0.11)) && ((2.44 + 0.11) <= qn(3)) )
 but = -2;
 
 else
