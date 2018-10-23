@@ -11,7 +11,6 @@ compteur = 0;
 t0 = 0; 
 deltaT = 0.01; 
 
-
 But = -6;
 tf = 0;
 rf = 0;
@@ -29,17 +28,17 @@ rf = [qResultat(4), qResultat(5), qResultat(6)];
 col = verifierCollision(rf);
 nCol = col;
 
-q0 = qResultat; 
-
 if(nCol!= -4)
   compteur +=1;
   t0 = t0 - 2*deltaT;
   deltaT = deltaT/10;
+  qResultat = q0;
   if((q0(5) - ballonRayon) < precision)
   compteur = 4;
   endif
 endif
 
+q0 = qResultat; 
 t0 = t0 + deltaT;
 tf = t0;
 vf = [q0(1), q0(2), q0(3)];
