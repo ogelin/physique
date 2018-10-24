@@ -12,6 +12,8 @@ clear;
 % vbals  vitesse initiale de la balle (m/s)
 % wbois  vitesse angulaire initiale de la boite (rads/s)
 %
+
+disp(f);
 tls=[0.66 1.1 0.66 1.1];
 vbals([1:3],1)=[6.85;0.0;6.85];
 wbois([1:3],1)=[0;0;0];

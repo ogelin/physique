@@ -18,6 +18,7 @@ classdef Constantes
         %Propriétés physiques
         FORCE_GRAVITATIONNELLE = 9.8; %m/s
         COEFFICIENT_FROTTEMENT = 0.1; %kg/m^2s
+        COEFFCIENT_RESTITUTION = 0.5;
         
         %Coup réussi ou manqué
         COUP_REUSSI = 1;
