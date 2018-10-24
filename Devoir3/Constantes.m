@@ -23,5 +23,7 @@ classdef Constantes
         %Coup réussi ou manqué
         COUP_REUSSI = 1;
         COUP_MANQUE = 0;
+        
+        PRECISION_VOULUE = 0.001; %m
     end
 end
