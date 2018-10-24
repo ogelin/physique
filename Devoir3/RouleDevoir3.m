@@ -25,7 +25,6 @@ wbois([1:3],4)=[0;2.3;0];
 % Simulations
 %
 for Cas=1:4
-  disp(Constants.MASSE_BALLE);
   fprintf('\nSimulation %3d\n',Cas);
   fprintf('Temps du tir = %8.4f \n',tls(Cas));
   fprintf('vbal (m/s)   = (%8.4f,%8.4f,%8.4f)  \n',vbals(1,Cas),vbals(2,Cas),vbals(3,Cas));
