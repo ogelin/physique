@@ -13,7 +13,6 @@ clear;
 % wbois  vitesse angulaire initiale de la boite (rads/s)
 %
 
-disp(f);
 tls=[0.66 1.1 0.66 1.1];
 vbals([1:3],1)=[6.85;0.0;6.85];
 wbois([1:3],1)=[0;0;0];
@@ -23,6 +22,7 @@ vbals([1:3],3)=[6.85;0.0;6.85];
 wbois([1:3],3)=[0;2.3;0];
 vbals([1:3],4)=[28;0.5;10];
 wbois([1:3],4)=[0;2.3;0];
+
 %
 % Simulations
 %
