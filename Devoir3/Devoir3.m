@@ -26,7 +26,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   qBalle = q(viBalle, rBalle, wiBalle);
   
   %Pour l'instant la simulation s'arrete quand la boite touche le sol
-  while (rBoite(3)>0)
+  while (rBoite(3)>Constantes.HAUTEUR_BOITE/2)
 
     qBoite = SEDRK4t0(qBoite,t,deltaT, 'g', Constantes.MASSE_BOITE_kg);
     rBoite = [qBoite(4), qBoite(5), qBoite(6)]
@@ -36,10 +36,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     %La balle est lancee au temps tl
     if (t > tl) 
       qBalle = SEDRK4t0(qBalle,t,deltaT, 'g', Constantes.MASSE_BALLE_kg);
-      rBalle = [qBalle(4), qBalle(5), qBalle(6)]
-      
-      
-      
+      rBalle = [qBalle(4), qBalle(5), qBalle(6)]    
     endif
         
     t = t+deltaT;
