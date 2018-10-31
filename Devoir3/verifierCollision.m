@@ -1,7 +1,7 @@
 function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaBoite)
   %Retourne Constantes.COUP_REUSSI (=1) si il y a collision entre 
   %la balle et la boite selon les positions données.
-  %Sinon retourne Constantes.COUP_REUSSI (=0) s'il n'y a pas de collision
+  %Sinon retourne Constantes.COUP_MANQUE (=0) s'il n'y a pas de collision
   
   positionCMBalleModif = matriceRotationY(thetaBoite)*positionCMBalle;
   positionCMBoiteModif = matriceRotationY(thetaBoite)*positionCMBoite;
@@ -15,7 +15,7 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
                     + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2) ...
                     <= Constantes.RAYON_BOITE_m+Constantes.RAYON_BALLE_m;
 
-  if(estDansBornesXY & estDansBornesZ)
+  if (estDansBornesXY & estDansBornesZ)
     collision = Constantes.COUP_REUSSI;
   else
     collision = Constantes.COUP_MANQUE;
