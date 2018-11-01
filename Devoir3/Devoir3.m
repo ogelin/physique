@@ -33,7 +33,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
          
     qBoite = SEDRK4t0(qBoite,t,deltaT, 'g', Constantes.MASSE_BOITE_kg);
     rBoite = [qBoite(4), qBoite(5), qBoite(6)];
-    theta = wiBoite*deltaT;
+    theta = wiBoite*t;
       
     %La balle est lancee au temps tl
     if (t >= tl) 
