@@ -4,8 +4,8 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
   %Sinon retourne Constantes.COUP_MANQUE (=0) s'il n'y a pas de collision
   
   %Rotation du système d'axes
-  positionCMBalleModif = matriceRotationY(thetaBoite)*positionCMBalle;
-  positionCMBoiteModif = matriceRotationY(thetaBoite)*positionCMBoite;
+  positionCMBalleModif = matriceRotationY(thetaBoite)*transpose(positionCMBalle);
+  positionCMBoiteModif = matriceRotationY(thetaBoite)*transpose(positionCMBoite);
   
   %Vérification des bornes d'en haut et d'en bas du cylindre
   distZ = Constantes.HAUTEUR_BOITE_m/2 + Constantes.RAYON_BALLE_m;
