@@ -4,7 +4,7 @@ function [j] = calculerImpulsion(vitesseCMBalle, vitesseCMBoite, wiBoite, thetaB
   
   vr_avant = [0,0,0]; %TODO
   
-  numerateur_j = -vr_avant*(1+Constantes.COEFFCIENT_RESTITUTION);
+  numerateur_j = -vr_avant*(1+Constantes.COEFFICIENT_RESTITUTION);
   
   j = numerateur_j/denominateur_j;
   
