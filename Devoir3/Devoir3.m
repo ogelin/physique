@@ -54,6 +54,10 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
   endwhile
 
+  if (estCollision)
+  
+  endif
+  
   Coup = estCollision;
   rbaf = rBalle;
   rbof = rBoite;

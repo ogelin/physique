@@ -16,4 +16,6 @@ function [j] = calculerImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rColl
   
   j = numerateur_j/denominateur_j;
   
+  %QUESTION: Doit-on multiplier j par le vec normal?? 
+  
 endfunction
