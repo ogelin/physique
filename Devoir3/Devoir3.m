@@ -32,23 +32,29 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
          && estCollision == Constantes.COUP_MANQUE) 
          
     qBoite = SEDRK4t0(qBoite,t,deltaT, 'g', Constantes.MASSE_BOITE_kg);
-    rBoite = [qBoite(4), qBoite(5), qBoite(6)]
+    rBoite = [qBoite(4), qBoite(5), qBoite(6)];
     theta = wiBoite*deltaT;
       
     %La balle est lancee au temps tl
-    if (t > tl) 
+    if (t >= tl) 
       qBalle = SEDRK4t0(qBalle,t,deltaT, 'g', Constantes.MASSE_BALLE_kg);
-      rBalle = [qBalle(4), qBalle(5), qBalle(6)]    
+      rBalle = [qBalle(4), qBalle(5), qBalle(6)];
       
       estCollision = verifierCollision(rBalle, rBoite, theta(2));
       
     endif
-        
+    
     t = t+deltaT;
     tf = t;
+    
+    if(rBalle(1) > 2.91 && rBalle(1) < 3.09)
+      deltaT = 0.0001;
+    endif
+        
   
   endwhile
 
+  Coup = estCollision;
   rbaf = rBalle;
   rbof = rBoite;
 
