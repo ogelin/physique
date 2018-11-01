@@ -6,6 +6,20 @@ clear all;
 clc;
 format long
 clear;
+
+%{ 
+TESTS DE LA FONCTION VERIFIERCOLLISION
+printf('Début des tests\n');
+verifierCollision([0,0,0],[0,0,0],0) %V
+verifierCollision([0,0,0],[0,0,0],90) %V
+verifierCollision([10000,10000,100000],[0,0,0],90) %F
+verifierCollision([0,0,Constantes.HAUTEUR_BOITE_m/2 + Constantes.RAYON_BALLE_m],[0,0,0],0) %V
+verifierCollision([0,0,Constantes.HAUTEUR_BOITE_m/2 + Constantes.RAYON_BALLE_m + 2],[0,0,0],0)%F
+verifierCollision([0,0,Constantes.RAYON_BOITE_m + Constantes.RAYON_BALLE_m + 2],[0,0,0],90) %F
+verifierCollision([0,0, Constantes.RAYON_BOITE_m + Constantes.RAYON_BALLE_m],[0,0,0],90) %V
+%}
+
+
 %
 % Conditions initiales
 % tls    temps du lancer
@@ -47,3 +61,4 @@ for Cas=1:4
   fprintf('Position finale de la boite          $(%8.4f,%8.4f,%8.4f)$  m\n\n',rbof(1),rbof(2),rbof(3));
   pause;
 end
+
