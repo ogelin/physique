@@ -24,7 +24,23 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
                     + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2) ...
                     <= sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
                     (Constantes.RAYON_BOITE_m)^2) + Constantes.RAYON_BALLE_m;
+  
+if(positionCMBalle(1) > 2.5 && positionCMBalle(1) < 3.09) 
+  %disp(thetaBoite); 
+  %printf("Balle\n");
+  %disp(positionCMBalle);
+  %disp(positionCMBalleModif);
+  %printf("Boite\n");
+  %disp(positionCMBoite);
+  %disp(positionCMBoiteModif);
+  disp(sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
+                    + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2 ...
+                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2));
+  disp(sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
+                    (Constantes.RAYON_BOITE_m)^2) + Constantes.RAYON_BALLE_m);
                     
+endif
+
   if (estDansBornesXY && estDansBornesZ && distanceCMAcceptable)
     collision = Constantes.COUP_REUSSI;
   else
