@@ -54,4 +54,4 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
     %Pas de collision
     collision = Constantes.COUP_MANQUE;
   endif
-endfunction
+endfunction 
