@@ -1,4 +1,4 @@
-function [j] = calculerImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, thetaBoite)
+function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, thetaBoite)
   
   denominateur_j = 1/Constantes.MASSE_BALLE_kg + 1/Constantes.MASSE_BOITE_kg; 
   

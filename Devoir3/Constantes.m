@@ -24,6 +24,11 @@ classdef Constantes
         COUP_REUSSI = 1;
         COUP_MANQUE = 0;
         
+        %Lieu de la collision 
+        COLLISION_BASE = 2; %Collision avec le cercle sur le dessus ou dessous du cylindre
+        COLLISION_COTE = 3; %Collision avec le mur vertical du cylindre
+        COLLISION_ARETE = 4; %Collision où la base et le cote se rejoignent
+        
         PRECISION_VOULUE = 0.001; %m
     end
 end
