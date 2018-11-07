@@ -19,5 +19,5 @@ function [vecteurNormal] = trouverVecteurNormal(rCMBalle, rCMBoite, theta, typeC
     
     vecteurNormal = matriceRotationY(-thetaBoite)*vecteurNormalModif;
     
-    vecteurNormal = tmp / sqrt(tmp(1)^2+tmp(2)^2+tmp(3)^2); %rendre le vecteur unitaire en divisant par la norme
+    vecteurNormal = vecteurNormal / sqrt(vecteurNormal(1)^2+vecteurNormal(2)^2+vecteurNormal(3)^2); %rendre le vecteur unitaire en divisant par la norme
 endfunction
