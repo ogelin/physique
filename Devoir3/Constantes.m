@@ -20,14 +20,12 @@ classdef Constantes
         COEFFICIENT_FROTTEMENT = 0.1; %kg/m^2s
         COEFFICIENT_RESTITUTION = 0.5;
         
-        %Coup réussi ou manqué
-        COUP_REUSSI = 1;
+        %Types de collisions possibles
         COUP_MANQUE = 0;
         
-        %Lieu de la collision 
-        COLLISION_BASE = 2; %Collision avec le cercle sur le dessus ou dessous du cylindre
-        COLLISION_COTE = 3; %Collision avec le mur vertical du cylindre
-        COLLISION_ARETE = 4; %Collision où la base et le cote se rejoignent
+        COLLISION_BASE = 1; %Collision avec le cercle sur le dessus ou dessous du cylindre
+        COLLISION_COTE = 2; %Collision avec le mur vertical du cylindre
+        COLLISION_ARETE = 3; %Collision où la base et le cote se rejoignent
         
         PRECISION_VOULUE = 0.001; %m
     end
