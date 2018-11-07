@@ -27,7 +27,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
   estCollision = Constantes.COUP_MANQUE;
   
-  %Pour l'instant la simulation s'arrete quand la boite touche le sol
+  %La simulation s'arrete quand la boite touche le sol ou la balle
   while (rBoite(3)>Constantes.HAUTEUR_BOITE_m/2 ...
          && estCollision == Constantes.COUP_MANQUE) 
          
