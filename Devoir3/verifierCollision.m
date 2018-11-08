@@ -23,7 +23,7 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
                     
   distanceActuelleDesCM =  sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
                     + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2 ...
-                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2)
+                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2);
                     
   maxDistanceDesCMQuandCollision =  sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
                     (Constantes.RAYON_BOITE_m)^2) + Constantes.RAYON_BALLE_m;
@@ -36,7 +36,9 @@ if(positionCMBalle(1) > 2.5 && positionCMBalle(1) < 3.09)
   %printf("Boite\n");
   %disp(positionCMBoite);
   %disp(positionCMBoiteModif);
+  printf("MaxDistCM : ");
   disp(maxDistanceDesCMQuandCollision);
+  printf("DistanceActuelle : ");
   disp(distanceActuelleDesCM);
             
 endif

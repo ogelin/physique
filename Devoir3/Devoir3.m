@@ -48,13 +48,10 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     tf = t;
     
     if(rBalle(1) > 2.5 && rBalle(1) < 3.09)
-      disp(t);
       deltaT = 0.0001;
-      printf("Balle : ");
-      disp(rBalle);
-      
-      printf("Boite : ");
-      disp(rBoite);
+    endif
+    if(rBalle(1) < 2.1 || rBalle(1) > 3.09)
+      deltaT = 0.01;
     endif
         
   

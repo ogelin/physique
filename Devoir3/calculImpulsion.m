@@ -2,13 +2,13 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollis
   
   denominateur_j = 1/Constantes.MASSE_BALLE_kg + 1/Constantes.MASSE_BOITE_kg; 
   
-  va = vitesseCMBalle
+  va = vitesseCMBalle;
   
-  vb = vitesseCMBoite + cross(transpose(wiBoite), rCollision)
+  vb = vitesseCMBoite + cross(transpose(wiBoite), rCollision);
   
   deltaV = va - vb
   
-  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, Constantes.COLLISION_BASE)
+  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, Constantes.COLLISION_BASE);
   
   vr_avant = dot(vecteurNormal, deltaV);
   
