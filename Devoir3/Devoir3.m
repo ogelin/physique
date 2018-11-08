@@ -97,7 +97,7 @@ endwhile
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
     
-  
+    
   
     %vitesseAngulaireBoiteApresCollision =  momentinertieInversee*momentCinetiqueFinale;
   
