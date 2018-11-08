@@ -29,8 +29,10 @@ function [vecteurNormalCylindre, vecteurNormalBalle] = trouverVecteurNormal(rCMB
     
   %CAS 3: La balle entre en collision avec l'arête entre le cercle et le côté
     elseif(typeCollision==Constantes.COLLISION_ARETE)
-    %.............TODO.............
-    
+      %collision avec l'arête du haut
+      vecteurNormalBalle = positionCMBalleModif-positionCMBoiteModif;
+      vecteurNormalCylindre = - vecteurNormalBalle;
+ 
   endif
   
    %retour au système d'axes global  
