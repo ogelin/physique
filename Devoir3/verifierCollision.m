@@ -13,16 +13,19 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
   estDansBornesZ = (positionCMBalleModif(3) <= positionCMBoiteModif(3) + distZ) ...
                     && (positionCMBalleModif(3) >= positionCMBoiteModif(3) - distZ);
   
-  %Vérification des bornes du cercle
-  estDansBornesXY = sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
-                    + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2) ...
+  %Vérification des bornes du cercle a la base du cylindre
+  
+  distanceCMEtBaseCylindre = sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
+                    + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2);
+                    
+  estDansBornesXY = distanceCMEtBaseCylindre ...
                     <= Constantes.RAYON_BOITE_m+Constantes.RAYON_BALLE_m;
                     
-  %Vérification de la distance des CM 
-  distanceCMAcceptable = sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
+  distanceActuelleDesCM =  sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
                     + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2 ...
-                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2) ...
-                    <= sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
+                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2)
+                    
+  maxDistanceDesCMQuandCollision =  sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
                     (Constantes.RAYON_BOITE_m)^2) + Constantes.RAYON_BALLE_m;
   
 if(positionCMBalle(1) > 2.5 && positionCMBalle(1) < 3.09) 
@@ -33,17 +36,35 @@ if(positionCMBalle(1) > 2.5 && positionCMBalle(1) < 3.09)
   %printf("Boite\n");
   %disp(positionCMBoite);
   %disp(positionCMBoiteModif);
-  disp(sqrt((positionCMBalleModif(1)-positionCMBoiteModif(1))^2 ...
-                    + (positionCMBalleModif(2)-positionCMBoiteModif(2))^2 ...
-                    + (positionCMBalleModif(3)-positionCMBoiteModif(3))^2));
-  disp(sqrt((Constantes.HAUTEUR_BOITE_m/2)^2 + ...
-                    (Constantes.RAYON_BOITE_m)^2) + Constantes.RAYON_BALLE_m);
-                    
+  disp(maxDistanceDesCMQuandCollision);
+  disp(distanceActuelleDesCM);
+            
 endif
 
+  %Vérification de la distance des CM 
+  distanceCMAcceptable = distanceActuelleDesCM <=  maxDistanceDesCMQuandCollision;
+                    
   if (estDansBornesXY && estDansBornesZ && distanceCMAcceptable)
-    collision = Constantes.COUP_REUSSI;
+    
+    %On sait qu'on a une collision, alors on verifie de quel type...
+    
+    if (distanceActuelleDesCM == maxDistanceDesCMQuandCollision)
+      %L'arete est a la distance max entre le CM du cylindre et de la sphere
+      collision = Constantes.COLLISION_ARETE;
+    
+    elseif(positionCMBalleModif(3)<positionCMBoiteModif(3) + distZ...
+    && positionCMBalleModif(3)>positionCMBoiteModif(3) + distZ)
+      %Si la collision se fait à une hauteur entre les deux bases elle
+      %se fait avec le rebord vertical du cylindre
+      collision = Constantes.COLLISION_COTE;
+  
+    else
+      %Si la collision n'est pas avec une arête ou un côté vertical, 
+      %on peut déduire qu'elle est avec une des bases circulaires
+      collision = Constantes.COLLISION_BASE;
+    endif
   else
+    %Pas de collision
     collision = Constantes.COUP_MANQUE;
   endif
-endfunction
+endfunction 
