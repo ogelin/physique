@@ -69,6 +69,7 @@ endwhile
     vitesseCMBoite = [qBoite(1), qBoite(2), qBoite(3)];
     vbaf(1:3,1) = vitesseCMBalle;
     vbof(1:3,1) = vitesseCMBoite;
+    wbof(1:3,1) = wiBoite;
     rCMBalle = [qBalle(4), qBalle(5), qBalle(6)];
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
 
@@ -96,16 +97,15 @@ endwhile
     vbof(:,2) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
+
+    momentCinetiqueInitialBoite = calculMomentCinetiqueBoiteInitial(momentInertieBoite, wiBoite)
+
+    momentCinetiqueFinalBoite = calculMomentCinetiqueBoiteFinal(momentCinetiqueInitialBoite,rCMBoite, impulsion);
+  
+    vitesseAngulaireBoiteApresCollision =  inverse(momentInertieBoite)*momentCinetiqueFinalBoite
     
-    
-  
-    %vitesseAngulaireBoiteApresCollision =  momentinertieInversee*momentCinetiqueFinale;
-  
-  %faire fonction a part pour inertie voir devoir2;
-  %faire fct moment cinetique
-  %momentCinetique = momentCinetiqueInertie + cross(positionCMBalle,impulsion);
-  %
-  
+    wbof = vitesseAngulaireBoiteApresCollision(:,2); %TODO: Fix dimension de la matrice (devrait etre 1X3)
+      
   endif
   
   if (estCollision != 0)
