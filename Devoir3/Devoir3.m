@@ -40,7 +40,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
       qBalle = SEDRK4t0(qBalle,t,deltaT, 'g', Constantes.MASSE_BALLE_kg, aireBalle());
       rBalle = [qBalle(4), qBalle(5), qBalle(6)];
       
-      estCollision = verifierCollision(rBalle, rBoite, theta(2));
+      estCollision = verifierCollision(rBalle, rBoite, theta(2))
       
     endif
     
@@ -55,14 +55,16 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     endif
         
   
-  endwhile
+endwhile
+
 
   if (estCollision)
     vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
     vitesseCMBoite = [qBoite(1), qBoite(2), qBoite(3)];
     rCMBalle = [qBalle(4), qBalle(5), qBalle(6)];
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
-
+    rCollision = [0,0,0];
+    
     impulsion = calculImpulsion(...
                                 vitesseCMBalle,...
                                 vitesseCMBoite,...
@@ -97,7 +99,9 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
   endif
   
-  Coup = estCollision;
+  if (estCollision != 0)
+    Coup = 1;
+  endif
   rbaf = rBalle;
   rbof = rBoite;
 

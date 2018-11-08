@@ -55,7 +55,7 @@ endif
       collision = Constantes.COLLISION_ARETE;
     
     elseif(positionCMBalleModif(3)<positionCMBoiteModif(3) + distZ...
-    && positionCMBalleModif(3)>positionCMBoiteModif(3) + distZ)
+    && positionCMBalleModif(3)>positionCMBoiteModif(3) - distZ)
       %Si la collision se fait à une hauteur entre les deux bases elle
       %se fait avec le rebord vertical du cylindre
       collision = Constantes.COLLISION_COTE;
