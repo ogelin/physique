@@ -7,15 +7,17 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollis
   vb = vitesseCMBoite + cross(transpose(wiBoite), rCollision);
   
   deltaV = va - vb
+    
+  %vr_avant = dot(vecteurNormal, deltaV);
   
-  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, typeCollision);
+  %numerateur_j = -vr_avant*(1+Constantes.COEFFICIENT_RESTITUTION);
   
-  vr_avant = dot(vecteurNormal, deltaV);
-  
-  numerateur_j = -vr_avant*(1+Constantes.COEFFICIENT_RESTITUTION);
-  
+  numerateur_j = -deltaV*(1+Constantes.COEFFICIENT_RESTITUTION);
+
   j = numerateur_j/denominateur_j;
   
   %QUESTION: Doit-on multiplier j par le vec normal?? 
+  
+  
   
 endfunction

@@ -7,8 +7,8 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   %Valeurs de retour du programme
   Coup = 0;
   tf = 0;
-  vbaf = transpose([0,0,0;0,0,0]);
-  vbof = transpose([0,0,0;0,0,0]);
+  vbaf = [transpose([0,0,0;0,0,0])];
+  vbof = [transpose([0,0,0;0,0,0])];
   wbof = [0,0,0];
   rbaf = [0,0,0];
   rbof = [0,0,0];
@@ -63,6 +63,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     rCMBalle = [qBalle(4), qBalle(5), qBalle(6)];
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
 
+    rCollision = [0,0,0]; %var tmp pour tester
     impulsion = calculImpulsion(...
                                 vitesseCMBalle,...
                                 vitesseCMBoite,...
@@ -71,18 +72,18 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
                                 wiBoite,...
                                 theta(2),...
                                 estCollision...
-                                );
+                                )
     
     [normaleBoite, normaleBalle] = trouverVecteurNormal(...
                                                         rBalle,...
                                                         rBoite,...
                                                         theta(2),...
                                                         estCollision...
-                                                        );
+                                                        )
 
     %Calcul vitesse finale
-    vbaf = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
-    vbof = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
+    vbaf(:,1) = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
+    vbof(:,1) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
     
