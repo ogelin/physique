@@ -66,7 +66,7 @@ endwhile
     rCMBalle = [qBalle(4), qBalle(5), qBalle(6)];
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
 
-    rCollision = [0,0,0];
+    rCollision = [0,0,0]; %TODOOOOO
     
     impulsion = calculImpulsion(...
                                 vitesseCMBalle,...
