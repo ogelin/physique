@@ -64,13 +64,13 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
     rCollision = [0,0,0]; %TODO 
 
-    impulsion = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, theta(2));
+    impulsion = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, theta(2), estCollision);
 
     %Calcul vitesse finale
     vaf = vitesseCMBalle + impulsion/Constantes.MASSE_BALLE_kg;
     vbf = vitesseCMBoite + impulsion/Constantes.MASSE_BOITE_kg;
   
-  %vitesseAngulaireBalle =  momentinertieInversee*momentCinetiqueFinale;
+    %vitesseAngulaireBoiteApresCollision =  momentinertieInversee*momentCinetiqueFinale;
   
   %faire fonction a part pour inertie voir devoir2;
   %faire fct moment cinetique

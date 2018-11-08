@@ -1,4 +1,4 @@
-function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, thetaBoite)
+function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollision, wiBoite, thetaBoite, typeCollision)
   
   denominateur_j = 1/Constantes.MASSE_BALLE_kg + 1/Constantes.MASSE_BOITE_kg; 
   
@@ -8,7 +8,7 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollis
   
   deltaV = va - vb
   
-  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, Constantes.COLLISION_BASE);
+  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, typeCollision);
   
   vr_avant = dot(vecteurNormal, deltaV);
   
