@@ -8,7 +8,7 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollis
   
   deltaV = va - vb
   
-  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision)
+  vecteurNormal = trouverVecteurNormal(rCMBalle, rCollision, thetaBoite, Constantes.COLLISION_BASE)
   
   vr_avant = dot(vecteurNormal, deltaV);
   
