@@ -36,10 +36,10 @@ if(positionCMBalle(1) > 2.5 && positionCMBalle(1) < 3.09)
   %printf("Boite\n");
   %disp(positionCMBoite);
   %disp(positionCMBoiteModif);
-  printf("MaxDistCM : ");
-  disp(maxDistanceDesCMQuandCollision);
-  printf("DistanceActuelle : ");
-  disp(distanceActuelleDesCM);
+  %printf("MaxDistCM : ");
+  %disp(maxDistanceDesCMQuandCollision);
+  %printf("DistanceActuelle : ");
+  %disp(distanceActuelleDesCM);
             
 endif
 
