@@ -57,6 +57,12 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
 endwhile
 
+    vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
+    vitesseCMBoite = [qBoite(1), qBoite(2), qBoite(3)];
+    vbaf(1:3,1) = vitesseCMBalle;
+    vbaf(1:3,2) = vitesseCMBalle
+    vbof(1:3,1) = vitesseCMBoite;
+    vbof(1:3,2) = vitesseCMBoite;
 
   if (estCollision)
     vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
