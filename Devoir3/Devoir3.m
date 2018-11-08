@@ -9,7 +9,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   tf = 0;
   vbaf = [transpose([0,0,0;0,0,0])];
   vbof = [transpose([0,0,0;0,0,0])];
-  wbof = [0,0,0];
+  wbof = wboi;
   rbaf = [0,0,0];
   rbof = [0,0,0];
   
