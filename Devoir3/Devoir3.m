@@ -65,10 +65,6 @@ endwhile
     vbof(1:3,2) = vitesseCMBoite;
 
   if (estCollision)
-    vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
-    vitesseCMBoite = [qBoite(1), qBoite(2), qBoite(3)];
-    vbaf(1:3,1) = vitesseCMBalle;
-    vbof(1:3,1) = vitesseCMBoite;
     wbof(1:3,1) = wiBoite;
     rCMBalle = [qBalle(4), qBalle(5), qBalle(6)];
     rCMBoite = [qBoite(4), qBoite(5), qBoite(6)];
