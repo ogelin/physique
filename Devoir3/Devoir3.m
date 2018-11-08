@@ -40,7 +40,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
       qBalle = SEDRK4t0(qBalle,t,deltaT, 'g', Constantes.MASSE_BALLE_kg, aireBalle());
       rBalle = [qBalle(4), qBalle(5), qBalle(6)];
       
-      estCollision = verifierCollision(rBalle, rBoite, theta(2))
+      estCollision = verifierCollision(rBalle, rBoite, theta(2));
       
     endif
     
@@ -86,8 +86,8 @@ endwhile
                                                         )
 
     %Calcul vitesse finale
-    vbaf(:,1) = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
-    vbof(:,1) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
+    vbaf(:,2) = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
+    vbof(:,2) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
     
