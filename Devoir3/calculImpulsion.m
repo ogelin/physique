@@ -2,8 +2,8 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBalle, rCollis
   
   denominateur_j = 1/Constantes.MASSE_BALLE_kg + 1/Constantes.MASSE_BOITE_kg; 
   
-  va = vitesseCMBalle;
-  
+  va = vitesseCMBalle;  
+ 
   vb = vitesseCMBoite + cross(transpose(wiBoite), rCollision);
   
   deltaV = va - vb
