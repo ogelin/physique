@@ -80,6 +80,10 @@ endwhile
 
  
     rCollision = rCMBalle - Constantes.RAYON_BALLE_m .* transpose(normaleBoite); 
+   
+    %Selon vos preferences
+    %rCollision2 = rCMBalle + Constantes.RAYON_BALLE_m .* transpose(normaleBalle); 
+  
     
     
     
