@@ -10,7 +10,7 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
   %Vérification des bornes d'en haut et d'en bas du cylindre
   distZ = Constantes.HAUTEUR_BOITE_m/2 + Constantes.RAYON_BALLE_m;
   
-  distanceCMBoiteBalleZ = sqrt((positionCMBalleModif(3) - positionCMBoiteModif(3))^2)
+  distanceCMBoiteBalleZ = sqrt((positionCMBalleModif(3) - positionCMBoiteModif(3))^2);
   
   estDansBornesZ = ( distanceCMBoiteBalleZ <= distZ);
   
@@ -33,19 +33,23 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
   
 if(positionCMBalle(1) > 2.7 && positionCMBalle(1) < 3.09) 
   %disp(thetaBoite); 
-  printf("Balle\n");
+  %printf("Balle\n");
   %disp(positionCMBalle);
-  disp(positionCMBalleModif);
-  printf("Boite\n");
+  %disp(positionCMBalleModif);
+  %printf("Boite\n");
   %disp(positionCMBoite);
-  disp(positionCMBoiteModif);
-  printf("MaxDistCM : ");
-  disp(maxDistanceDesCMQuandCollision);
-  printf("DistanceActuelle : ");
-  disp(distanceActuelleDesCM);
-  printf("Distances : ");
-  disp(distanceCMEtBaseCylindre);
-  disp(Constantes.RAYON_BOITE_m+Constantes.RAYON_BALLE_m);
+  %disp(positionCMBoiteModif);
+  %printf("MaxDistCM : ");
+  %disp(maxDistanceDesCMQuandCollision);
+  %printf("DistanceActuelle : ");
+  %disp(distanceActuelleDesCM);
+  %printf("Distances : ");
+  %disp(distanceCMEtBaseCylindre);
+  %disp(Constantes.RAYON_BOITE_m+Constantes.RAYON_BALLE_m);
+  %printf("Condition");
+  %disp(estDansBornesZ);  
+  %printf("THETA:");
+  %disp(thetaBoite);
 endif
 
   %Vérification de la distance des CM 

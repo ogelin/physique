@@ -47,10 +47,10 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     t = t+deltaT;
     tf = t;
     
-    if(rBalle(1) > 2.5 && rBalle(1) < 3.09)
-      deltaT = 0.0001;
+    if(rBalle(1) > 2.7 && rBalle(1) < 3.09)
+      deltaT = 0.00001;
     endif
-    if(rBalle(1) < 2.1 || rBalle(1) > 3.09)
+    if(rBalle(1) < 2.7 || rBalle(1) > 3.09)
       deltaT = 0.01;
     endif
         
@@ -100,9 +100,11 @@ endwhile
    
 
     %Calcul vitesse finale
+
     vbaf(:,2) = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
     vbof(:,2) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
-    
+    printf("VITESSE BALLE");
+    disp(vbaf);
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
 
     momentCinetiqueInitialBoite = calculMomentCinetiqueBoiteInitial(momentInertieBoite, wiBoite)
