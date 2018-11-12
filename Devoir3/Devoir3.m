@@ -29,7 +29,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   estCollision = Constantes.COUP_MANQUE;
   
   %La simulation s'arrete quand la boite touche le sol ou la balle
-  while (rBoite(3)>Constantes.HAUTEUR_BOITE_m * cos(theta)/2 ...
+  while (rBalle(3)>Constantes.RAYON_BOITE_m + Constantes.PRECISION_VOULUE ...
          && estCollision == Constantes.COUP_MANQUE) 
          
     qBoite = SEDRK4t0(qBoite,t,deltaT, 'g', Constantes.MASSE_BOITE_kg, aireBoite());
