@@ -106,11 +106,13 @@ endwhile
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
     
-    distCMBoiteCollision = rCollision - rCMBoite
+    distCMBoiteCollision = rCollision - rCMBoite;
   
-    vitesseAngulaireBoiteApresCollision = transpose(wiBoite) - impulsion .* transpose(inverse(momentInertieBoite) * transpose(cross(distCMBoiteCollision, transpose(normaleBoite))))
+    vitesseAngulaireBoiteApresCollision = transpose(wiBoite)...
+    - impulsion .* transpose(inverse(momentInertieBoite)...
+    * transpose(cross(distCMBoiteCollision, transpose(normaleBoite))));
     
-    wbof = transpose(vitesseAngulaireBoiteApresCollision)
+    wbof = transpose(vitesseAngulaireBoiteApresCollision);
       
   endif
   

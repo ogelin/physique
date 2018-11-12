@@ -43,18 +43,18 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
       && distanceCMBoiteBalleZ > distZ - Constantes.PRECISION_VOULUE...
       && distanceCMBoiteBalleZ < distZ + Constantes.PRECISION_VOULUE)
       %L'arete est a la distance max entre le CM du cylindre et de la sphere
-      collision = Constantes.COLLISION_BASE
+      collision = Constantes.COLLISION_BASE;
     
     elseif(positionCMBalleModif(3)<positionCMBoiteModif(3) + distZ + Constantes.PRECISION_VOULUE...
     && positionCMBalleModif(3)>positionCMBoiteModif(3) - distZ - Constantes.PRECISION_VOULUE)
       %Si la collision se fait à une hauteur entre les deux bases elle
       %se fait avec le rebord vertical du cylindre
-      collision = Constantes.COLLISION_COTE
+      collision = Constantes.COLLISION_COTE;
   
     else
       %Si la collision n'est pas avec une arête ou un côté vertical, 
       %on peut déduire qu'elle est avec une des bases circulaires
-      collision = Constantes.COLLISION_ARETE
+      collision = Constantes.COLLISION_ARETE;
     endif
   else
     %Pas de collision
