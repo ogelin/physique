@@ -105,10 +105,12 @@ endwhile
     vbof(:,2) = vitesseCMBoite + (impulsion.*transpose(normaleBoite))/Constantes.MASSE_BOITE_kg;
     
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
-      
-    vitesseAngulaireBoiteApresCollision = transpose(wiBoite) - impulsion .* transpose(inverse(momentInertieBoite) * transpose(cross(distCMBoiteCollision, transpose(normaleBoite))));
     
-    wbof = transpose(vitesseAngulaireBoiteApresCollision);
+    distCMBoiteCollision = rCollision - rCMBoite
+  
+    vitesseAngulaireBoiteApresCollision = transpose(wiBoite) - impulsion .* transpose(inverse(momentInertieBoite) * transpose(cross(distCMBoiteCollision, transpose(normaleBoite))))
+    
+    wbof = transpose(vitesseAngulaireBoiteApresCollision)
       
   endif
   
