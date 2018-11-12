@@ -47,10 +47,10 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     t = t+deltaT;
     tf = t;
     
-    if(rBalle(1) > 2.7 && rBalle(1) < 3.09)
+    if(rBalle(1) > 2.75 && rBalle(1) < 3.09)
       deltaT = 0.00001;
     endif
-    if(rBalle(1) < 2.7 || rBalle(1) > 3.09)
+    if(rBalle(1) < 2.75 || rBalle(1) > 3.09)
       deltaT = 0.01;
     endif
         
@@ -60,7 +60,7 @@ endwhile
     vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
     vitesseCMBoite = [qBoite(1), qBoite(2), qBoite(3)];
     vbaf(1:3,1) = vitesseCMBalle;
-    vbaf(1:3,2) = vitesseCMBalle
+    vbaf(1:3,2) = vitesseCMBalle;
     vbof(1:3,1) = vitesseCMBoite;
     vbof(1:3,2) = vitesseCMBoite;
 
@@ -74,12 +74,12 @@ endwhile
                                                         rBoite,...
                                                         theta(2),...
                                                         estCollision...
-                                                        );
+                                                        )
 
     % Cette equation a valider, peut-etre quon devrait verifier que lon prend le bon vecteur normal
 
  
-    rCollision = rCMBalle - Constantes.RAYON_BALLE_m .* transpose(normaleBoite); 
+    rCollision = rCMBalle - Constantes.RAYON_BALLE_m .* transpose(normaleBalle)
    
     %Selon vos preferences
     %rCollision2 = rCMBalle + Constantes.RAYON_BALLE_m .* transpose(normaleBalle); 
@@ -90,28 +90,25 @@ endwhile
     impulsion = calculImpulsion(...
                                 vitesseCMBalle,...
                                 vitesseCMBoite,...
-                                rCMBalle,...
+                                rCMBoite,...
                                 rCollision,...
                                 wiBoite,...
                                 theta(2),...
-                                estCollision...
-                                )
+                                estCollision,...
+                                normaleBalle );
     
    
 
     %Calcul vitesse finale
-
-    vbaf(:,2) = vitesseCMBalle + (impulsion*normaleBalle)/Constantes.MASSE_BALLE_kg;
-    vbof(:,2) = vitesseCMBoite + (impulsion*normaleBoite)/Constantes.MASSE_BOITE_kg;
-    printf("VITESSE BALLE");
-    disp(vbaf);
+    vbaf(:,2) = vitesseCMBalle + (impulsion.*transpose(normaleBalle))/Constantes.MASSE_BALLE_kg
+    vbof(:,2) = vitesseCMBoite + (impulsion.*transpose(normaleBoite))/Constantes.MASSE_BOITE_kg
     momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
 
-    momentCinetiqueInitialBoite = calculMomentCinetiqueBoiteInitial(momentInertieBoite, wiBoite)
+    momentCinetiqueInitialBoite = calculMomentCinetiqueBoiteInitial(momentInertieBoite, wiBoite);
 
     momentCinetiqueFinalBoite = calculMomentCinetiqueBoiteFinal(momentCinetiqueInitialBoite,rCMBoite, impulsion);
   
-    vitesseAngulaireBoiteApresCollision =  inverse(momentInertieBoite)*momentCinetiqueFinalBoite
+    vitesseAngulaireBoiteApresCollision =  inverse(momentInertieBoite)*momentCinetiqueFinalBoite;
     
     wbof = vitesseAngulaireBoiteApresCollision(:,2); %TODO: Fix dimension de la matrice (devrait etre 1X3)
       

@@ -29,7 +29,7 @@ function [mI] = calculMomentInertieBoite(theta, positionCMBoite)
        
        miOrigineCorrige = matriceRotation *... % MI' = (R_2<-1)*(MI)*((R_2<-1)^T)
                           mIOrigine * ...
-                          transpose(matriceRotation) 
+                          transpose(matriceRotation);
        
        mI = miOrigineCorrige;
            
