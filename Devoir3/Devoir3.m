@@ -49,13 +49,12 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     tf = t;
     
     %Calcul de la distance entre les deux objets
-    distanceEntreBalleBoite = sqrt((rBalle(1)-rBoite(1))^2+(rBalle(2)-rBoite(2))^2+(rBalle(3)-rBoite(3))^2)
-    distanceMinEnteBalleBoite = Constantes.RAYON_BALLE_m + Constantes.HAUTEUR_BOITE_m/2
+    distanceEntreBalleBoite = sqrt((rBalle(1)-rBoite(1))^2+(rBalle(2)-rBoite(2))^2+(rBalle(3)-rBoite(3))^2);
+    distanceMinEnteBalleBoite = Constantes.RAYON_BALLE_m + Constantes.HAUTEUR_BOITE_m/2;
     
     if(distanceEntreBalleBoite < 3 * distanceMinEnteBalleBoite)
-      deltaT = 0.00001
-    endif
-    if(rBalle(1) < 2.75 || rBalle(1) > 3.09)
+      deltaT = 0.00001;
+    else
       deltaT = 0.01;
     endif
         
