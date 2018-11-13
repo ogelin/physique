@@ -16,7 +16,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
   %Init parametres de la boite
   viBoite = [0,0,0];
-  wiBoite = wboi;
+  wiBoite = transpose(wboi);
   rBoite = Constantes.POSITION_INITIALE_BOITE_m;
   qBoite = q(viBoite, rBoite, wiBoite);
   
@@ -111,7 +111,7 @@ endwhile
     
     distCMBoiteCollision = rCollision - rCMBoite;
   
-    vitesseAngulaireBoiteApresCollision = transpose(wiBoite)...
+    vitesseAngulaireBoiteApresCollision = wiBoite...
     - impulsion .* transpose(inverse(momentInertieBoite)...
     * transpose(cross(distCMBoiteCollision, normaleBoite)));
     

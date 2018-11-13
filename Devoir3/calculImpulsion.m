@@ -5,7 +5,7 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBoite, rCollis
   va = vitesseCMBalle;
  
   distCMBoiteCollision = rCollision - rCMBoite;
-  vb = vitesseCMBoite + cross(transpose(wiBoite), distCMBoiteCollision);
+  vb = vitesseCMBoite + cross(wiBoite, distCMBoiteCollision);
   
   deltaV = normaleBalle .* (va - vb);
     
