@@ -7,7 +7,7 @@ function [j] = calculImpulsion(vitesseCMBalle, vitesseCMBoite, rCMBoite, rCollis
   distCMBoiteCollision = rCollision - rCMBoite;
   vb = vitesseCMBoite + cross(transpose(wiBoite), distCMBoiteCollision);
   
-  deltaV = transpose(normaleBalle) .* (va - vb);
+  deltaV = normaleBalle .* (va - vb);
     
   %numerateur_j = -vr_avant*(1+Constantes.COEFFICIENT_RESTITUTION);
   
