@@ -18,16 +18,24 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
     positionTrainCourante = calculerDeplacementTrain(deltaT, ...
                             positionTrainCourante,...
                             vitesseTrain);
-    positionAvionCourante = calculerDeplacementAvion(deltaT, positionAvionCourante);
-    dist = calculerDistanceEntreTrainEtAvion(positionTrainCourante, positionAvionCourante);
+                            
+    positionAvionCourante = calculerDeplacementAvion(deltaT, ...
+                                                     positionAvionCourante);
     
-    contactSonore = verifierContactSonore();
+    dist = calculerDistanceEntreTrainEtAvion(positionTrainCourante,...
+                                             positionAvionCourante);
+    
+    intensite = calculerIntensiteSonoreSelonDistance(dist, favion);
+   
+   if (intensite > 0 && !contactSonore)
+     contactSonore = true;
+     tps = t;
+   endif; 
    
     if (contactSonore) 
-      intensite = calculerIntensiteSonoreSelonDistance();
-      EffetDoppler();
+      EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain);
       
-      if (intensite > 20)
+      if (intensite < 20)
         fini = true;
       endif;
     endif; 
