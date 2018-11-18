@@ -1,3 +1,5 @@
 function intensite = calculerIntensiteSonoreSelonDistance(r, v)
-  intensite = 160 - 20*log(0/100)-calculerA_v(v)*-100;
+  a = 20*log(r/100)
+  b = calculerA_v(v)*(r-100)
+  intensite = 160 - a - b
 endfunction
