@@ -7,6 +7,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   %Valeurs de retour du programme
   Coup = 0;
   tf = 0;
+  theta = 0;
   vbaf = [transpose([0,0,0;0,0,0])];
   vbof = [transpose([0,0,0;0,0,0])];
   wbof = wboi;
@@ -15,7 +16,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   
   %Init parametres de la boite
   viBoite = [0,0,0];
-  wiBoite = wboi;
+  wiBoite = transpose(wboi);
   rBoite = Constantes.POSITION_INITIALE_BOITE_m;
   qBoite = q(viBoite, rBoite, wiBoite);
   
@@ -28,7 +29,7 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
   estCollision = Constantes.COUP_MANQUE;
   
   %La simulation s'arrete quand la boite touche le sol ou la balle
-  while (rBoite(3)>Constantes.HAUTEUR_BOITE_m/2 ...
+  while (rBalle(3)>Constantes.RAYON_BOITE_m + Constantes.PRECISION_VOULUE ...
          && estCollision == Constantes.COUP_MANQUE) 
          
     qBoite = SEDRK4t0(qBoite,t,deltaT, 'g', Constantes.MASSE_BOITE_kg, aireBoite());
@@ -47,14 +48,17 @@ function [Coup tf vbaf vbof wbof rbaf rbof ]=Devoir3(vbal,wboi,tl)
     t = t+deltaT;
     tf = t;
     
-    if(rBalle(1) > 2.75 && rBalle(1) < 3.09)
+    %Calcul de la distance entre les deux objets
+    distanceEntreBalleBoite = sqrt((rBalle(1)-rBoite(1))^2 ...
+                              +(rBalle(2)-rBoite(2))^2 ...
+                              +(rBalle(3)-rBoite(3))^2);
+    distanceMinEnteBalleBoite = Constantes.RAYON_BALLE_m + Constantes.HAUTEUR_BOITE_m/2;
+    
+    if(distanceEntreBalleBoite < 3 * distanceMinEnteBalleBoite)
       deltaT = 0.00001;
-    endif
-    if(rBalle(1) < 2.75 || rBalle(1) > 3.09)
+    else
       deltaT = 0.01;
-    endif
-        
-  
+    endif  
 endwhile
 
     vitesseCMBalle = [qBalle(1), qBalle(2), qBalle(3)];
@@ -74,15 +78,17 @@ endwhile
                                                         rBoite,...
                                                         theta(2),...
                                                         estCollision...
-                                                        )
+                                                        );
 
+    normaleBalle = transpose(normaleBalle);
+    normaleBoite = transpose(normaleBoite);    
     % Cette equation a valider, peut-etre quon devrait verifier que lon prend le bon vecteur normal
 
  
-    rCollision = rCMBalle - Constantes.RAYON_BALLE_m .* transpose(normaleBalle)
+    rCollision = rCMBalle - Constantes.RAYON_BALLE_m .* normaleBalle;
    
     %Selon vos preferences
-    %rCollision2 = rCMBalle + Constantes.RAYON_BALLE_m .* transpose(normaleBalle); 
+    %rCollision2 = rCMBalle + Constantes.RAYON_BALLE_m .* normaleBalle; 
   
     
     
@@ -93,24 +99,23 @@ endwhile
                                 rCMBoite,...
                                 rCollision,...
                                 wiBoite,...
-                                theta(2),...
-                                estCollision,...
                                 normaleBalle );
     
    
 
     %Calcul vitesse finale
-    vbaf(:,2) = vitesseCMBalle + (impulsion.*transpose(normaleBalle))/Constantes.MASSE_BALLE_kg
-    vbof(:,2) = vitesseCMBoite + (impulsion.*transpose(normaleBoite))/Constantes.MASSE_BOITE_kg
-    momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
-
-    momentCinetiqueInitialBoite = calculMomentCinetiqueBoiteInitial(momentInertieBoite, wiBoite);
-
-    momentCinetiqueFinalBoite = calculMomentCinetiqueBoiteFinal(momentCinetiqueInitialBoite,rCMBoite, impulsion);
-  
-    vitesseAngulaireBoiteApresCollision =  inverse(momentInertieBoite)*momentCinetiqueFinalBoite;
+    vbaf(:,2) = vitesseCMBalle + (impulsion.*normaleBalle)/Constantes.MASSE_BALLE_kg;
+    vbof(:,2) = vitesseCMBoite + (impulsion.*normaleBoite)/Constantes.MASSE_BOITE_kg;
     
-    wbof = vitesseAngulaireBoiteApresCollision(:,2); %TODO: Fix dimension de la matrice (devrait etre 1X3)
+    momentInertieBoite = calculMomentInertieBoite(theta(2), rCMBoite);
+    
+    distCMBoiteCollision = rCollision - rCMBoite;
+  
+    vitesseAngulaireBoiteApresCollision = wiBoite...
+    - impulsion .* transpose(inverse(momentInertieBoite)...
+    * transpose(cross(distCMBoiteCollision, normaleBoite)));
+    
+    wbof = transpose(vitesseAngulaireBoiteApresCollision);
       
   endif
   
