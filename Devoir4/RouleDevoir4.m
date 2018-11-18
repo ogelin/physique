@@ -3,6 +3,9 @@
 % Effets sonores
 % 
 %
+
+clear all;
+clc;
 format long
 clear;
 clf;

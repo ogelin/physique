@@ -33,7 +33,8 @@ function collision = verifierCollision (positionCMBalle, positionCMBoite, thetaB
   
 
   %Vérification de la distance des CM 
-  distanceCMAcceptable = distanceActuelleDesCM <=  maxDistanceDesCMQuandCollision + Constantes.PRECISION_VOULUE;
+  distanceCMAcceptable = distanceActuelleDesCM <=  maxDistanceDesCMQuandCollision...
+                                               + Constantes.PRECISION_VOULUE;
                     
   if (estDansBornesXY && estDansBornesZ && distanceCMAcceptable)
     

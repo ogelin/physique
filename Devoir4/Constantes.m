@@ -5,6 +5,8 @@ classdef Constantes
       VITESSE_AVION =  300 .*[cos(PI/18) ; 0; sin(PI/18)] .* (1000/3600)
       %(1000/3600) pour la conversion km/h -> m/s
       
+      INTENSITE_SONORE = 160; #decibels
+      
       POSITION_INITIALE_TRAIN = 1000 .* [10; 10; 10]
       
       VITESSE_SON = 331.3 + 0.606 * 10;
