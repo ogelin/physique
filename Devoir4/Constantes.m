@@ -7,7 +7,7 @@ classdef Constantes
       
       INTENSITE_SONORE = 160; #decibels
       
-      POSITION_INITIALE_TRAIN = 1000 .* [10; 10; 10]
+      POSITION_INITIALE_TRAIN = 1000 .* [10; 10; 0]
       
       VITESSE_SON = 331.3 + 0.606 * 10;
         
