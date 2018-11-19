@@ -1,6 +1,6 @@
-function [nouvellePosition] = calculerDeplacementAvion(deltaT,...
+function [nouvellePositionAvion] = calculerDeplacementAvion(deltaT,...
                                                        positionAvionCourante)
   
-  nouvellePosition = positionAvionCourante + deltaT * Constantes.VITESSE_AVION;
+  nouvellePositionAvion = positionAvionCourante + deltaT * Constantes.VITESSE_AVION
   
 endfunction

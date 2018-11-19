@@ -1,7 +1,7 @@
-function [nouvellePosition] = calculerDeplacementTrain(deltaT,...
+function [nouvellePositionTrain] = calculerDeplacementTrain(deltaT,...
                                                        positionTrainCourante,...
                                                        vitesseTrain)
   
-  nouvellePosition = positionTrainCourante + deltaT * vitesseTrain;
+  nouvellePositionTrain = positionTrainCourante + deltaT * vitesseTrain
   
 endfunction

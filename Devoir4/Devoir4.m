@@ -12,6 +12,10 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   positionTrainCourante = Constantes.POSITION_INITIALE_TRAIN;
   positionAvionCourante = Constantes.POSITION_AVION;
   
+  sonArrivee = false
+  
+  premier20db = false
+  
   while (!fini)
        
    
@@ -26,18 +30,26 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
                                              positionAvionCourante);
     
     intensite = calculerIntensiteSonoreSelonDistance(dist, favion)
+    sonArrivee
+    premier20db
+    fini 
+    
+    if(intensite > 0 && !sonArrivee)
+       tps = t;
+       sonArrivee = true;
+    endif;
+ 
+    if(intensite  > 20 && !premier20db)
+       premier20db = true
+    endif
    
-   if (intensite > 0 && !contactSonore)
-     contactSonore = true;
-     tps = t;
-   endif; 
-   
-    if (contactSonore) 
-      EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain);
+   if (sonArrivee) 
+     EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain);
       
-      if (intensite < 20)
-        fini = true;
-      endif;
+     if (intensite <20 && premier20db)
+       fini = true;
+     endif; 
+      
     endif; 
     
   t = t+deltaT;  
