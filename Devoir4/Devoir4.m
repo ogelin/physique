@@ -44,7 +44,7 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
     endif
    
    if (sonArrivee) 
-     EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain);
+     EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
       
      if (intensite <20 && premier20db)
        fini = true;
