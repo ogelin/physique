@@ -12,9 +12,12 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   positionTrainCourante = Constantes.POSITION_INITIALE_TRAIN;
   positionAvionCourante = Constantes.POSITION_AVION;
   
-  sonArrivee = false
+  sonArrivee = false;
+  premier20db = false;
   
-  premier20db = false
+  %Intensite;frequencerayon;position centre d'onde (aka position avion); 
+  ondeSonore = [160;favion; 100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
+  
   
   while (!fini)
        
@@ -25,32 +28,51 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
                             
     positionAvionCourante = calculerDeplacementAvion(deltaT, ...
                                                      positionAvionCourante);
+   
+    nouvelleOnde = [160;100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
+    
+    %Ajout d'une nouvelle colonne;
+    ondeSonore = [ondeSonore nouvelleOnde];
+                                                     
     
     dist = calculerDistanceEntreTrainEtAvion(positionTrainCourante,...
                                              positionAvionCourante);
     
     intensite = calculerIntensiteSonoreSelonDistance(dist, favion)
-    sonArrivee
-    premier20db
-    fini 
+    %%sonArrivee
+    %%premier20db
+    %%fini 
     
-    if(intensite > 0 && !sonArrivee)
-       tps = t;
-       sonArrivee = true;
-    endif;
+    for ondeAIncremente=1:length(ondeSonore)
+      if(ondeSonore(1, ondeAIncremente) > 0 && !sonArrivee)
+         tps = t;
+         sonArrivee = true;
+      endif;
  
-    if(intensite  > 20 && !premier20db)
-       premier20db = true
-    endif
+      if(ondeSonore(1, ondeAIncremente)  > 20 && !premier20db)
+         premier20db = true
+      endif
    
-   if (sonArrivee) 
-     EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
+      if (sonArrivee) 
+        nouvelleFrequence = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
+        positionAvionEnreistree = [ondeSonore(4, ondeAIncremente), ...
+                                    ondeSonore(5, ondeAIncremente), ...
+                                    ondeSonore(6, ondeAIncremente) ];
+        distanceTrainetPositionAvionEnregistre = calculerDistanceEntreTrainEtAvion(positionTrainCourante,...
+                                                    positionAvionEnreistree);                                                
+                                                    
+        nouvelleIntensite = calculerIntensiteSonoreSelonDistance(distanceTrainetPositionAvionEnregistre, ...
+                              nouvelleFrequence);
+
       
-     if (intensite <20 && premier20db)
-       fini = true;
-     endif; 
+       if (ondeSonore(1, ondeAIncremente) <20 && premier20db)
+           fini = true;
+        endif; 
       
-    endif; 
+      endif; 
+      
+    end
+
     
   t = t+deltaT;  
   endwhile
