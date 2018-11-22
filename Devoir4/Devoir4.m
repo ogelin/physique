@@ -8,6 +8,10 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   
   deltaT = 1; #secondes
   
+  fTrain = [];
+  Itrain = [];
+  
+  
   t = 0;
   positionTrainCourante = Constantes.POSITION_INITIALE_TRAIN;
   positionAvionCourante = Constantes.POSITION_AVION;
@@ -57,9 +61,11 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
    
       if (sonArrivee) 
         nouvelleFrequence = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
+        
         positionAvionEnreistree = [ondeSonore(4, ondeAIncremente), ...
                                     ondeSonore(5, ondeAIncremente), ...
                                     ondeSonore(6, ondeAIncremente) ];
+                                    
         distanceTrainetPositionAvionEnregistre = calculerDistanceEntreTrainEtAvion(positionTrainCourante,...
                                                     positionAvionEnreistree);                                                
                                                     
@@ -70,19 +76,36 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
         
         ondeSonore(1,ondeAIncremente) = nouvelleIntensite;
       
-       if (ondeSonore(1, ondeAIncremente) <20 && premier20db)
-           fini = true;
-        endif; 
+        sommeFrequenceDeltaT = sum(ondeSonore,[2,:])(2);
+      
+        sommeIntensiteDeltaT = sum(ondeSonore,[2,:])(1);
+        
+        %%if (ondeSonore(1, ondeAIncremente) > 20 && !premier20db )
+          %% fini = true;
+        %%endif; 
       
       endif; 
       
+       
+      
     end
+        
+       fTrain = [fTrain sommeFrequenceDeltaT];
+       Itrain = [Itrain sommeIntensiteDeltaT];
+    
+     if (sommeIntensiteDeltaT < 20) 
+          fini = true; 
+        endif
+        
+        
+
 
     
   t = t+deltaT;  
   endwhile
   
-  fTrain = [];
-  Itrain = [];
+  %%fTrain = [ondeSonore(2,:)];
+  %%disp(fTrain)
+  %%Itrain = [ondeSonore(1,:)];
   
 endfunction
