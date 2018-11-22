@@ -29,7 +29,7 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
     positionAvionCourante = calculerDeplacementAvion(deltaT, ...
                                                      positionAvionCourante);
    
-    nouvelleOnde = [160;100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
+    nouvelleOnde = [160;favion;100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
     
     %Ajout d'une nouvelle colonne;
     ondeSonore = [ondeSonore nouvelleOnde];
@@ -43,7 +43,9 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
     %%premier20db
     %%fini 
     
-    for ondeAIncremente=1:length(ondeSonore)
+    for ondeAIncremente=1:size(ondeSonore,2)
+ 
+
       if(ondeSonore(1, ondeAIncremente) > 0 && !sonArrivee)
          tps = t;
          sonArrivee = true;
@@ -63,7 +65,10 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
                                                     
         nouvelleIntensite = calculerIntensiteSonoreSelonDistance(distanceTrainetPositionAvionEnregistre, ...
                               nouvelleFrequence);
-
+        
+        ondeSonore(2,ondeAIncremente) = nouvelleFrequence;
+        
+        ondeSonore(1,ondeAIncremente) = nouvelleIntensite;
       
        if (ondeSonore(1, ondeAIncremente) <20 && premier20db)
            fini = true;
