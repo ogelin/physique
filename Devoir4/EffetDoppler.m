@@ -7,6 +7,6 @@ function [frequenceRecepteur] = EffetDoppler(positionRecepteur, positionSource,v
   
   %Pour trouver la freq recepteur
   frequenceRecepteur = (Constantes.VITESSE_SON - dot(vitesseTrain, (vecUnitaire))) ...
-                       / (Constantes.VITESSE_SON - dot(Constantes.VITESSE_AVION, (vecUnitaire))) * fSource
+                       / (Constantes.VITESSE_SON - dot(Constantes.VITESSE_AVION, (vecUnitaire))) * fSource;
   
 endfunction

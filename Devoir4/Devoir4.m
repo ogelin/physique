@@ -1,16 +1,14 @@
 function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   %Devoir4
   contactSonore = false;
+  nombreDeBips = 1;
+  tempsEntreBips = 1;
   vitesseTrain = vtrainkmh * (1000/3600);
   
   #detecter premier contact sonore
   fini = false;
   
-  deltaT = 1; #secondes
-  
-  fTrain = [];
-  Itrain = [];
-  
+  deltaT = 0.1; #secondes
   
   t = 0;
   positionTrainCourante = Constantes.POSITION_INITIALE_TRAIN;
@@ -19,13 +17,23 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   %sonArrivee = false;
   premier20db = false;
   
-  %Intensite;frequencerayon;position centre d'onde (aka position avion); 
-  ondeSonore = [160;favion; 100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
+  %Valeurs de la premiere onde captee
+  tempsPremierCaptage = calculTempsContactRecepteur(positionAvionCourante, positionTrainCourante, vitesseTrain);
+  positionTrainAuMomentDuCaptage = positionTrainCourante + vitesseTrain * tempsPremierCaptage;
+  frenquenceCaptee = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
+  distanceParcourueParSon = norm(positionTrainAuMomentDuCaptage - positionAvionCourante);
+  nouvelleIntensite = calculerIntensiteSonoreSelonDistance(distanceParcourueParSon, favion);
   
+  fTrain = [frenquenceCaptee];
+  Itrain = [nouvelleIntensite];
   
+  positionTrainAuMomentDuCaptage = calculPositionTrainAuMomentDuCaptage(positionTrainAuMomentDuCaptage, vitesseTrain, tempsEntreBips);
   while (!fini)
        
-   
+    ancienneIntensite = nouvelleIntensite;   
+       
+    t = t+deltaT;  
+    
     positionTrainCourante = calculerDeplacementTrain(deltaT, ...
                             positionTrainCourante,...
                             vitesseTrain);
@@ -33,62 +41,48 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
     positionAvionCourante = calculerDeplacementAvion(deltaT, ...
                                                      positionAvionCourante);
    
-    nouvelleOnde = [160;favion;100; positionAvionCourante(1);positionAvionCourante(2);positionAvionCourante(3)];
+    nouvelleFrequence = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
     
-    %Ajout de la nouvelle onde dans la matrice;
-    ondeSonore = [ondeSonore nouvelleOnde];
-                                                   
-    %Pour chacune de ces nouvelles ondes, on doit augmenter leur rayon et ajuster leur intensité et fréquence.
-    for ondeAIncremente=1:size(ondeSonore,2)
-
-        nouvelleFrequence = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
-        
-        positionAvionEnreistree = [ondeSonore(4, ondeAIncremente), ...
-                                    ondeSonore(5, ondeAIncremente), ...
-                                    ondeSonore(6, ondeAIncremente) ];
-                                    
-        distanceTrainetPositionAvionEnregistre = calculerDistanceEntreTrainEtAvion(positionTrainCourante,...
-                                                    positionAvionEnreistree);                                                
-                                                    
-        nouvelleIntensite = calculerIntensiteSonoreSelonDistance(distanceTrainetPositionAvionEnregistre, ...
-                              favion);
-        
-        
-        %Ajustement de l'intensité et de la fréquence de l'onde
-        ondeSonore(2,ondeAIncremente) = nouvelleFrequence;
-        ondeSonore(1,ondeAIncremente) = nouvelleIntensite; 
-       
-      %On trouve le premier 20 db, ce qui nous permettra éventuellement de faire cesser le while. 
-       if(ondeSonore(1, ondeAIncremente)  > 20 && !premier20db)
-          premier20db = true
-       endif
-      
-      
-    end
+    distanceParcourueParSon = norm(positionTrainAuMomentDuCaptage - positionAvionCourante);
     
+    nouvelleIntensite = calculerIntensiteSonoreSelonDistance(distanceParcourueParSon, favion);
     
-    %Il faut maintenant trouver la somme des fréquences et des intensités percus par le train au temps deltat t
-    % et placer ces résultats dans les matrices correspondantes.
-    %J'ai un doute sur la manière dont on l'a fait.
-    sommeIntensiteDeltaT = sum(ondeSonore,[1,:])(1); 
-    sommeFrequenceDeltaT = sum(ondeSonore,[2,:])(2);
-      
-    fTrain = [fTrain sommeFrequenceDeltaT];
-    Itrain = [Itrain sommeIntensiteDeltaT];
-       
-       
-   %Parcours de la matrice des résutltats finaux, c'est à dire la somme de toutes les fréquences et instensités
-   % À chaque seconde pour vérifier quand cette intensité est devenue inférieure à 20 db.  Lorsque c'est le cas,
-   % on doit arrêter le while. 
-   for ItrainAuTemps=1:size(Itrain,1)   
-       if(Itrain(1, ItrainAuTemps)<20 && premier20db)
-          fini = true;
-       endif     
-   end
-       
+    %Temps auquel la prochaine onde sera captee par le recepteur
+    tempsProchainCaptage = calculTempsContactRecepteur(positionAvionCourante, positionTrainCourante, vitesseTrain);
     
-  t = t+deltaT;  
+    %Au cas ou la simulation commence en dessous de 20db
+    if (!premier20db && nouvelleIntensite >= 20)
+      premier20db = true;
+    endif
+    
+    %Si la simulation fini, on ajoute les dernieres donnes au tableau
+    %On ajoute les valeurs car on nous demande les dernieres valeurs juste après qu'on soit descendu en dessous de 20db
+    if (premier20db && nouvelleIntensite < 20)
+      fTrain(end + 1) = nouvelleFrequence;
+      Itrain(end + 1) = nouvelleIntensite;
+      fini = true;
+    endif
+    
+    %Ce if sert a seulement prendre les valeurs a chaque seconde
+    %Comme le while est effectué avec un deltaT de 0.1s pour plus de precision, ce if a ete ajouter pour qu'on prenne les valeurs seulement aux secondes.
+    %On s'assure que la prise de donnee soit faite toutes les secondes a partir du moment ou le premier son est capté
+    if (tempsPremierCaptage+nombreDeBips <  tempsProchainCaptage + t + deltaT && tempsPremierCaptage + nombreDeBips > tempsProchainCaptage + t - deltaT)
+      fTrain(end + 1) = nouvelleFrequence;
+      Itrain(end + 1) = nouvelleIntensite;
+      positionTrainAuMomentDuCaptage = calculPositionTrainAuMomentDuCaptage(positionTrainAuMomentDuCaptage, vitesseTrain, tempsEntreBips);
+      nombreDeBips = nombreDeBips + 1;
+    endif
+    
+    % Si l'intensite captee diminue alors qu'on a pas atteint 20db
+    % on sort de la simulation
+    if (!premier20db && nouvelleIntensite < ancienneIntensite)
+      break;
+    endif
+   
+   
   endwhile
+  
+  tps = tempsPremierCaptage;
   
 
   

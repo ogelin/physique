@@ -25,7 +25,7 @@ FileNamesI={'Test1I.eps','Test2I.eps','Test3I.eps','Test4I.eps','Test5I.eps'};
 fprintf('\\begin{table}[h] \\begin{center} \\caption{R\\''{e}sultats des simulations.}\\label{SimRes}\n\\vspace{0.2cm}\n');
 fprintf('\\begin{tabular}{|l||c|c|c||c|c|c||} \n \\hline &\\multicolumn{3}{c||}{Son initial}&\\multicolumn{3}{c||}{Son final} \\\\ \\cline{2-7}\n');
 fprintf('Test & $t$ (s)  & $\\nu$ (Hz)& $I$ (dB)  & $t$ (s)& $\\nu$ (Hz)& $I$  (dB) \\\\ \\hline\n');
-for isimulation=1:NSimulations
+for isimulation=1:5
   clear ftrain Itrain;
   [tps ftrain Itrain]=Devoir4(vtrain(:,isimulation),favion(isimulation));
   ifirst=int8((tps+0.5)*tfac)+1;
