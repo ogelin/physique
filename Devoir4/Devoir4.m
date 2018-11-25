@@ -8,7 +8,7 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   #detecter premier contact sonore
   fini = false;
   
-  deltaT = 0.1; #secondes
+  deltaT = 1; #secondes
   
   t = 0;
   positionTrainCourante = Constantes.POSITION_INITIALE_TRAIN;
@@ -18,7 +18,7 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
   premier20db = false;
   
   %Valeurs de la premiere onde captee
-  tempsPremierCaptage = calculTempsContactRecepteur(positionAvionCourante, positionTrainCourante, vitesseTrain);
+  tempsPremierCaptage = calculTempsContactRecepteur(positionAvionCourante, positionTrainCourante, vitesseTrain)
   positionTrainAuMomentDuCaptage = positionTrainCourante + vitesseTrain * tempsPremierCaptage;
   frenquenceCaptee = EffetDoppler(positionTrainCourante, positionAvionCourante, vitesseTrain, favion);
   distanceParcourueParSon = norm(positionTrainAuMomentDuCaptage - positionAvionCourante);
@@ -63,14 +63,15 @@ function [tps fTrain Itrain] = Devoir4(vtrainkmh, favion)
       fini = true;
     endif
     
-    %Ce if sert a seulement prendre les valeurs a chaque seconde
-    %Comme le while est effectué avec un deltaT de 0.1s pour plus de precision, ce if a ete ajouter pour qu'on prenne les valeurs seulement aux secondes.
-    %On s'assure que la prise de donnee soit faite toutes les secondes a partir du moment ou le premier son est capté
-    if (tempsPremierCaptage+nombreDeBips <  tempsProchainCaptage + t + deltaT && tempsPremierCaptage + nombreDeBips > tempsProchainCaptage + t - deltaT)
+    if (t < tempsPremierCaptage)
+      fTrain(end + 1) = 0;
+      Itrain(end + 1) = 0;
+    endif
+    
+    if (t > tempsPremierCaptage)
       fTrain(end + 1) = nouvelleFrequence;
       Itrain(end + 1) = nouvelleIntensite;
       positionTrainAuMomentDuCaptage = calculPositionTrainAuMomentDuCaptage(positionTrainAuMomentDuCaptage, vitesseTrain, tempsEntreBips);
-      nombreDeBips = nombreDeBips + 1;
     endif
     
     % Si l'intensite captee diminue alors qu'on a pas atteint 20db
