@@ -3,8 +3,15 @@ function [tempsContact] = calculTempsContactRecepteur(positionAvionCourante, pos
   c = Constantes.VITESSE_SON;
   
   %temps pour qu'un son emis par l'avion atteigne le recepteur sur le train
-  tempsContact = sqrt((vitesseTrain(1)*c + positionTrainCourante(1)- positionAvionCourante(1)).^2 + ...
-                          (vitesseTrain(2)*c + positionTrainCourante(2) - positionAvionCourante(2)).^2 +...
-                          (vitesseTrain(3)*c + positionTrainCourante(3) - positionAvionCourante(3)).^2)/c;
+  
+  distanceInitialeAParcourir = sqrt((positionTrainCourante(1)- positionAvionCourante(1)).^2 + ...
+                          (positionTrainCourante(2) - positionAvionCourante(2)).^2 +...
+                          (positionTrainCourante(3) - positionAvionCourante(3)).^2);
+                          
+  if (vitesseTrain(1) > 0 || vitesseTrain(2) > 0)
+    tempsContact = distanceInitialeAParcourir/(c-sqrt(vitesseTrain(1)^2 + vitesseTrain(2)^2 + vitesseTrain(3)^2));
+  elseif(vitesseTrain(1) <= 0 || vitesseTrain(2) < 0)
+    tempsContact = distanceInitialeAParcourir/(c+sqrt(vitesseTrain(1)^2 + vitesseTrain(2)^2 + vitesseTrain(3)^2));
+  endif
   
 endfunction
